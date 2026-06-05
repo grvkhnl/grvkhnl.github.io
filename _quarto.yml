@@ -1,0 +1,89 @@
+project:
+  type: website
+  output-dir: _site
+  render:
+    - "*.qmd"
+    - "posts/"
+
+website:
+  title: "Gaurav Khanal"
+  site-url: "https://grvkhnl.github.io"
+  description: "Personal website of Gaurav Khanal — mathematics, machine learning, information geometry, and research notes."
+  favicon: assets/profile/favicon.png
+
+  repo-url: "https://github.com/grvkhnl/grvkhnl.github.io"
+  repo-actions: [source, issue]
+
+  page-navigation: true
+  reader-mode: true
+
+  search:
+    location: navbar
+    type: overlay
+
+  navbar:
+    pinned: true
+    background: light
+    left:
+      - href: index.qmd
+        text: Home
+      - href: blog.qmd
+        text: Blog
+      - href: projects.qmd
+        text: Projects
+      - href: notes.qmd
+        text: Notes
+      - href: cv.qmd
+        text: CV
+      - href: about.qmd
+        text: About
+    right:
+      - icon: github
+        href: "https://github.com/grvkhnl"
+        aria-label: GitHub
+      - icon: rss
+        href: blog.xml
+        aria-label: RSS
+
+  page-footer:
+    border: true
+    left: "© 2026 Gaurav Khanal"
+    center: "Mathematics · Machine Learning · Geometry"
+    right:
+      - icon: github
+        href: "https://github.com/grvkhnl"
+
+format:
+  html:
+    theme:
+      light: [flatly, styles/theme.scss]
+      dark: [darkly, styles/theme.scss]
+    css: styles/custom.css
+
+    page-layout: article
+    toc: true
+    toc-depth: 3
+    number-sections: false
+    smooth-scroll: true
+
+    code-copy: true
+    code-overflow: wrap
+    code-link: true
+
+    citations-hover: true
+    footnotes-hover: true
+    crossrefs-hover: true
+    anchor-sections: true
+
+    fig-align: center
+    reference-location: margin
+    cap-location: bottom
+    html-math-method: mathjax
+
+execute:
+  freeze: auto
+  echo: true
+  warning: false
+  message: false
+
+bibliography: references.bib
