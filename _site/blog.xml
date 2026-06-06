@@ -1,0 +1,223 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss  xmlns:atom="http://www.w3.org/2005/Atom" 
+      xmlns:media="http://search.yahoo.com/mrss/" 
+      xmlns:content="http://purl.org/rss/1.0/modules/content/" 
+      xmlns:dc="http://purl.org/dc/elements/1.1/" 
+      version="2.0">
+<channel>
+<title>Gaurav Khanal</title>
+<link>https://grvkhnl.github.io/blog.html</link>
+<atom:link href="https://grvkhnl.github.io/blog.xml" rel="self" type="application/rss+xml"/>
+<description>Essays, notes, and technical writing.</description>
+<generator>quarto-1.9.38</generator>
+<lastBuildDate>Thu, 04 Jun 2026 22:00:00 GMT</lastBuildDate>
+<item>
+  <title>The First Ruler: Fisher Information</title>
+  <dc:creator>Gaurav Khanal</dc:creator>
+  <link>https://grvkhnl.github.io/posts/2026-06-05-first-ruler/</link>
+  <description><![CDATA[ 
+
+
+
+
+
+<section id="the-question" class="level2" data-number="1">
+<h2 data-number="1" class="anchored" data-anchor-id="the-question"><span class="header-section-number">1</span> The Question</h2>
+<p>Suppose we have two probability distributions, <img src="https://latex.codecogs.com/png.latex?p"> and <img src="https://latex.codecogs.com/png.latex?q">, defined over the same space. How far apart are they?</p>
+<p>This is not a rhetorical question. Different answers lead to different algorithms, different criteria for what it means to learn well, and fundamentally different pictures of what the probability space looks like. The choice of distance is a geometric choice. And geometry, as we will see, has consequences that reach all the way into how neural networks are trained.</p>
+<p>The naïve answer (subtract the distributions and take a norm) immediately runs into trouble. The <img src="https://latex.codecogs.com/png.latex?L%5E2"> norm,</p>
+<p><span id="eq-l2-norm"><img src="https://latex.codecogs.com/png.latex?%0A%5C%7Cp-q%5C%7C_%7BL%5E2%7D%0A=%0A%5Csqrt%7B%20%5Cint%20%5Cleft(%20p(x)-q(x)%20%5Cright)%5E2%5C,dx%7D%0A%5Ctag%7B1%7D"></span></p>
+<p>is indifferent to where the points of the sample space <img src="https://latex.codecogs.com/png.latex?X"> sit relative to each other. Consider a narrow Gaussian concentrated near pixel <img src="https://latex.codecogs.com/png.latex?i"> of an image. Shifting it one pixel to the right prodicues a distribution that is nearyly identical to the original in any intuitive sense—yet, the <img src="https://latex.codecogs.com/png.latex?L%5E2"> norm assigns this the same distances as comparing the original to an entirely different distribution on the opposite side of the image. The norm sees only pointwise differences in probability mass; it has no vocabulary for the cost of moving that mass through space. For most problems of interest, this is exactly wrong.</p>
+<p>A better answer requires first deciding what structure the distance should respect: there are two natural answers and they come from completely different directions. In this post, we duscyss the first one.</p>
+</section>
+<section id="distinguishability-as-geometry" class="level2" data-number="2">
+<h2 data-number="2" class="anchored" data-anchor-id="distinguishability-as-geometry"><span class="header-section-number">2</span> Distinguishability as Geometry</h2>
+<p>The first answer starts from a statistical question: <em>how well can you tell two distributions apart from data?</em></p>
+<p>If <img src="https://latex.codecogs.com/png.latex?p"> and <img src="https://latex.codecogs.com/png.latex?q"> are nearly identical, no experiment can distinguish them reliably regardless of sample size. If they differ substantially, even a small sample makes them easy to tell apart. This notion of statistical distinguishability is the basis of Fisher’s approach [1].</p>
+<p>The key object is the <em>score function</em>, which is the gradient of the log-likelihood with respect to the parameter. For a parameter family <img src="https://latex.codecogs.com/png.latex?p(x;%5Ctheta)">, the score at <img src="https://latex.codecogs.com/png.latex?%5Ctheta"> is:</p>
+<p><span id="eq-score-function"><img src="https://latex.codecogs.com/png.latex?%0As(x;%5Ctheta)%0A=%0A%5Cfrac%7B%5Cpartial%7D%7B%5Cpartial%20%5Ctheta%7D%0A%5Clog%20p(x;%5Ctheta).%0A%5Ctag%7B2%7D"></span></p>
+<p>The score measures, infinitesimally, how the distribution changes as you move in the parameter space. It is the velocity of the distribution in the direction fo <img src="https://latex.codecogs.com/png.latex?%5Ctheta">.</p>
+<p>To quantify how large this veloctiy is—how much the distribution changes per unit movement in <img src="https://latex.codecogs.com/png.latex?%5Ctheta">—Fisher took the expected squared magnitude of the score. In 1-D, this gives the <em>Fisher information</em> [1, 2]:</p>
+<p><span id="eq-fisher-information"><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathcal%20I(%5Ctheta)%0A=%0A%5Cmathbb%20E_%5Ctheta%0A%5Cleft%5B%0A%20%20%5Cleft(%0A%20%20%20%20%5Cfrac%7B%5Cpartial%7D%7B%5Cpartial%20%5Ctheta%7D%0A%20%20%20%20%5Clog%20p(x;%5Ctheta)%0A%20%20%5Cright)%5E2%0A%5Cright%5D.%0A%5Ctag%7B3%7D"></span></p>
+<p>In higher dimensions, this becomes the Fisher Information Matrix (FIM):</p>
+<p><span id="eq-fisher-information-matrix"><img src="https://latex.codecogs.com/png.latex?%0AF_%7Bij%7D(%5Ctheta)%0A=%0A%5Cmathbb%20E_%5Ctheta%0A%5Cleft%5B%0A%20%20%5Cfrac%7B%5Cpartial_i%20%5Clog%20p%7D%7B%5Cpartial%20%5Ctheta%5Ei%7D%0A%20%20%5C,%0A%20%20%5Cfrac%7B%5Cpartial_j%20%5Clog%20p%7D%7B%5Cpartial%20%5Ctheta%5Ej%7D%0A%5Cright%5D.%0A%5Ctag%7B4%7D"></span></p>
+<p>This matrix is not merely a useful statistic. It is a <em>Riemannian metric tensor</em> on the parameter manifold <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BM%7D">: a smooth varying inner product on each tangent space <img src="https://latex.codecogs.com/png.latex?T_%7B%5Ctheta%7D%5Cmathcal%7BM%7D">, encoding the inifinitesimal statistical distinguishability of nearby distributions. The systematic study of this structure is the subject of information geometry [3,4].</p>
+</section>
+<section id="the-fim-as-a-pullback-metric" class="level2" data-number="3">
+<h2 data-number="3" class="anchored" data-anchor-id="the-fim-as-a-pullback-metric"><span class="header-section-number">3</span> The FIM as a Pullback Metric</h2>
+<p>The FIM has a clean geometric origin and is not an <em>ad hoc</em> construction. It is the metric that parameter space <em>inherits</em> from the space of distributions via the parametric family. This is the concept of <em>pullback metric</em>.</p>
+<div class="math-depth callout callout-style-default callout-tip callout-titled" title="Mathematical Depth">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Mathematical Depth
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Pullback metrics.</strong> Given a smooth map <img src="https://latex.codecogs.com/png.latex?f:M%20%5Cto%20N"> between manifolds and a Riemannian metric <img src="https://latex.codecogs.com/png.latex?g"> on <img src="https://latex.codecogs.com/png.latex?N">, the pullback metric <img src="https://latex.codecogs.com/png.latex?f%5E%7B*%7Dg"> on <img src="https://latex.codecogs.com/png.latex?M"> is defined by:</p>
+<p><span id="eq-pullback-metric"><img src="https://latex.codecogs.com/png.latex?%0A%5Cleft(f%5E%7B*%7Dg%20%5Cright)(u,v)%0A=%0Ag_%7Bf(p)%7D%5Cleft(df_p(u),df_p(v)%5Cright)%0A%5Ctag%7B5%7D"></span></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?df_p:%20T_p%20M%20%5Cto%20T_%7Bf(p)%7D%20N"> is the differential of <img src="https://latex.codecogs.com/png.latex?f"> at <img src="https://latex.codecogs.com/png.latex?p">, and <img src="https://latex.codecogs.com/png.latex?u,v%20%5Cin%20M"> are tangent vectors. Intuitively, to measure vectors in <img src="https://latex.codecogs.com/png.latex?M">, push them forward to <img src="https://latex.codecogs.com/png.latex?N"> using <img src="https://latex.codecogs.com/png.latex?df"> and measyre them using <img src="https://latex.codecogs.com/png.latex?g">. For <img src="https://latex.codecogs.com/png.latex?f%5E%7B*%7Dg"> to be a genuine metric (positive definite), <img src="https://latex.codecogs.com/png.latex?f"> must be an immersion, i.e., its differential must be inhective at each point.</p>
+<p><strong>The FIM as a pullback.</strong> Let <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BP%7D"> be the space of probability distributions, equipped with the <img src="https://latex.codecogs.com/png.latex?L%5E2"> inner product on score functions: <img src="https://latex.codecogs.com/png.latex?%5Clangle%20u,v%20%5Crangle%20=%20%5Cmathbb%7BE%7D_p%5Bu%20%5Ccdot%20v%5D">. The parametric family defines a map</p>
+<p><span id="eq-parametric-family-map"><img src="https://latex.codecogs.com/png.latex?%0Af:%5Cmathcal%7BM%7D%20%5Cto%20%5Cmathcal%7BP%7D,%20%5Cquad%20%5Ctheta%20%5Cmapsto%20p(%5Ccdot%5C,;%5Ctheta).%0A%5Ctag%7B6%7D"></span></p>
+<p>Its differential sends parameter directions to score functions: <img src="https://latex.codecogs.com/png.latex?df(%5Cpartial_i)%20=%20%5Cpartial_i%20%5Clog%20p(%5Ccdot%5C,;%5Ctheta)">. The pullback of the <img src="https://latex.codecogs.com/png.latex?L%5E2"> inner product is then</p>
+<p><span id="eq-pullback-l2-inner-product"><img src="https://latex.codecogs.com/png.latex?%0A%5Cleft(f%5E%7B*%7Dg%5Cright)_%7Bij%7D%0A=%0A%5Clangle%20df(%5Cpartial_i),df(%5Cpartial_j)%5Crangle%0A=%0A%5Cmathbb%7BE%7D_%7B%5Ctheta%7D%5Cleft%5B%5Cpartial_i%20%5Clog%20p%20%5Ccdot%20%5Cpartial_j%20%5Clog%20p%20%5Cright%5D%0A=%0AF_%7Bij%7D(%5Ctheta)%0A%5Ctag%7B7%7D"></span></p>
+<p>The FIM is the metric that <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BM%7D"> inherits from <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BP%7D">. Geometry flows <em>downward</em> from the space of distributions to the parameter space.</p>
+<p><strong>Coordinate invariance.</strong> Under a reparameterization <img src="https://latex.codecogs.com/png.latex?%5Ctilde%7B%5Ctheta%7D=%5Cphi(%5Ctheta)">, the FIM transforms as a <img src="https://latex.codecogs.com/png.latex?(0,2)">-tensor</p>
+<p><span id="eq-reparameterized-fim"><img src="https://latex.codecogs.com/png.latex?%0A%5Ctilde%7BF%7D_%7Bij%7D%0A=%0A%5Csum_%7Bi,j%7D%20F_%7Bij%7D%20%5Cfrac%7B%5Cpartial%20%5Ctheta%5Ei%7D%7B%5Cpartial%20%5Ctheta%5Ek%7D%20%5Cfrac%7B%5Cpartial%20%5Ctheta%5Ej%7D%7B%5Cpartial%20%5Ctheta%5El%7D%0A%5Ctag%7B8%7D"></span></p>
+<p>This is the transformation law of the Riemannian metric. The FIM captures intrinsic geometry, not a coordinate artifact. In essence, changing how you label the parameter does not change the geometry.</p>
+</div>
+</div>
+</section>
+<section id="chentsovs-theorem-the-unique-invariant-metric" class="level2" data-number="4">
+<h2 data-number="4" class="anchored" data-anchor-id="chentsovs-theorem-the-unique-invariant-metric"><span class="header-section-number">4</span> Chentsov’s Theorem: The Unique Invariant Metric</h2>
+<p>The pullback construction shows that FIM is natural. A deeper ressult, due to Chentsov [5], shows it is unique.</p>
+<div class="math-depth callout callout-style-default callout-tip callout-titled" title="Mathematical Depth">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Mathematical Depth
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Chentsov’s Theorem [5] (informal).</strong> The Fisher-Rao metric is the unique Riemannian metric on the statistical manifold, up to a positive scalar multiple, that is invariant under sufficient statistics: i.e., invariant under any measurable transformation of the sample space that preserves all statistical information about <img src="https://latex.codecogs.com/png.latex?%5Ctheta">.</p>
+</div>
+</div>
+<p>Chentsov is not saying the FIM is a natural choice among many. He is saying it is the only choice consistent with the principle that geometry should not depend on how data is represented. If two experimentsers measure the same phenomenon but record their observations differently—and neither loses information—their geometric picture of the statistical model must agree. The FIM is the unique metric with this property.</p>
+<p>This is a strong and somewhat surprising result. It says the geometry of statistical inference is not a convention or a convenience: it is forced by the structure of the problem.</p>
+<div class="remark-box callout callout-style-default callout-note callout-titled" title="Remark">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Remark
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Locality.</strong> The Fisher metric is local and infinitesimal. It is a tensor at each point of parameter space, giving an inner product on tangent vectors. It measures how fast nearby distributions diverge statistically, but it says directly about distributions that are far apart.</p>
+<p>Recovering a global distance requires integrating along geodesics in the Fisher metric, which is generally difficult and depends on the path. For many parametric families (such as Gaussians, exponential families, etc.), geodesics can be computed explicitly. In general, though, they cannot. This locality is a strength (it gives a clean Riemannian theory that is well-defined and coordinate-free) and a genuine limitation (it is not a ready-made global distance between arbitrary distributions).</p>
+</div>
+</div>
+</section>
+<section id="the-cramér-rao-bound-geometry-in-action" class="level2" data-number="5">
+<h2 data-number="5" class="anchored" data-anchor-id="the-cramér-rao-bound-geometry-in-action"><span class="header-section-number">5</span> The Cramér-Rao Bound: Geometry in Action</h2>
+<p>The Fisher metric does more that organize the geometry of a statistical model. It places hard limits on what any learning or estimation procedure can achieve. A learner navigating parameter space with smaller Fisher metric in some direction cannot acquire information in that direction quickly, no matter how its update rule is designed. The Cramér-Rao bound makes this precise [1, 2].</p>
+<p>For an unbiased estimator <img src="https://latex.codecogs.com/png.latex?%5Chat%7Btheta%7D"> of a scalar parameter <img src="https://latex.codecogs.com/png.latex?%5Ctheta">, the bound states:</p>
+<p><span id="eq-cramer-rao-bound"><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BVar%7D_%7B%5Ctheta%7D(%5Chat%7B%5Ctheta%7D)%0A%5Cgeq%0A%5Cfrac%7B1%7D%7B%5Cmathcal%7BI%7D(%5Ctheta)%7D%0A%5Ctag%7B9%7D"></span></p>
+<p>In vector form, for an unbiased estimator <img src="https://latex.codecogs.com/png.latex?%5Chat%7B%5Ctheta%7D"> of <img src="https://latex.codecogs.com/png.latex?%5Ctheta%20%5Cin%20%5Cmathbb%7BR%7D%5En">:</p>
+<p><span id="eq-cramer-rao-bound-vector"><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BCov%7D_%7B%5Ctheta%7D(%5Chat%7B%5Ctheta%7D)%0A%5Csucceq%0AF(%5Ctheta)%5E%7B-1%7D%0A%5Ctag%7B10%7D"></span></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?%5Csucceq"> denotes the Loewner partial order on positive semidefinite matrices. No unbiased estimator can have covariance smaller than <img src="https://latex.codecogs.com/png.latex?F(%5Ctheta)%5E%7B-1%7D">.</p>
+<p>The geometric reading is direct: <img src="https://latex.codecogs.com/png.latex?F(%5Ctheta)%5E%7B-1%7D"> is the dual metric on the cotangent space, and the bound says that estimation uncertainty is bounded below by the inverse of the local metric scale of the statistical manifold. Where the Fisher metric is large—where distributioons are highly distinguishable and change rapidly with <img src="https://latex.codecogs.com/png.latex?%5Ctheta">—estimation is easy. Conversely, where the local distinguishability is small, estimation is hard.</p>
+<div class="math-depth callout callout-style-default callout-tip callout-titled" title="Mathematical Depth">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Mathematical Depth
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Proof sketch.</strong> Fix an unbiased estimator <img src="https://latex.codecogs.com/png.latex?%5Chat%7B%5Ctheta%7D"> of <img src="https://latex.codecogs.com/png.latex?%5Ctheta%20%5Cin%20%5Cmathbb%7BR%7D">. Since <img src="https://latex.codecogs.com/png.latex?%5Chat%7B%5Ctheta%7D"> is unbiased, differentiating <img src="https://latex.codecogs.com/png.latex?%5Cint%5C,%5Chat%7B%5Ctheta%7D(x)p(x;%5Ctheta)dx=%5Ctheta"> with respect to <img src="https://latex.codecogs.com/png.latex?%5Ctheta"> and exchanging derivative and integral gives</p>
+<p><span id="eq-exp-score"><img src="https://latex.codecogs.com/png.latex?%0A%5Cmathbb%7BE%7D_%7B%5Ctheta%7D%5B%5Chat%7B%5Ctheta%7D(x)s(x;%5Ctheta)%5D=1%0A%5Ctag%7B11%7D"></span></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?s=%5Cpartial_%7B%5Ctheta%7D%5Clog%20p"> is the score and we used Fisher’s identity <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BE%7D_%7B%5Ctheta%7D%5Bs%5D=0">. Now apply the Cauchy-Schwarz inequality to the covariance <img src="https://latex.codecogs.com/png.latex?Cov(%5Chat%7B%5Ctheta%7D,s)">:</p>
+<p><span id="eq-cauchy-schwarz-covariance"><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BCov%7D(%5Chat%7B%5Ctheta%7D,s)%5E2%0A%5Cpreceq%0A%5Ctext%7BVar%7D(%5Chat%7B%5Ctheta%7D)%5Ccdot%5Ctext%7BVar%7D(s)%0A%5Ctag%7B12%7D"></span></p>
+<p>Thw left side equas <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BE%7D%5B%5Chat%7B%5Ctheta%20s%7D%5D%5E2=1"> (since <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BE%7D%5Bs%5D=0"> and <img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BE%7D%5B%5Chat%7B%5Ctheta%7D%20s%5D=1">). The right side is <img src="https://latex.codecogs.com/png.latex?%5Ctext%7BVar%7D(%5Chat%7B%5Ctheta%7D)%5Ccdot%5Cmathcal%7BI%7D(%5Ctheta)">.</p>
+<p>The vector case follows by applying the scalar bound to the directional estimator <img src="https://latex.codecogs.com/png.latex?v%5E%7B%5Ctop%7D%5Chat%7B%5Ctheta%7D"> for each <img src="https://latex.codecogs.com/png.latex?v%20%5Cin%20%5Cmathbb%7BR%7D%5En">, giving <img src="https://latex.codecogs.com/png.latex?v%5E%7B%5Ctop%7D%5Ctext%7BCov%7D(%5Chat%7B%5Ctheta%7D)v%20%5Cgeq%20v%5E%7B%5Ctop%7DF(%5Ctheta)%5E%7B-1%7Dv"> for all <img src="https://latex.codecogs.com/png.latex?v">; hence, <img src="https://latex.codecogs.com/png.latex?%5Ctext%7BCov%7D(%5Chat%7B%5Ctheta%7D)%20%5Csucceq%20F(%5Ctheta)%5E%7B-1%7D">.</p>
+</div>
+</div>
+<p>The Cramér-Rao bound is one of the oldest results in mathematical statistics but its geometric interpretation—as a statement about the inverse of a Riemannian metric—was not fully articulated until Rao’s formulation [2] and the subsequent development of information geometry [3].</p>
+</section>
+<section id="what-the-fisher-metric-cannot-see" class="level2" data-number="6">
+<h2 data-number="6" class="anchored" data-anchor-id="what-the-fisher-metric-cannot-see"><span class="header-section-number">6</span> What the Fisher Metric Cannot See</h2>
+<p>The Fisher metric is defined enturely within parameter space. It requires a parametric family <img src="https://latex.codecogs.com/png.latex?p(x;%5Ctheta)"> and measures how the model changes as <img src="https://latex.codecogs.com/png.latex?%5Ctheta"> varies. It is sensitive to the statistical shape of the model—how distributions in the family differ from each other—and entirely indifferent to the geometry of the sample space <img src="https://latex.codecogs.com/png.latex?X"> itself.</p>
+<p>If you relabel the points of <img src="https://latex.codecogs.com/png.latex?X"> arbitrarily—i.e., apply any measurable bijection to the data—the Fisher metric does not change. This is exactly Chentsov’s invariance property that we touched earlier, and it is both, a strength and a limitation.</p>
+<p>It is a strength because it means the geometry is intrinsic to the statistical model, not an artifact of data representation. It is a limitation becasue it means the Fisher metric has no vocabulary for the spatial layout of the data. It cannot tell you that the image of a cat shifted two pixels to the right is closer to the original than a completely different image. It lives entirely in the vertical direction, how probability weights change, and is blind to the horizontal direction of where points live in space.</p>
+<div class="remark-box callout callout-style-default callout-note callout-titled" title="Remark">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Note</span>Remark
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p>Learning algorithms that minimize <em>Kullback-Leibler (KL) divergence</em> (maximum likelihood estimation, variational autoencoders, and most of classical statistical inference) are navigating Fisher geometry locally [3, 6]. This is not merely an analogy; Chapter 3 makes the connection precise. For now, the key point is that KL-based objectives are sensitive to the parametric structure of the model and indifferent to the spatial layout of the data.</p>
+<p>This has a sharp failure mode: when the model distribution and the target distribution have disjoint support, KL divergence is infinite and provides no gradient signal. Early generative adversarial networks syffered precisely this failure [7], which motivated the shift to Wasserstein-based objectives. The failure traces directly to the geometry: KL is a Fisher-geometric object, and Fisher geometry has no concept of spatial distance.</p>
+<p>Natural gradient descent [8] corrects the optimization geometry by using <img src="https://latex.codecogs.com/png.latex?F(%5Ctheta)%5E%7B-1%7D"> to rescale the gradient, moving in the steepest direction with respect to the Fisher metric rather than the Euclidean one. This is the geometrically correct update in parameter space—but it is still confined to the vertical, statistical geometry, which we will come back to in a future post.</p>
+</div>
+</div>
+</section>
+<section id="preview-fisher-as-local-kl-geometry" class="level2" data-number="7">
+<h2 data-number="7" class="anchored" data-anchor-id="preview-fisher-as-local-kl-geometry"><span class="header-section-number">7</span> Preview: Fisher as Local KL Geometry</h2>
+<p>The Fisher metric does not stand alone. It is the local, symmetric residue of a richer asymmetric object: the KL divergence. This connection—which we will come back to in another blog post—is worth previewing here because it explains why the Fisher metric appears so naturally in learning.</p>
+<div class="math-depth callout callout-style-default callout-tip callout-titled" title="Mathematical Depth">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Mathematical Depth
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Fisher metric as the Hessian of KL.</strong> For a parametric family <img src="https://latex.codecogs.com/png.latex?p(%5Ccdot%5C,;%5Ctheta)">, the KL divergence from <img src="https://latex.codecogs.com/png.latex?p(%5Ccdot%5C,;%5Ctheta)"> to a nearby distribution <img src="https://latex.codecogs.com/png.latex?p(%5Ccdot%5C,;%5Ctheta%20+%20d%5Ctheta)"> has the Taylor expansion</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0A%5Ctext%7BKL%7D(p(%5Ccdot%5C,;%5Ctheta%20+%20d%5Ctheta)%5C,%5CVert%5C,p(%5Ccdot%5C,;%5Ctheta))%0A=%0A%5Cfrac%7B1%7D%7B2%7D%5C,F_%7Bij%7D(%5Ctheta)d%5Ctheta%5Ei%20d%5Ctheta%5Ej%20+%20%5Cmathcal%7BO%7D(%5C%7Cd%5Ctheta%5C%7C%5E3)%0A"></p>
+<p>To second order, KL divergence <em>is</em> the Fisher metric. The FIM is the Hessian of KL divergence at <img src="https://latex.codecogs.com/png.latex?%5Ctheta">, evaluated in the forward direction.</p>
+<p>This means two things. First, any algorithm that minimizes KL divergence inherits Fisher geometry in its local second-rder behavior. Minimizing KL gives Fisher as the local geometry, but the actual update rule may still use Euclidean gradients—this is precisely the gap that natural gradient descent, which will be discussed in future posts, is designed to close. Second, the Fisher metric inherits its symmetry from the Hessian operation: even though KL itself is asymmetric (because <img src="https://latex.codecogs.com/png.latex?%5Ctext%7BKL%7D(p%5C%7Cq)%20%5Cneq%20%5Ctext%7BKL%7D(q%5C%7Cp)"> in general), its second-order term is a symmetric bilinear form—the metric tensor <img src="https://latex.codecogs.com/png.latex?F_%7Bij%7D">.</p>
+<p>The asymmetry of KL beyond second order encodes something important: the two directions of KL correspond to qualitatively different behaviors (mode-covering vs.&nbsp;mode-seeking). I will examine this asymmetry in detail and show how it points directly toward <em>Schrödinger bridge</em>.</p>
+</div>
+</div>
+</section>
+<section id="the-fisher-metric-in-the-exponenrtial-family" class="level2" data-number="8">
+<h2 data-number="8" class="anchored" data-anchor-id="the-fisher-metric-in-the-exponenrtial-family"><span class="header-section-number">8</span> The Fisher Metric in the Exponenrtial Family</h2>
+<p>The Fisher metric takes a particularly clean form for exponential families, which include Gaussians, Bernoulli, Poisson and several other distributions used in practice.</p>
+<p>An exponential famuly has density</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0Ap(x;%5Ctheta)%0A=%0Ah(x)%5Cexp%5C,%5C%7B%5Ctheta%5E%7B%5Ctop%7D%5C,T(x)-A(%5Ctheta)%5C%7D%0A"></p>
+<p>where <img src="https://latex.codecogs.com/png.latex?T(x)"> are the sufficient statistics, <img src="https://latex.codecogs.com/png.latex?%5Ctheta"> are the natural parameters, and <img src="https://latex.codecogs.com/png.latex?A(%5Ctheta)"> is the log-partition function. A direct calcuylation shows that the FIM is the Hessian of A:</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AF_%7Bij%7D%0A=%0A%5Cfrac%7B%5Cpartial%5E2%5C,A%7D%7B%5Cpartial%5Ctheta%5Ei%5C,%5Cpartial%5Ctheta%5Ej%7D.%0A"></p>
+<div class="math-depth callout callout-style-default callout-tip callout-titled" title="Mathematical Depth">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<span class="screen-reader-only">Tip</span>Mathematical Depth
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Derivation.</strong> For the exponential family, <img src="https://latex.codecogs.com/png.latex?%5Clog%20p(x;%5Ctheta)%20=%20%5Ctheta%5E%7B%5Ctop%7DT(x)-A(%5Ctheta)+%5Clog%20h(x)">, so <img src="https://latex.codecogs.com/png.latex?%5Cpartial_i%20%5Clog%20p%20=%20T_i(x)%20-%20%5Cpartial_i%20A(%5Ctheta)">. The score has mean zero by Fisher’s identity (<img src="https://latex.codecogs.com/png.latex?%5Cmathbb%7BE%7D_%7B%5Ctheta%7D%5B%5Cpartial_i%20%5Clog%20p%5D=0">), so</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AF_%7Bij%7D%0A=%0A%5Cmathbb%7BE%7D_%7B%5Ctheta%7D%5Cleft%5B(T_i-%5Cpartial_iA)(T_j-%5Cpartial_jA)%5Cright%5D%0A=%0A%5Ctext%7BCov%7D_%7B%5Ctheta%7D(T_i,T_j)=%5Cpartial_i%5Cpartial_jA(%5Ctheta)%0A"></p>
+<p>The FIM is the covariance of the sufficient statistics, or equivalently, the Hessian of the log-partition function <em>with respect to the natural parameters <img src="https://latex.codecogs.com/png.latex?%5Ctheta"></em>. Since <img src="https://latex.codecogs.com/png.latex?A"> is convex, <img src="https://latex.codecogs.com/png.latex?F"> is positive semidefinite, confirming that the FIM is a valid Riemannian metric.</p>
+<p><strong><em>Example: Gaussians.</em></strong> The Gaussian <img src="https://latex.codecogs.com/png.latex?%5Cmathcal%7BN%7D(%5Cmu,%5Csigma%5E2)"> belongs to an exponential family with natural parameters <img src="https://latex.codecogs.com/png.latex?%5Ctheta_1=%5Cmu/%5Csigma%5E2"> and <img src="https://latex.codecogs.com/png.latex?%5Ctheta_2=-1/(2%5Csigma%5E2)">. In those coordinates, <img src="https://latex.codecogs.com/png.latex?F=%5Cnabla%5E2A(%5Ctheta)"> as above. Transforming to the more familiar coordinates <img src="https://latex.codecogs.com/png.latex?(%5Cmu,%5Csigma%5E2)"> via the chain rule for metric tensors gives</p>
+<p><img src="https://latex.codecogs.com/png.latex?%0AF(%5Cmu,%5Csigma%5E2)%0A=%0A%5Cbegin%7Bpmatrix%7D%0A1/%5Csigma%5E2%20&amp;%200%20%5C%5C%0A0%20&amp;%201/(2%5Csigma%5E4)%0A%5Cend%7Bpmatrix%7D%0A"></p>
+<p>This is the correct Fisher metric in <img src="https://latex.codecogs.com/png.latex?(%5Cmu,%5Csigma%5E2)"> coordinates, but it is <em>not</em> obtained as the Hessian of <img src="https://latex.codecogs.com/png.latex?A"> with respect to <img src="https://latex.codecogs.com/png.latex?(%5Cmu,%5Csigma%5E2)"> directly—those are not natural parameters. Geodesic distance in the Fisher metric on the space of Gaussians has closed form expression and is well-studied [4].</p>
+<p>The fact that the Fisher metric on an exponential family is the Hessian of a convex function is deeply connected to the duality structure of information geometry [3]. The convex function <img src="https://latex.codecogs.com/png.latex?A"> and its Legendre transform generate two dual coordinate systems on the manifold—the natural parameters <img src="https://latex.codecogs.com/png.latex?%5Ctheta"> and the expectation paramaters <img src="https://latex.codecogs.com/png.latex?%5Ceta=%5Cnabla%20A(%5Ctheta)">—and the KL divergence between two distributions in the family is the Bregman divergence generated by <img src="https://latex.codecogs.com/png.latex?A">. This duality will be explored in future posts.</p>
+</div>
+</div>
+</section>
+<section id="a-first-uniqueness-result" class="level2" data-number="9">
+<h2 data-number="9" class="anchored" data-anchor-id="a-first-uniqueness-result"><span class="header-section-number">9</span> A First Uniqueness Result</h2>
+<p>I close this post by noting the signficiance of Chentsov’s theorem in the context of the larger information geometry argument.</p>
+<p>The Fisher metric is unique. Given the natural invariance requirement, that geometry should not depend on data representation, there is only one Riemannian metric on the statistical manifold. This is not a result about convenience or convention; it is a structural constraint imposed by the problem itself.</p>
+<p>This pattern recurs. Next, we will see a second uniqueness result—Brenier’s theorem [9], which characterizes the optimal transport map for the <img src="https://latex.codecogs.com/png.latex?W_2"> distance. In future posts, I will also introduce Schrödinger’s bridge, which wil be unique given its marginals and reference processes. And then we will also explore Hodge decomposition, which will also be unique.</p>
+<p>These are not four theorems on the same object. They live in different mathematical languages. But they carry the same message: once natural requirements are imposed, the geomrty of probability becomes highly constrained. When independent fields discover compatible pieces of that constrained geometry, they were alwasy finding facets of the same underlying structure.</p>
+
+
+</section>
+
+ ]]></description>
+  <category>information geometry</category>
+  <category>fisher information</category>
+  <category>pullback metric</category>
+  <category>riemannian metric</category>
+  <guid>https://grvkhnl.github.io/posts/2026-06-05-first-ruler/</guid>
+  <pubDate>Thu, 04 Jun 2026 22:00:00 GMT</pubDate>
+</item>
+</channel>
+</rss>

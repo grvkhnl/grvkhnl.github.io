@@ -1,0 +1,47 @@
+/* Full-width listing pages, but readable article pages */
+.page-layout-full main.content {
+  max-width: 1080px;
+}
+
+/* Better mobile title spacing */
+@media (max-width: 768px) {
+  .quarto-title-block .title {
+    font-size: 2.35rem;
+  }
+
+  main.content {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .hero {
+    padding-top: 2.5rem;
+  }
+
+  .hero-title {
+    font-size: 3.2rem;
+  }
+}
+
+/* Better spacing when math follows prose */
+p + .math.display {
+  margin-top: 1.1rem;
+}
+
+/* Avoid overly wide images */
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Make listings feel less default */
+.quarto-grid-item {
+  border-radius: 14px;
+}
+
+/* Slightly quieter metadata */
+.listing-author,
+.listing-date,
+.listing-reading-time {
+  color: #6b7280;
+}

@@ -1,0 +1,13 @@
+---
+title: "Blog"
+description: "Essays, notes, and technical writing."
+page-layout: full
+listing:
+  contents: posts
+  type: default
+  sort: "date desc"
+  categories: true
+  feed: true
+---
+
+Essays, notes, and technical writing on mathematics, machine learning, information geometry, and related topics.

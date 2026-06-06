@@ -1,0 +1,25 @@
+---
+title: "CV"
+description: "Curriculum vitae."
+page-layout: article
+---
+
+## Gaurav Khanal
+
+You can place a short academic CV here.
+
+## Education
+
+- MSc in Data Science and Artificial Intelligence (DSAI), Université Côte d'Azur, France (2024-2026)
+
+## Research interests
+
+- Geometric Deep Learning
+- Topological Deep Learning
+- SciML / AI4Science
+- Medical Image Registration and Analysis
+- Biomedical Signal Processing
+
+## Selected projects
+
+- The Geometry of Probability

@@ -1,0 +1,286 @@
+---
+title: "The First Ruler: Fisher Information"
+subtitle: "Why Fisher information is the local geometry of statistical models"
+description: "This post introduces Fisher information as the first “ruler” for probability distributions: a local metric that measures how distinguishable nearby statistical models are from data. We will see why it arises naturally as a pullback metric, why Chentsov’s theorem makes it unique, and how it foreshadows the deeper connection between KL divergence, natural gradients, and learning."
+date: 2026-06-05
+categories:
+  - information geometry
+  - fisher information
+  - pullback metric
+  - riemannian metric
+author: "Gaurav Khanal"
+bibliography: ../../references.bib
+toc: true
+number-sections: true
+---
+
+## The Question
+
+Suppose we have two probability distributions, $p$ and $q$, defined over the same space. How far apart are they?
+
+This is not a rhetorical question. Different answers lead to different algorithms, different criteria for what it means to learn well, and fundamentally different pictures of what the probability space looks like. The choice of distance is a geometric choice. And geometry, as we will see, has consequences that reach all the way into how neural networks are trained.  
+
+The naïve answer (subtract the distributions and take a norm) immediately runs into trouble. The $L^2$ norm,
+
+$$
+\|p-q\|_{L^2}
+=
+\sqrt{ \int \left( p(x)-q(x) \right)^2\,dx}
+$$ {#eq-l2-norm}}
+
+is indifferent to where the points of the sample space $X$ sit relative to each other. Consider a narrow Gaussian concentrated near pixel $i$ of an image. Shifting it one pixel to the right prodicues a distribution that is nearyly identical to the original in any intuitive sense---yet, the $L^2$ norm assigns this the same distances as comparing the original to an entirely different distribution on the opposite side of the image. The norm sees only pointwise differences in probability mass; it has no vocabulary for the cost of moving that mass through space. For most problems of interest, this is exactly wrong.
+
+A better answer requires first deciding what structure the distance should respect: there are two natural answers and they come from completely different directions. In this post, we duscyss the first one.
+
+## Distinguishability as Geometry
+
+The first answer starts from a statistical question: *how well can you tell two distributions apart from data?*
+
+If $p$ and $q$ are nearly identical, no experiment can distinguish them reliably regardless of sample size. If they differ substantially, even a small sample makes them easy to tell apart. This notion of statistical distinguishability is the basis of Fisher's approach [1].
+
+The key object is the *score function*, which is the gradient of the log-likelihood with respect to the parameter. For a parameter family $p(x;\theta)$, the score at $\theta$ is:
+
+$$
+s(x;\theta)
+=
+\frac{\partial}{\partial \theta}
+\log p(x;\theta).
+$$ {#eq-score-function}
+
+The score measures, infinitesimally, how the distribution changes as you move in the parameter space. It is the velocity of the distribution in the direction fo $\theta$. 
+
+To quantify how large this veloctiy is---how much the distribution changes per unit movement in $\theta$---Fisher took the expected squared magnitude of the score. In 1-D, this gives the *Fisher information* [1, 2]:
+
+$$
+\mathcal I(\theta)
+=
+\mathbb E_\theta
+\left[
+  \left(
+    \frac{\partial}{\partial \theta}
+    \log p(x;\theta)
+  \right)^2
+\right].
+$$ {#eq-fisher-information}
+
+In higher dimensions, this becomes the Fisher Information Matrix (FIM):
+
+$$
+F_{ij}(\theta)
+=
+\mathbb E_\theta
+\left[
+  \frac{\partial_i \log p}{\partial \theta^i}
+  \,
+  \frac{\partial_j \log p}{\partial \theta^j}
+\right].
+$$ {#eq-fisher-information-matrix}
+
+This matrix is not merely a useful statistic. It is a *Riemannian metric tensor* on the parameter manifold $\mathcal{M}$: a smooth varying inner product on each tangent space $T_{\theta}\mathcal{M}$, encoding the inifinitesimal statistical distinguishability of nearby distributions. The systematic study of this structure is the subject of information geometry [3,4].
+
+## The FIM as a Pullback Metric
+
+The FIM has a clean geometric origin and is not an *ad hoc* construction. It is the metric that parameter space *inherits* from the space of distributions via the parametric family. This is the concept of *pullback metric*.
+
+::: {.callout-tip .math-depth title="Mathematical Depth"}
+**Pullback metrics.** Given a smooth map $f:M \to N$ between manifolds and a Riemannian metric $g$ on $N$, the pullback metric $f^{*}g$ on $M$ is defined by:
+
+$$
+\left(f^{*}g \right)(u,v)
+=
+g_{f(p)}\left(df_p(u),df_p(v)\right)
+$$ {#eq-pullback-metric}
+
+where $df_p: T_p M \to T_{f(p)} N$ is the differential of $f$ at $p$, and $u,v \in M$ are tangent vectors. Intuitively, to measure vectors in $M$, push them forward to $N$ using $df$ and measyre them using $g$. For $f^{*}g$ to be a genuine metric (positive definite), $f$ must be an immersion, i.e., its differential must be inhective at each point.
+
+**The FIM as a pullback.** Let $\mathcal{P}$ be the space of probability distributions, equipped with the $L^2$ inner product on score functions: $\langle u,v \rangle = \mathbb{E}_p[u \cdot v]$. The parametric family defines a map
+
+$$
+f:\mathcal{M} \to \mathcal{P}, \quad \theta \mapsto p(\cdot\,;\theta).
+$$ {#eq-parametric-family-map}
+
+
+Its differential sends parameter directions to score functions: $df(\partial_i) = \partial_i \log p(\cdot\,;\theta)$. The pullback of the $L^2$ inner product is then
+
+$$
+\left(f^{*}g\right)_{ij}
+=
+\langle df(\partial_i),df(\partial_j)\rangle
+=
+\mathbb{E}_{\theta}\left[\partial_i \log p \cdot \partial_j \log p \right]
+=
+F_{ij}(\theta)
+$$ {#eq-pullback-l2-inner-product}
+
+The FIM is the metric that $\mathcal{M}$ inherits from $\mathcal{P}$. Geometry flows *downward* from the space of distributions to the parameter space.
+
+**Coordinate invariance.** Under a reparameterization $\tilde{\theta}=\phi(\theta)$, the FIM transforms as a $(0,2)$-tensor
+
+$$
+\tilde{F}_{ij}
+=
+\sum_{i,j} F_{ij} \frac{\partial \theta^i}{\partial \theta^k} \frac{\partial \theta^j}{\partial \theta^l}
+$$ {#eq-reparameterized-fim}
+
+This is the transformation law of the Riemannian metric. The FIM captures intrinsic geometry, not a coordinate artifact. In essence, changing how you label the parameter does not change the geometry.
+:::
+
+## Chentsov's Theorem: The Unique Invariant Metric
+
+The pullback construction shows that FIM is natural. A deeper ressult, due to Chentsov [5], shows it is unique.
+
+::: {.callout-tip .math-depth title="Mathematical Depth"}
+
+**Chentsov's Theorem [5] (informal).** The Fisher-Rao metric is the unique Riemannian metric on the statistical manifold, up to a positive scalar multiple, that is invariant under sufficient statistics: i.e., invariant under any measurable transformation of the sample space that preserves all statistical information about $\theta$.
+:::
+
+Chentsov is not saying the FIM is a natural choice among many. He is saying it is the only choice consistent with the principle that geometry should not depend on how data is represented. If two experimentsers measure the same phenomenon but record their observations differently---and neither loses information---their geometric picture of the statistical model must agree. The FIM is the unique metric with this property.
+
+This is a strong and somewhat surprising result. It says the geometry of statistical inference is not a convention or a convenience: it is forced by the structure of the problem.
+
+::: {.callout-note .remark-box title="Remark"}
+**Locality.** The Fisher metric is local and infinitesimal. It is a tensor at each point of parameter space, giving an inner product on tangent vectors. It measures how fast nearby distributions diverge statistically, but it says directly about distributions that are far apart. 
+
+Recovering a global distance requires integrating along geodesics in the Fisher metric, which is generally difficult and depends on the path. For many parametric families (such as Gaussians, exponential families, etc.), geodesics can be computed explicitly. In general, though, they cannot. This locality is a strength (it gives a clean Riemannian theory that is well-defined and coordinate-free) and a genuine limitation (it is not a ready-made global distance between arbitrary distributions).
+:::
+
+## The Cramér-Rao Bound: Geometry in Action
+
+The Fisher metric does more that organize the geometry of a statistical model. It places hard limits on what any learning or estimation procedure can achieve. A learner navigating parameter space with smaller Fisher metric in some direction cannot acquire information in that direction quickly, no matter how its update rule is designed. The Cramér-Rao bound makes this precise [1, 2].
+
+For an unbiased estimator $\hat{theta}$ of a scalar parameter $\theta$, the bound states:
+
+$$
+\text{Var}_{\theta}(\hat{\theta})
+\geq
+\frac{1}{\mathcal{I}(\theta)}
+$$ {#eq-cramer-rao-bound}
+
+In vector form, for an unbiased estimator $\hat{\theta}$ of $\theta \in \mathbb{R}^n$:
+
+$$
+\text{Cov}_{\theta}(\hat{\theta})
+\succeq
+F(\theta)^{-1}
+$$ {#eq-cramer-rao-bound-vector}
+
+where $\succeq$ denotes the Loewner partial order on positive semidefinite matrices. No unbiased estimator can have covariance smaller than $F(\theta)^{-1}$.
+
+The geometric reading is direct: $F(\theta)^{-1}$ is the dual metric on the cotangent space, and the bound says that estimation uncertainty is bounded below by the inverse of the local metric scale of the statistical manifold. Where the Fisher metric is large---where distributioons are highly distinguishable and change rapidly with $\theta$---estimation is easy. Conversely, where the local distinguishability is small, estimation is hard. 
+
+::: {.callout-tip .math-depth title="Mathematical Depth"}
+**Proof sketch.** Fix an unbiased estimator $\hat{\theta}$ of $\theta \in \mathbb{R}$. Since $\hat{\theta}$ is unbiased, differentiating $\int\,\hat{\theta}(x)p(x;\theta)dx=\theta$ with respect to $\theta$ and exchanging derivative and integral gives
+
+$$
+\mathbb{E}_{\theta}[\hat{\theta}(x)s(x;\theta)]=1
+$$ {#eq-exp-score}
+
+where $s=\partial_{\theta}\log p$ is the score and we used Fisher's identity $\mathbb{E}_{\theta}[s]=0$. Now apply the Cauchy-Schwarz inequality to the covariance $Cov(\hat{\theta},s)$:
+
+$$
+\text{Cov}(\hat{\theta},s)^2
+\preceq
+\text{Var}(\hat{\theta})\cdot\text{Var}(s)
+$$ {#eq-cauchy-schwarz-covariance}
+
+Thw left side equas $\mathbb{E}[\hat{\theta s}]^2=1$ (since $\mathbb{E}[s]=0$ and $\mathbb{E}[\hat{\theta} s]=1$). The right side is $\text{Var}(\hat{\theta})\cdot\mathcal{I}(\theta)$.
+
+The vector case follows by applying the scalar bound to the directional estimator $v^{\top}\hat{\theta}$ for each $v \in \mathbb{R}^n$, giving $v^{\top}\text{Cov}(\hat{\theta})v \geq v^{\top}F(\theta)^{-1}v$ for all $v$; hence, $\text{Cov}(\hat{\theta}) \succeq F(\theta)^{-1}$.
+:::
+
+The Cramér-Rao bound is one of the oldest results in mathematical statistics but its geometric interpretation---as a statement about the inverse of a Riemannian metric---was not fully articulated until Rao's formulation [2] and the subsequent development of information geometry [3]. 
+
+## What the Fisher Metric Cannot See
+
+The Fisher metric is defined enturely within parameter space. It requires a parametric family $p(x;\theta)$ and measures how the model changes as $\theta$ varies. It is sensitive to the statistical shape of the model---how distributions in the family differ from each other---and entirely indifferent to the geometry of the sample space $X$ itself.
+
+If you relabel the points of $X$ arbitrarily---i.e., apply any measurable bijection to the data---the Fisher metric does not change. This is exactly Chentsov's invariance property that we touched earlier, and it is both, a strength and a limitation.
+
+It is a strength because it means the geometry is intrinsic to the statistical model, not an artifact of data representation. It is a limitation becasue it means the Fisher metric has no vocabulary for the spatial layout of the data. It cannot tell you that the image of a cat shifted two pixels to the right is closer to the original than a completely different image. It lives entirely in the vertical direction, how probability weights change, and is blind to the horizontal direction of where points live in space.
+
+::: {.callout-note .remark-box title="Remark"}
+Learning algorithms that minimize *Kullback-Leibler (KL) divergence* (maximum likelihood estimation, variational autoencoders, and most of classical statistical inference) are navigating Fisher geometry locally [3, 6]. This is not merely an analogy; Chapter 3 makes the connection precise. For now, the key point is that KL-based objectives are sensitive to the parametric structure of the model and indifferent to the spatial layout of the data.
+
+This has a sharp failure mode: when the model distribution and the target distribution have disjoint support, KL divergence is infinite and provides no gradient signal. Early generative adversarial networks syffered precisely this failure [7], which motivated the shift to Wasserstein-based objectives. The failure traces directly to the geometry: KL is a Fisher-geometric object, and Fisher geometry has no concept of spatial distance. 
+
+Natural gradient descent [8] corrects the optimization geometry by using $F(\theta)^{-1}$ to rescale the gradient, moving in the steepest direction with respect to the Fisher metric rather than the Euclidean one. This is the geometrically correct update in parameter space---but it is still confined to the vertical, statistical geometry, which we will come back to in a future post.
+:::
+
+## Preview: Fisher as Local KL Geometry
+
+The Fisher metric does not stand alone. It is the local, symmetric residue of a richer asymmetric object: the KL divergence. This connection---which we will come back to in another blog post---is worth previewing here because it explains why the Fisher metric appears so naturally in learning.
+
+::: {.callout-tip .math-depth title="Mathematical Depth"}
+**Fisher metric as the Hessian of KL.** For a parametric family $p(\cdot\,;\theta)$, the KL divergence from $p(\cdot\,;\theta)$ to a nearby distribution $p(\cdot\,;\theta + d\theta)$ has the Taylor expansion
+
+$$
+\text{KL}(p(\cdot\,;\theta + d\theta)\,\Vert\,p(\cdot\,;\theta))
+=
+\frac{1}{2}\,F_{ij}(\theta)d\theta^i d\theta^j + \mathcal{O}(\|d\theta\|^3)
+$$
+
+To second order, KL divergence *is* the Fisher metric. The FIM is the Hessian of KL divergence at $\theta$, evaluated in the forward direction.
+
+This means two things. First, any algorithm that minimizes KL divergence inherits Fisher geometry in its local second-rder behavior. Minimizing KL gives Fisher as the local geometry, but the actual update rule may still use Euclidean gradients---this is precisely the gap that natural gradient descent, which will be discussed in future posts, is designed to close. Second, the Fisher metric inherits its symmetry from the Hessian operation: even though KL itself is asymmetric (because $\text{KL}(p\|q) \neq \text{KL}(q\|p)$ in general), its second-order term is a symmetric bilinear form---the metric tensor $F_{ij}$.
+
+The asymmetry of KL beyond second order encodes something important: the two directions of KL correspond to qualitatively different behaviors (mode-covering vs. mode-seeking). I will examine this asymmetry in detail and show how it points directly toward *Schrödinger bridge*.
+:::
+
+## The Fisher Metric in the Exponenrtial Family
+
+The Fisher metric takes a particularly clean form for exponential families, which include Gaussians, Bernoulli, Poisson and several other distributions used in practice. 
+
+An exponential famuly has density
+
+$$
+p(x;\theta)
+=
+h(x)\exp\,\{\theta^{\top}\,T(x)-A(\theta)\}
+$$
+
+where $T(x)$ are the sufficient statistics, $\theta$ are the natural parameters, and $A(\theta)$ is the log-partition function. A direct calcuylation shows that the FIM is the Hessian of A:
+
+$$
+F_{ij}
+=
+\frac{\partial^2\,A}{\partial\theta^i\,\partial\theta^j}.
+$$
+
+::: {.callout-tip .math-depth title="Mathematical Depth"}
+**Derivation.** For the exponential family, $\log p(x;\theta) = \theta^{\top}T(x)-A(\theta)+\log h(x)$, so $\partial_i \log p = T_i(x) - \partial_i A(\theta)$. The score has mean zero by Fisher's identity ($\mathbb{E}_{\theta}[\partial_i \log p]=0$), so 
+
+$$
+F_{ij}
+= 
+\mathbb{E}_{\theta}\left[(T_i-\partial_iA)(T_j-\partial_jA)\right]
+=
+\text{Cov}_{\theta}(T_i,T_j)=\partial_i\partial_jA(\theta)
+$$
+
+The FIM is the covariance of the sufficient statistics, or equivalently, the Hessian of the log-partition function *with respect to the natural parameters $\theta$*. Since $A$ is convex, $F$ is positive semidefinite, confirming that the FIM is a valid Riemannian metric.
+
+***Example: Gaussians.*** The Gaussian $\mathcal{N}(\mu,\sigma^2)$ belongs to an exponential family with natural parameters $\theta_1=\mu/\sigma^2$ and $\theta_2=-1/(2\sigma^2)$. In those coordinates, $F=\nabla^2A(\theta)$ as above. Transforming to the more familiar coordinates $(\mu,\sigma^2)$ via the chain rule for metric tensors gives
+
+$$
+F(\mu,\sigma^2)
+=
+\begin{pmatrix}
+1/\sigma^2 & 0 \\
+0 & 1/(2\sigma^4)
+\end{pmatrix}
+$$
+
+This is the correct Fisher metric in $(\mu,\sigma^2)$ coordinates, but it is *not* obtained as the Hessian of $A$ with respect to $(\mu,\sigma^2)$ directly---those are not natural parameters. Geodesic distance in the Fisher metric on the space of Gaussians has closed form expression and is well-studied [4].
+
+The fact that the Fisher metric on an exponential family is the Hessian of a convex function is deeply connected to the duality structure of information geometry [3]. The convex function $A$ and its Legendre transform generate two dual coordinate systems on the manifold---the natural parameters $\theta$ and the expectation paramaters $\eta=\nabla A(\theta)$---and the KL divergence between two distributions in the family is the Bregman divergence generated by $A$. This duality will be explored in future posts. 
+:::
+
+## A First Uniqueness Result
+
+I close this post by noting the signficiance of Chentsov's theorem in the context of the larger information geometry argument. 
+
+The Fisher metric is unique. Given the natural invariance requirement, that geometry should not depend on data representation, there is only one Riemannian metric on the statistical manifold. This is not a result about convenience or convention; it is a structural constraint imposed by the problem itself. 
+
+This pattern recurs. Next, we will see a second uniqueness result---Brenier's theorem [9], which characterizes the optimal transport map for the $W_2$ distance. In future posts, I will also introduce Schrödinger's bridge, which wil be unique given its marginals and reference processes. And then we will also explore Hodge decomposition, which will also be unique. 
+
+These are not four theorems on the same object. They live in different mathematical languages. But they carry the same message: once natural requirements are imposed, the geomrty of probability becomes highly constrained. When independent fields discover compatible pieces of that constrained geometry, they were alwasy finding facets of the same underlying structure. 

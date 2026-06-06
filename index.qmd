@@ -1,7 +1,79 @@
 ---
-title: "Gaurav Khanal"
+title: ""
+description: "Personal website of Gaurav Khanal."
+page-layout: article
+title-block-style: none
 ---
 
-This is a Quarto website.
+<div class="hero">
 
-To learn more about Quarto websites visit <https://quarto.org/docs/websites>.
+<h1 class="hero-title">Gaurav Khanal</h1>
+
+<p class="hero-subtitle">
+Mathematics, machine learning, information geometry, and research notes.
+I write about the geometry behind uncertainty, learning systems, and probability.
+</p>
+
+<div class="hero-links">
+  <a href="blog.html">Blog</a>
+  <a href="projects.html">Projects</a>
+  <a href="notes.html">Notes</a>
+  <a href="cv.html">CV</a>
+  <a href="about.html">About</a>
+</div>
+
+</div>
+
+## Current writing
+
+I am currently developing a mathematical essay series called **The Geometry of Uncertainty**, starting from Fisher information, optimal transport, KL geometry, and Schrödinger bridges.
+
+<div class="card-grid">
+
+<div class="card">
+
+### The Geometry of Uncertainty
+
+A long-form essay series on information geometry, optimal transport, KL divergence, Schrödinger bridges, and learning.
+
+<a href="blog.html">Read the series →</a>
+
+</div>
+
+<div class="card">
+
+### Research notes
+
+Technical notes, paper summaries, derivations, and working ideas in mathematics and machine learning.
+
+<a href="notes.html">See notes →</a>
+
+</div>
+
+<div class="card">
+
+### Projects
+
+Selected work in machine learning, mathematical modeling, computation, and visualization.
+
+<a href="projects.html">See projects →</a>
+
+</div>
+
+</div>
+
+## Recent focus
+
+My current interests sit at the intersection of geometry, probability, and learning:
+
+- information geometry and Fisher metrics
+- optimal transport and Wasserstein geometry
+- KL divergence, Bregman geometry, and exponential families
+- Schrödinger bridges and stochastic processes
+- geometric viewpoints on machine learning
+
+## Start here
+
+If you are here for the writing project, start with the blog series:
+
+<a href="blog.html"><strong>The Geometry of Uncertainty →</strong></a>
