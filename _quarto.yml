@@ -9,7 +9,7 @@ website:
   title: "Gaurav Khanal"
   site-url: "https://grvkhnl.github.io"
   description: "Personal website of Gaurav Khanal — mathematics, machine learning, information geometry, and research notes."
-  favicon: assets/profile/favicon.png
+  favicon: assets/profile/favicon.svg
 
   repo-url: "https://github.com/grvkhnl/grvkhnl.github.io"
   repo-actions: [source, issue]
