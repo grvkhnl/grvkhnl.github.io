@@ -41,6 +41,11 @@
   color: #7a2435 !important;
 }
 
+.callout.learning-box .callout-icon::before,
+.callout.consequence-box .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="%237a2435" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 16 16"><path d="M2 13.5h12"/><path d="M2.5 11.5 5.5 8l2.25 2.25L12.5 4.5"/><path d="M10 4.5h2.5V7"/></svg>') !important;
+}
+
 .callout.precision-box {
   border-left-color: var(--plum) !important;
   background-color: #e8dce3 !important;
@@ -138,6 +143,11 @@ body.quarto-dark .callout.consequence-box > .callout-header {
   background-color: #4a2429 !important;
   background-color: color-mix(in srgb, #4a2429 80%, transparent) !important;
   color: #f0b5ad !important;
+}
+
+body.quarto-dark .callout.learning-box .callout-icon::before,
+body.quarto-dark .callout.consequence-box .callout-icon::before {
+  background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="none" stroke="%23f0b5ad" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 16 16"><path d="M2 13.5h12"/><path d="M2.5 11.5 5.5 8l2.25 2.25L12.5 4.5"/><path d="M10 4.5h2.5V7"/></svg>') !important;
 }
 
 body.quarto-dark .callout.precision-box {

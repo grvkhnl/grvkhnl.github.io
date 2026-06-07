@@ -76,6 +76,8 @@ F_{ij}(\theta)
 \right].
 $$ {#eq-fisher-information-matrix}
 
+There is an important computational caveat. For a model with $N$ parameters, the FIM is an $N \times N$ matrix. In modern neural networks, where $N$ can be millions or billions, explicitly constructing this matrix is impossible. Practical methods therefore rely on matrix-free Fisher-vector products, diagonal approximations, low-rank approximations, or structured block approximations such as K-FAC. These approximations change the computation, but not the underlying geometric object.
+
 This matrix is not merely a useful statistic. It is a *Riemannian metric tensor* on the parameter manifold $\mathcal{M}$: a smooth varying inner product on each tangent space $T_{\theta}\mathcal{M}$, encoding the infinitesimal statistical distinguishability of nearby distributions. The systematic study of this structure is the subject of information geometry [@amari2000; @amari2016].
 
 ## The FIM as a Pullback Metric
@@ -224,6 +226,8 @@ $$ {#eq-cramer-rao-bound-vector}
 
 where $\succeq$ denotes the Loewner partial order on positive semidefinite matrices. No unbiased estimator can have covariance smaller than $F(\theta)^{-1}$.
 
+For deep learning, this statement should not be read too literally. We are usually not searching for an unbiased estimator of a true parameter vector; neural networks are overparameterized, non-identifiable, and trained for predictive performance rather than classical parameter recovery. The relevance is geometric: the inverse Fisher describes how sensitive the model distribution is to parameter movement. In optimization language, it acts like a curvature-aware preconditioner, shaping stable step sizes and update directions.
+
 The geometric reading is direct: $F(\theta)^{-1}$ is the dual metric on the cotangent space, and the bound says that estimation uncertainty is bounded below by the inverse of the local metric scale of the statistical manifold. Where the Fisher metric is large in a direction---where distributions are highly distinguishable and change rapidly along that direction---estimation is easy. Conversely, where the local distinguishability is small, estimation is hard.
 
 ::: {.callout-tip .math-depth title="Mathematical Depth"}
@@ -349,6 +353,8 @@ This is the vector analogue of the scalar covariance identity above. Applying th
 $$
 \text{Cov}_\theta(\hat{\theta}) \succeq F(\theta)^{-1}.
 $$ {#eq-matrix-cramer-rao-proof}
+
+One way to read this step is through a Schur-complement argument: the joint covariance block matrix of the estimator error and the score is positive semidefinite, and using $\mathbb{E}_\theta[(\hat{\theta}-\theta)s^\top]=I$ forces the estimator covariance block to dominate the inverse Fisher block. This is exactly the matrix version of the scalar inequality above.
 :::
 
 The Cramér-Rao bound is one of the oldest results in mathematical statistics but its geometric interpretation---as a statement about the inverse of a Riemannian metric---was not fully articulated until Rao's formulation [@rao1945] and the subsequent development of information geometry [@amari2000].
@@ -456,6 +462,8 @@ This is the first practical lesson of Fisher geometry: learning is not just abou
 :::
 
 ## The Fisher Metric in the Exponential Family
+
+The previous section showed that KL locally contains Fisher geometry in its second-order term. Exponential families are the cleanest setting where this local picture becomes algebraic: the Fisher metric, KL divergence, and convex duality can all be written in terms of a single function, the log-partition function.
 
 The Fisher metric takes a particularly clean form for exponential families, which include Gaussians, Bernoulli, Poisson and several other distributions used in practice.
 
