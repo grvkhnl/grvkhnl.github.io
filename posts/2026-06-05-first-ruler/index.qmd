@@ -83,7 +83,7 @@ This matrix is not merely a useful statistic. It is a *Riemannian metric tensor*
 The FIM has a clean geometric origin and is not an *ad hoc* construction. It is the metric that parameter space *inherits* from the space of distributions via the parametric family. This is the concept of *pullback metric*.
 
 ::: {.callout-tip .math-depth title="Mathematical Depth"}
-**Pullback metrics.** Given a smooth map $f:M \to N$ between manifolds and a Riemannian metric $g$ on $N$, the pullback metric $f^{*}g$ on $M$ is defined by:
+***Pullback metrics.*** Given a smooth map $f:M \to N$ between manifolds and a Riemannian metric $g$ on $N$, the pullback metric $f^{*}g$ on $M$ is defined by:
 
 $$
 \left(f^{*}g \right)(u,v)
@@ -93,7 +93,7 @@ $$ {#eq-pullback-metric}
 
 where $df_p: T_p M \to T_{f(p)} N$ is the differential of $f$ at $p$, and $u,v \in M$ are tangent vectors. Intuitively, to measure vectors in $M$, push them forward to $N$ using $df$ and measure them using $g$. For $f^{*}g$ to be a genuine metric (positive definite), $f$ must be an immersion, i.e., its differential must be injective at each point.
 
-**The FIM as a pullback.** Let $\mathcal{P}$ be the space of probability distributions, equipped with the $L^2$ inner product on score functions: $\langle u,v \rangle = \mathbb{E}_p[u \cdot v]$. The parametric family defines a map
+***The FIM as a pullback.*** Let $\mathcal{P}$ be the space of probability distributions, equipped with the $L^2$ inner product on score functions: $\langle u,v \rangle = \mathbb{E}_p[u \cdot v]$. The parametric family defines a map
 
 $$
 f:\mathcal{M} \to \mathcal{P}, \quad \theta \mapsto p(\cdot\,;\theta).
@@ -114,7 +114,7 @@ $$ {#eq-pullback-l2-inner-product}
 
 The FIM is the metric that $\mathcal{M}$ inherits from $\mathcal{P}$. Geometry flows *downward* from the space of distributions to the parameter space.
 
-**Coordinate invariance.** Under a reparameterization $\tilde{\theta}=\phi(\theta)$, the FIM transforms as a $(0,2)$-tensor
+***Coordinate invariance.*** Under a reparameterization $\tilde{\theta}=\phi(\theta)$, the FIM transforms as a $(0,2)$-tensor
 
 $$
 \tilde F_{kl}
@@ -190,7 +190,7 @@ Chentsov is not saying the FIM is a natural choice among many. He is saying it i
 This is a strong and somewhat surprising result. It says the geometry of statistical inference is not a convention or a convenience: it is forced by the structure of the problem.
 
 ::: {.callout-note .remark-box title="Remark"}
-**Locality.** The Fisher metric is local and infinitesimal. It is a tensor at each point of parameter space, giving an inner product on tangent vectors. It measures how fast nearby distributions diverge statistically, but it says nothing directly about distributions that are far apart.
+***Locality.*** The Fisher metric is local and infinitesimal. It is a tensor at each point of parameter space, giving an inner product on tangent vectors. It measures how fast nearby distributions diverge statistically, but it says nothing directly about distributions that are far apart.
 
 Recovering a global distance requires integrating along geodesics in the Fisher metric, which is generally difficult and depends on the path. For many parametric families (such as Gaussians, exponential families, etc.), geodesics can be computed explicitly. In general, though, they cannot. This locality is a strength (it gives a clean Riemannian theory that is well-defined and coordinate-free) and a genuine limitation (it is not a ready-made global distance between arbitrary distributions).
 :::
@@ -220,7 +220,7 @@ where $\succeq$ denotes the Loewner partial order on positive semidefinite matri
 The geometric reading is direct: $F(\theta)^{-1}$ is the dual metric on the cotangent space, and the bound says that estimation uncertainty is bounded below by the inverse of the local metric scale of the statistical manifold. Where the Fisher metric is large---where distributions are highly distinguishable and change rapidly with $\theta$---estimation is easy. Conversely, where the local distinguishability is small, estimation is hard. 
 
 ::: {.callout-tip .math-depth title="Mathematical Depth"}
-**Proof sketch.** Fix an unbiased estimator $\hat{\theta}$ of $\theta \in \mathbb{R}$. Since $\hat{\theta}$ is unbiased, differentiating $\int\,\hat{\theta}(x)p(x;\theta)dx=\theta$ with respect to $\theta$ and exchanging derivative and integral gives
+***Proof sketch.*** Fix an unbiased estimator $\hat{\theta}$ of $\theta \in \mathbb{R}$. Since $\hat{\theta}$ is unbiased, differentiating $\int\,\hat{\theta}(x)p(x;\theta)dx=\theta$ with respect to $\theta$ and exchanging derivative and integral gives
 
 $$
 \mathbb{E}_{\theta}[\hat{\theta}(x)s(x;\theta)]=1
@@ -268,7 +268,7 @@ Natural gradient descent [@amari1998] corrects the optimization geometry by usin
 The Fisher metric does not stand alone. It is the local, symmetric residue of a richer asymmetric object: the KL divergence. This connection---which we will come back to in another blog post---is worth previewing here because it explains why the Fisher metric appears so naturally in learning.
 
 ::: {.callout-tip .math-depth title="Mathematical Depth"}
-**Fisher metric as the Hessian of KL.** For a parametric family $p(\cdot\,;\theta)$, the KL divergence between $p(\cdot\,;\theta)$ and a nearby distribution $p(\cdot\,;\theta+d\theta)$ has the Taylor expansion 
+***Fisher metric as the Hessian of KL.*** For a parametric family $p(\cdot\,;\theta)$, the KL divergence between $p(\cdot\,;\theta)$ and a nearby distribution $p(\cdot\,;\theta+d\theta)$ has the Taylor expansion 
 
 $$ 
 \text{KL}(p(\cdot\,;\theta + d\theta)\,\Vert\,p(\cdot\,;\theta))
@@ -305,7 +305,7 @@ F_{ij}
 $$ {#eq-fisher-hessian-log-partition}
 
 ::: {.callout-tip .math-depth title="Mathematical Depth"}
-**Derivation.** For the exponential family, $\log p(x;\theta) = \theta^{\top}T(x)-A(\theta)+\log h(x)$, so $\partial_i \log p = T_i(x) - \partial_i A(\theta)$. The score has mean zero by Fisher's identity ($\mathbb{E}_{\theta}[\partial_i \log p]=0$), so 
+***Derivation.*** For the exponential family, $\log p(x;\theta) = \theta^{\top}T(x)-A(\theta)+\log h(x)$, so $\partial_i \log p = T_i(x) - \partial_i A(\theta)$. The score has mean zero by Fisher's identity ($\mathbb{E}_{\theta}[\partial_i \log p]=0$), so 
 
 $$
 F_{ij}
