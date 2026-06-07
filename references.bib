@@ -1,26 +1,452 @@
-@article{fisher1925,
-  author = {Fisher, R. A.},
-  title = {Theory of Statistical Estimation},
-  journal = {Mathematical Proceedings of the Cambridge Philosophical Society},
-  volume = {22},
-  number = {5},
-  pages = {700--725},
-  year = {1925},
+% ============================================================
+%  references.bib
+%  Shared bibliography for "The Geometry of Probability"
+% ============================================================
+
+% --- Langevin Dynamics ---
+
+@book{risken1989,
+  author    = {Hannes Risken},
+  title     = {The {F}okker--{P}lanck Equation:
+               Methods of Solution and Applications},
+  publisher = {Springer},
+  year      = {1989},
+  edition   = {2nd},
+  series    = {Springer Series in Synergetics},
+  volume    = {18}
 }
 
-@article{rao1945,
-  author = {Rao, C. R.},
-  title = {Information and the Accuracy Attainable in the Estimation of
-           Statistical Parameters},
-  journal = {Bulletin of the Calcutta Mathematical Society},
-  volume = {37},
-  pages = {81--91},
-  year = {1945},
+@inproceedings{welling2011,
+  author    = {Max Welling and Yee Whye Teh},
+  title     = {Bayesian Learning via Stochastic Gradient {L}angevin Dynamics},
+  booktitle = {Proceedings of the 28th International Conference
+               on Machine Learning},
+  year      = {2011},
+  pages     = {681--688},
+  series    = {ICML}
+}
+
+@inproceedings{song2019,
+  author    = {Yang Song and Stefano Ermon},
+  title     = {Generative Modeling by Estimating Gradients
+               of the Data Distribution},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2019},
+  volume    = {32}
+}
+
+@article{jordan1998,
+  author  = {Richard Jordan and David Kinderlehrer
+             and Felix Otto},
+  title   = {The Variational Formulation of the
+             {F}okker--{P}lanck Equation},
+  journal = {SIAM Journal on Mathematical Analysis},
+  year    = {1998},
+  volume  = {29},
+  number  = {1},
+  pages   = {1--17}
+}
+
+% --- Fisher / Information Geometry ---
+
+@article{kullback1951,
+  author  = {Solomon Kullback and Richard A. Leibler},
+  title   = {On Information and Sufficiency},
+  journal = {Annals of Mathematical Statistics},
+  year    = {1951},
+  volume  = {22},
+  number  = {1},
+  pages   = {79--86}
 }
 
 @book{amari2016,
-  author = {Amari, Shun-ichi},
-  title = {Information Geometry and Its Applications},
+  author    = {Shun-ichi Amari},
+  title     = {Information Geometry and Its Applications},
   publisher = {Springer},
-  year = {2016},
+  year      = {2016},
+  series    = {Applied Mathematical Sciences},
+  volume    = {194}
+}
+
+@book{amari2000,
+  author    = {Shun-ichi Amari and Hiroshi Nagaoka},
+  title     = {Methods of Information Geometry},
+  publisher = {American Mathematical Society},
+  year      = {2000},
+  series    = {Translations of Mathematical Monographs},
+  volume    = {191}
+}
+
+@book{chentsov1982,
+  author    = {Nikolai N. Chentsov},
+  title     = {Statistical Decision Rules and Optimal Inference},
+  publisher = {American Mathematical Society},
+  year      = {1982},
+  series    = {Translations of Mathematical Monographs},
+  volume    = {53},
+  note      = {Original Russian edition: Nauka, Moscow, 1972}
+}
+
+@article{fisher1925,
+  author  = {Ronald A. Fisher},
+  title   = {Theory of Statistical Estimation},
+  journal = {Mathematical Proceedings of the Cambridge Philosophical Society},
+  year    = {1925},
+  volume  = {22},
+  number  = {5},
+  pages   = {700--725}
+}
+
+@article{rao1945,
+  author  = {C. Radhakrishna Rao},
+  title   = {Information and the Accuracy Attainable in the Estimation
+             of Statistical Parameters},
+  journal = {Bulletin of the Calcutta Mathematical Society},
+  year    = {1945},
+  volume  = {37},
+  pages   = {81--91}
+}
+
+% --- Optimal Transport / Wasserstein ---
+
+@book{villani2009,
+  author    = {C{\'e}dric Villani},
+  title     = {Optimal Transport: {O}ld and New},
+  publisher = {Springer},
+  year      = {2009},
+  series    = {Grundlehren der mathematischen Wissenschaften},
+  volume    = {338}
+}
+
+@book{villani2003,
+  author    = {C{\'e}dric Villani},
+  title     = {Topics in Optimal Transportation},
+  publisher = {American Mathematical Society},
+  year      = {2003},
+  series    = {Graduate Studies in Mathematics},
+  volume    = {58}
+}
+
+@book{santambrogio2015,
+  author    = {Filippo Santambrogio},
+  title     = {Optimal Transport for Applied Mathematicians},
+  publisher = {Birkh{\"a}user},
+  year      = {2015},
+  series    = {Progress in Nonlinear Differential Equations
+               and Their Applications},
+  volume    = {87}
+}
+
+@article{brenier1991,
+  author  = {Yann Brenier},
+  title   = {Polar Factorization and Monotone Rearrangement
+             of Vector-Valued Functions},
+  journal = {Communications on Pure and Applied Mathematics},
+  year    = {1991},
+  volume  = {44},
+  number  = {4},
+  pages   = {375--417}
+}
+
+@article{otto2001,
+  author  = {Felix Otto},
+  title   = {The Geometry of Dissipative Evolution Equations:
+             The Porous Medium Equation},
+  journal = {Communications in Partial Differential Equations},
+  year    = {2001},
+  volume  = {26},
+  number  = {1--2},
+  pages   = {101--174}
+}
+
+@article{kantorovich1942,
+  author  = {Leonid V. Kantorovich},
+  title   = {On the Translocation of Masses},
+  journal = {Doklady Akademii Nauk SSSR},
+  year    = {1942},
+  volume  = {37},
+  number  = {7--8},
+  pages   = {227--229}
+}
+
+@book{peyre2019,
+  author    = {Gabriel Peyr{\'e} and Marco Cuturi},
+  title     = {Computational Optimal Transport},
+  publisher = {Now Publishers},
+  year      = {2019},
+  series    = {Foundations and Trends in Machine Learning},
+  volume    = {11},
+  number    = {5--6}
+}
+
+% --- Schrödinger Bridge ---
+
+@article{schrodinger1931,
+  author  = {Erwin Schr{\"o}dinger},
+  title   = {{\"U}ber die Umkehrung der Naturgesetze},
+  journal = {Sitzungsberichte der Preussischen Akademie der
+             Wissenschaften, Physikalisch-Mathematische Klasse},
+  year    = {1931},
+  pages   = {144--153}
+}
+
+@article{schrodinger1932,
+  author  = {Erwin Schr{\"o}dinger},
+  title   = {La th{\'e}orie relativiste de l'{\'e}lectron et
+             l'interpr{\'e}tation de la m{\'e}canique quantique},
+  journal = {Annales de l'Institut Henri Poincar{\'e}},
+  year    = {1932},
+  volume  = {2},
+  pages   = {269--310}
+}
+
+@article{leonard2014,
+  author  = {Christian L{\'e}onard},
+  title   = {A Survey of the {S}chr{\"o}dinger Problem and
+             Some of Its Connections with Optimal Transport},
+  journal = {Discrete and Continuous Dynamical Systems},
+  year    = {2014},
+  volume  = {34},
+  number  = {4},
+  pages   = {1533--1574}
+}
+
+@article{follmer1988,
+  author  = {Hans F{\"o}llmer},
+  title   = {Random Fields and Diffusion Processes},
+  journal = {Lecture Notes in Mathematics},
+  year    = {1988},
+  volume  = {1362},
+  pages   = {101--203}
+}
+
+% --- Hodge Theory ---
+
+@book{hodge1941,
+  author    = {William V. D. Hodge},
+  title     = {The Theory and Applications of Harmonic Integrals},
+  publisher = {Cambridge University Press},
+  year      = {1941}
+}
+
+@book{warner1983,
+  author    = {Frank W. Warner},
+  title     = {Foundations of Differentiable Manifolds and {L}ie Groups},
+  publisher = {Springer},
+  year      = {1983},
+  series    = {Graduate Texts in Mathematics},
+  volume    = {94}
+}
+
+@book{bott1982,
+  author    = {Raoul Bott and Loring W. Tu},
+  title     = {Differential Forms in Algebraic Topology},
+  publisher = {Springer},
+  year      = {1982},
+  series    = {Graduate Texts in Mathematics},
+  volume    = {82}
+}
+
+% --- Natural Gradient and K-FAC ---
+
+@article{amari1998,
+  author  = {Shun-ichi Amari},
+  title   = {Natural Gradient Works Efficiently in Learning},
+  journal = {Neural Computation},
+  year    = {1998},
+  volume  = {10},
+  number  = {2},
+  pages   = {251--276}
+}
+
+@inproceedings{martens2015,
+  author    = {James Martens and Roger Grosse},
+  title     = {Optimizing Neural Networks with {K}ronecker-Factored
+               Approximate Curvature},
+  booktitle = {Proceedings of the 32nd International Conference
+               on Machine Learning},
+  year      = {2015},
+  pages     = {2408--2417},
+  series    = {PMLR},
+  volume    = {37}
+}
+
+@article{martens2014,
+  author  = {James Martens},
+  title   = {New Insights and Perspectives on the Natural Gradient Method},
+  journal = {Journal of Machine Learning Research},
+  year    = {2020},
+  volume  = {21},
+  number  = {146},
+  pages   = {1--76}
+}
+
+% --- Diffusion Models and Score Matching ---
+
+@inproceedings{song2021,
+  author    = {Yang Song and Jascha Sohl-Dickstein and Diederik P. Kingma
+               and Abhishek Kumar and Stefano Ermon and Ben Poole},
+  title     = {Score-Based Generative Modeling through Stochastic
+               Differential Equations},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2021}
+}
+
+@inproceedings{ho2020,
+  author    = {Jonathan Ho and Ajay Jain and Pieter Abbeel},
+  title     = {Denoising Diffusion Probabilistic Models},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2020},
+  volume    = {33},
+  pages     = {6840--6851}
+}
+
+@article{hyvarinen2005,
+  author  = {Aapo Hyv{\"a}rinen},
+  title   = {Estimation of Non-Normalized Statistical Models
+             by Score Matching},
+  journal = {Journal of Machine Learning Research},
+  year    = {2005},
+  volume  = {6},
+  pages   = {695--709}
+}
+
+% --- Flow Matching ---
+
+@inproceedings{lipman2022,
+  author    = {Yaron Lipman and Ricky T. Q. Chen and Heli Ben-Hamu
+               and Maximilian Nickel and Matthew Le},
+  title     = {Flow Matching for Generative Modeling},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2023}
+}
+
+@inproceedings{albergo2023,
+  author    = {Michael S. Albergo and Eric Vanden-Eijnden},
+  title     = {Building Normalizing Flows with Stochastic Interpolants},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2023}
+}
+
+% --- Wasserstein Gradient Flows ---
+
+@book{ambrosio2008,
+  author    = {Luigi Ambrosio and Nicola Gigli and Giuseppe Savar{\'e}},
+  title     = {Gradient Flows in Metric Spaces and in the Space
+               of Probability Measures},
+  publisher = {Birkh{\"a}user},
+  year      = {2008},
+  edition   = {2nd},
+  series    = {Lectures in Mathematics ETH Z{\"u}rich}
+}
+
+@article{benamoubrenier2000,
+  author  = {Jean-David Benamou and Yann Brenier},
+  title   = {A Computational Fluid Mechanics Solution to the
+             {M}onge--{K}antorovich Mass Transfer Problem},
+  journal = {Numerische Mathematik},
+  year    = {2000},
+  volume  = {84},
+  number  = {3},
+  pages   = {375--393}
+}
+
+@inproceedings{kingma2015,
+  author    = {Diederik P. Kingma and Jimmy Ba},
+  title     = {Adam: A Method for Stochastic Optimization},
+  booktitle = {International Conference on Learning Representations},
+  year      = {2015}
+}
+
+@inproceedings{schulman2015,
+  author    = {John Schulman and Sergey Levine and Pieter Abbeel
+               and Michael Jordan and Philipp Moritz},
+  title     = {Trust Region Policy Optimization},
+  booktitle = {Proceedings of the 32nd International Conference
+               on Machine Learning},
+  year      = {2015},
+  pages     = {1889--1897},
+  series    = {PMLR},
+  volume    = {37}
+}
+
+@inproceedings{debortoli2021,
+  author    = {Valentin De Bortoli and James Thornton
+               and Jeremy Heng and Arnaud Doucet},
+  title     = {Diffusion {S}chr\"{o}dinger Bridge with Applications
+               to Score-Based Generative Modeling},
+  booktitle = {Advances in Neural Information Processing Systems},
+  year      = {2021},
+  volume    = {34},
+  pages     = {17695--17709}
+}
+
+@article{jiang2011,
+  author  = {Yuan Jiang and Yuekai Sun and Stratis Ioannidis
+             and Andrea Montanari},
+  title   = {Statistical Ranking and Combinatorial {H}odge Theory},
+  journal = {Mathematical Programming},
+  year    = {2011},
+  volume  = {127},
+  number  = {1},
+  pages   = {203--244}
+}
+
+% --- Wasserstein GAN ---
+
+@inproceedings{arjovsky2017,
+  author    = {Mart{\'i}n Arjovsky and Soumith Chintala
+               and L{\'e}on Bottou},
+  title     = {{W}asserstein Generative Adversarial Networks},
+  booktitle = {Proceedings of the 34th International Conference
+               on Machine Learning},
+  year      = {2017},
+  pages     = {214--223},
+  series    = {PMLR},
+  volume    = {70}
+}
+
+% --- Mean Field ---
+
+@article{parisi1988,
+  author  = {Giorgio Parisi},
+  title   = {Statistical Field Theory},
+  journal = {Addison-Wesley},
+  year    = {1988}
+}
+
+@article{wainwright2008,
+  author  = {Martin J. Wainwright and Michael I. Jordan},
+  title   = {Graphical Models, Exponential Families, and
+             Variational Inference},
+  journal = {Foundations and Trends in Machine Learning},
+  year    = {2008},
+  volume  = {1},
+  number  = {1--2},
+  pages   = {1--305}
+}
+
+% --- Hellinger-Kantorovich ---
+
+@article{kondratyev2016,
+  author  = {Stanislav Kondratyev and L{\'e}onard Monsaingeon
+             and Dmitry Vorotnikov},
+  title   = {A New Optimal Transport Distance on the Space
+             of Finite Radon Measures},
+  journal = {Advances in Differential Equations},
+  year    = {2016},
+  volume  = {21},
+  number  = {11--12},
+  pages   = {1117--1164}
+}
+
+@article{liero2018,
+  author  = {Matthias Liero and Alexander Mielke and Giuseppe Savar{\'e}},
+  title   = {Optimal Entropy-Transport Problems and a New
+             {H}ellinger--{K}antorovich Distance between Positive Measures},
+  journal = {Inventiones Mathematicae},
+  year    = {2018},
+  volume  = {211},
+  number  = {3},
+  pages   = {969--1117}
 }

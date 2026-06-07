@@ -136,15 +136,11 @@ The pullback construction shows that FIM is natural. A deeper result, due to Che
 
 **Chentsov's Theorem [5].** 
 
-***Informal Version.***
-
-The Fisher-Rao metric is the unique Riemannian metric on the statistical manifold, up to a positive scalar multiple, that is invariant under statistically sufficient transformations of the observations.
+***Informal Version.*** The Fisher-Rao metric is the unique Riemannian metric on the statistical manifold, up to a positive scalar multiple, that is invariant under statistically sufficient transformations of the observations.
 
 Equivalently: if a transformation of the data preserves all information relevant to $\theta$, then it should preserve the geometry of the model. Fisher-Rao is the only Riemannian metric with this property.
 
-***A more formal version (finite-dimensional).*** 
-
-Let
+***A more formal version (finite-dimensional).*** Let
 
 $$
 \Delta_n
@@ -189,7 +185,7 @@ Thus Fisher geometry is not merely invariant under reparameterizing $\theta$; it
 
 :::
 
-Chentsov is not saying the FIM is a natural choice among many. He is saying it is the only choice consistent with the principle that geometry should not depend on how data is represented. If two experimenters measure the same phenomenon but record their observations differently---and neither loses information---their geometric picture of the statistical model must agree. The FIM is the unique metric with this property.
+Chentsov is not saying the FIM is a natural choice among many. He is saying it is the *only* choice consistent with the principle that geometry should not depend on how data is represented. If two experimenters measure the same phenomenon but record their observations differently---and neither loses information---their geometric picture of the statistical model must agree. The FIM is the unique metric with this property.
 
 This is a strong and somewhat surprising result. It says the geometry of statistical inference is not a convention or a convenience: it is forced by the structure of the problem.
 
@@ -206,7 +202,7 @@ The Fisher metric does more than organize the geometry of a statistical model. I
 For an unbiased estimator $\hat{\theta}$ of a scalar parameter $\theta$, the bound states:
 
 $$
-\text{Var}_{\theta}(\hat{\theta})
+\mathbb{V}_{\theta}(\hat{\theta})
 \geq
 \frac{1}{\mathcal{I}(\theta)}
 $$ {#eq-cramer-rao-bound}
@@ -230,15 +226,15 @@ $$
 \mathbb{E}_{\theta}[\hat{\theta}(x)s(x;\theta)]=1
 $$ {#eq-exp-score}
 
-where $s=\partial_{\theta}\log p$ is the score and we used Fisher's identity $\mathbb{E}_{\theta}[s]=0$. Now apply the Cauchy-Schwarz inequality to the covariance $Cov(\hat{\theta},s)$:
+where $s=\partial_{\theta}\log p$ is the score and we used Fisher's identity $\mathbb{E}_{\theta}[s]=0$. Now apply the Cauchy-Schwarz inequality to the covariance $\text{Cov}(\hat{\theta},s)$:
 
 $$
 \text{Cov}(\hat{\theta},s)^2
-\preceq
-\text{Var}(\hat{\theta})\cdot\text{Var}(s)
+\leq
+\mathbb{V}(\hat{\theta})\cdot\mathbb{V}(s)
 $$ {#eq-cauchy-schwarz-covariance}
 
-The left side equals $\mathbb{E}[\hat{\theta}s]^2=1$ (since $\mathbb{E}[s]=0$ and $\mathbb{E}[\hat{\theta} s]=1$). The right side is $\text{Var}(\hat{\theta})\cdot\mathcal{I}(\theta)$. The multivariate case follows from the matrix Cauchy-Schwarz inequality. Let $s=\nabla_\theta \log p(x;\theta)$ be the score vector. For an unbiased estimator, differentiating $\mathbb{E}_\theta[\hat{\theta}]=\theta$ gives 
+The left side equals $\mathbb{E}[\hat{\theta}s]^2=1$ (since $\mathbb{E}[s]=0$ and $\mathbb{E}[\hat{\theta} s]=1$). The right side is $\mathbb{V}(\hat{\theta})\cdot\mathcal{I}(\theta)$. The multivariate case follows from the matrix Cauchy-Schwarz inequality. Let $s=\nabla_\theta \log p(x;\theta)$ be the score vector. For an unbiased estimator, differentiating $\mathbb{E}_\theta[\hat{\theta}]=\theta$ gives 
 $$
 \mathbb{E}_\theta[(\hat{\theta}-\theta)s^\top]=I.
 $$ 
