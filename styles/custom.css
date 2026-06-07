@@ -1,6 +1,269 @@
-/* Full-width listing pages, but readable article pages */
+/* Late-loaded site styling. Quarto compiles SCSS before parts of Bootstrap,
+   so final visual polish lives here where the cascade is predictable. */
+
+body {
+  font-family: "Inter", "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-feature-settings: "liga" 1, "kern" 1;
+  text-rendering: optimizeLegibility;
+  background: var(--paper);
+  color: var(--ink);
+}
+
+main.content {
+  max-width: var(--essay-max-width);
+}
+
 .page-layout-full main.content {
   max-width: 1080px;
+}
+
+main.content p:not(.hero-subtitle):not(.card p):not(.hero p),
+main.content li:not(.hero-links li),
+main.content blockquote {
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.08rem;
+  line-height: 1.78;
+}
+
+main.content p:not(.hero-subtitle):not(.card p):not(.hero p) {
+  margin-bottom: 1.05rem;
+}
+
+main.content li:not(.hero-links li) {
+  margin-bottom: 0.35rem;
+}
+
+.navbar,
+.nav-footer,
+.quarto-title-meta,
+.description,
+.quarto-listing,
+.sidebar,
+#TOC,
+code,
+pre,
+table,
+.callout-header {
+  font-family: "Inter", "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.quarto-title-block .title {
+  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: clamp(2.25rem, 5vw, 4.25rem);
+  line-height: 0.98;
+  letter-spacing: -0.04em;
+  margin-bottom: 0.45rem;
+}
+
+.quarto-title-block .subtitle {
+  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: clamp(1.1rem, 2vw, 1.45rem);
+  line-height: 1.35;
+  color: var(--muted-ink);
+}
+
+.description,
+.quarto-title-meta {
+  color: var(--faint-ink);
+}
+
+h1,
+h2,
+h3,
+h4 {
+  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  letter-spacing: -0.025em;
+}
+
+h2 {
+  margin-top: 2.75rem;
+  padding-top: 0.55rem;
+  border-top: 1px solid var(--rule);
+}
+
+h3 {
+  margin-top: 2rem;
+}
+
+a {
+  text-decoration-thickness: 0.075em;
+  text-underline-offset: 0.2em;
+}
+
+.math.display,
+.quarto-figure {
+  margin-top: 1.45rem;
+  margin-bottom: 1.45rem;
+}
+
+mjx-container {
+  font-size: 104%;
+  color: var(--ink);
+}
+
+blockquote {
+  border-left: 3px solid var(--accent);
+  background: var(--paper-soft);
+  padding: 0.9rem 1.1rem;
+  color: #2c2a25;
+  border-radius: 0 10px 10px 0;
+}
+
+blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+pre.sourceCode {
+  background-color: #f5e3c4;
+  border: 1px solid var(--rule);
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+code {
+  font-family: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  border-radius: 4px;
+  padding: 0.08rem 0.22rem;
+}
+
+table {
+  font-size: 0.94rem;
+}
+
+thead {
+  border-bottom: 2px solid var(--rule);
+}
+
+.figure-caption,
+figcaption {
+  font-family: "Inter", "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.9rem;
+  color: var(--muted-ink);
+  line-height: 1.5;
+}
+
+.navbar {
+  background: rgba(255, 241, 220, 0.94);
+  border-bottom: 1px solid var(--rule);
+  backdrop-filter: blur(8px);
+}
+
+.navbar-title {
+  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-weight: 650;
+  letter-spacing: -0.025em;
+}
+
+.quarto-listing .listing-title {
+  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.35rem;
+  font-weight: 650;
+  letter-spacing: -0.02em;
+}
+
+.quarto-listing .listing-description {
+  line-height: 1.55;
+}
+
+.quarto-listing .listing-date {
+  color: var(--faint-ink);
+}
+
+.quarto-category {
+  border-radius: 999px;
+  font-size: 0.78rem;
+  padding: 0.2rem 0.55rem;
+}
+
+#TOC {
+  font-size: 0.9rem;
+}
+
+#TOC a {
+  color: var(--muted-ink);
+}
+
+#TOC a.active {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.nav-footer {
+  border-top: 1px solid var(--rule);
+}
+
+.hero {
+  padding: 4.5rem 0 3.5rem 0;
+}
+
+.hero .hero-title,
+.hero-title {
+  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: clamp(3rem, 8vw, 6.5rem);
+  line-height: 0.92;
+  letter-spacing: -0.055em;
+  margin-bottom: 1rem;
+}
+
+.hero p,
+.hero-subtitle {
+  max-width: 720px;
+  font-family: "Inter", "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  color: var(--muted-ink);
+  line-height: 1.55;
+  margin-bottom: 0;
+}
+
+.hero-links {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+  margin-top: 1.6rem;
+}
+
+.hero-links p {
+  margin: 0;
+}
+
+.hero-links a {
+  display: inline-block;
+  border: 1px solid var(--rule-strong);
+  border-radius: 999px;
+  padding: 0.45rem 0.85rem;
+  text-decoration: none;
+  color: var(--ink);
+  font-family: "Inter", "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 1rem;
+  line-height: 1.2;
+}
+
+.hero-links a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
+  gap: 1rem;
+  margin-top: 1.25rem;
+}
+
+.card {
+  border: 1px solid var(--rule);
+  border-radius: 16px;
+  padding: 1rem 1.1rem;
+  background: rgba(255, 247, 235, 0.65);
+}
+
+.card h3 {
+  margin-top: 0;
+}
+
+.card p {
+  margin-bottom: 0;
+  color: var(--muted-ink);
 }
 
 /* Better mobile title spacing */
@@ -43,5 +306,42 @@ img {
 .listing-author,
 .listing-date,
 .listing-reading-time {
-  color: #6b7280;
+  color: var(--faint-ink);
+}
+
+body.quarto-dark {
+  background: var(--paper);
+  color: var(--ink);
+}
+
+body.quarto-dark .navbar {
+  background: rgba(13, 17, 23, 0.92);
+  border-bottom: 1px solid var(--rule);
+}
+
+body.quarto-dark blockquote {
+  color: #d8dee9;
+}
+
+body.quarto-dark .description,
+body.quarto-dark .quarto-title-meta,
+body.quarto-dark figcaption,
+body.quarto-dark .figure-caption {
+  color: var(--muted-ink);
+}
+
+body.quarto-dark pre.sourceCode {
+  background-color: #151a22;
+}
+
+body.quarto-dark .card {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+body.quarto-dark .hero-links a {
+  color: var(--ink);
+}
+
+body.quarto-dark .hero-links a:hover {
+  color: var(--accent);
 }

@@ -456,15 +456,15 @@
      font-family: "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
    }
    
-   /* Mathematical Depth: sepia parchment */
+   /* Mathematical Depth: muted plum */
    .callout.math-depth {
-     border-left-color: var(--umber);
-     background: color-mix(in srgb, #f3e6cc 72%, transparent);
+     border-left-color: var(--plum);
+     background: color-mix(in srgb, #e9d9e2 76%, transparent);
    }
    
    .callout.math-depth .callout-header {
-     background: color-mix(in srgb, #ead2aa 76%, transparent);
-     color: #6b3f1d;
+     background: color-mix(in srgb, #d8becd 78%, transparent);
+     color: #56324e;
    }
    
    /* Remark: warm gold */
@@ -611,12 +611,12 @@
    
    /* Dark mode custom callouts */
    body.quarto-dark .callout.math-depth {
-     background: color-mix(in srgb, #2d2418 74%, transparent);
+     background: color-mix(in srgb, #2a1f2b 76%, transparent);
    }
    
    body.quarto-dark .callout.math-depth .callout-header {
-     background: color-mix(in srgb, #3a2d1d 78%, transparent);
-     color: #e7c79b;
+     background: color-mix(in srgb, #382638 80%, transparent);
+     color: #e3bfd7;
    }
    
    body.quarto-dark .callout.remark-box {
