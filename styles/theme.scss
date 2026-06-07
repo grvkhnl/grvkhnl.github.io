@@ -39,13 +39,16 @@
      --rule: #d8c7aa;
      --rule-strong: #bda984;
    
-     --accent: #1f4f8f;
-     --accent-soft: #e2ecff;
-     --accent-deep: #15396d;
+     --accent: #7a2435;
+     --accent-soft: #ead7da;
+     --accent-deep: #5b1625;
    
      --gold: #9a6a1f;
-     --green: #28784f;
-     --red: #9f3026;
+     --maroon: #7a2435;
+     --plum: #5f3b57;
+     --rust: #9f3026;
+     --taupe: #7c5f58;
+     --umber: #8a5a32;
    }
    
    /* ============================================================
@@ -241,12 +244,12 @@
    }
    
    .callout-tip {
-     border-left-color: var(--green);
+     border-left-color: var(--maroon);
    }
    
    .callout-warning,
    .callout-caution {
-     border-left-color: var(--red);
+     border-left-color: var(--rust);
    }
    
    /* ============================================================
@@ -453,87 +456,87 @@
      font-family: "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
    }
    
-   /* Mathematical Depth: blue */
+   /* Mathematical Depth: sepia parchment */
    .callout.math-depth {
-     border-left-color: var(--accent);
-     background: color-mix(in srgb, var(--accent-soft) 38%, transparent);
+     border-left-color: var(--umber);
+     background: color-mix(in srgb, #f3e6cc 72%, transparent);
    }
    
    .callout.math-depth .callout-header {
-     background: color-mix(in srgb, var(--accent-soft) 78%, transparent);
-     color: var(--accent-deep);
+     background: color-mix(in srgb, #ead2aa 76%, transparent);
+     color: #6b3f1d;
    }
    
    /* Remark: warm gold */
    .callout.remark-box {
      border-left-color: var(--gold);
-     background: color-mix(in srgb, #fff7e6 58%, transparent);
+     background: color-mix(in srgb, #fff4dc 70%, transparent);
    }
    
    .callout.remark-box .callout-header {
-     background: color-mix(in srgb, #fff0cc 72%, transparent);
-     color: #7a4f12;
+     background: color-mix(in srgb, #f1d9a8 74%, transparent);
+     color: #70470f;
    }
    
-   /* Consequence for Learning: green */
+   /* Consequence for Learning: oxblood */
    .callout.learning-box {
-     border-left-color: var(--green);
-     background: color-mix(in srgb, #eefaf2 62%, transparent);
+     border-left-color: var(--maroon);
+     background: color-mix(in srgb, #ead7da 70%, transparent);
    }
    
    .callout.learning-box .callout-header {
-     background: color-mix(in srgb, #dcf5e5 72%, transparent);
-     color: #1f6b43;
+     background: color-mix(in srgb, #dec1c8 74%, transparent);
+     color: #6f1f31;
    }
    
-   /* Precision Point: muted violet/blue */
+   /* Precision Point: muted plum */
    .callout.precision-box {
-     border-left-color: #6d5bd0;
-     background: color-mix(in srgb, #f0edff 62%, transparent);
+     border-left-color: var(--plum);
+     background: color-mix(in srgb, #e7dbe2 72%, transparent);
    }
    
    .callout.precision-box .callout-header {
-     background: color-mix(in srgb, #e5e0ff 72%, transparent);
-     color: #493ca3;
+     background: color-mix(in srgb, #d7c2cf 74%, transparent);
+     color: #56324e;
    }
    
-   /* Failure Mode: red */
+   /* Failure Mode: clay rust */
    .callout.failure-box {
-     border-left-color: var(--red);
-     background: color-mix(in srgb, #fff0ee 62%, transparent);
+     border-left-color: var(--rust);
+     background: color-mix(in srgb, #f0ddd4 72%, transparent);
    }
    
    .callout.failure-box .callout-header {
-     background: color-mix(in srgb, #ffe0dc 72%, transparent);
+     background: color-mix(in srgb, #e5c2b5 74%, transparent);
      color: #8c241c;
    }
    
-   /* Intuition: soft cyan */
+   /* Intuition: rose taupe */
    .callout.intuition-box {
-     border-left-color: #23839b;
-     background: color-mix(in srgb, #eafaff 62%, transparent);
+     border-left-color: var(--taupe);
+     background: color-mix(in srgb, #eee0da 72%, transparent);
    }
    
    .callout.intuition-box .callout-header {
-     background: color-mix(in srgb, #d8f5ff 72%, transparent);
-     color: #176477;
+     background: color-mix(in srgb, #e0cbc2 74%, transparent);
+     color: #6d514a;
    }
    
-   /* Preview: gray-blue */
+   /* Preview: warm umber */
    .callout.preview-box {
-     border-left-color: #64748b;
-     background: color-mix(in srgb, #f1f5f9 65%, transparent);
+     border-left-color: #7b5a3a;
+     background: color-mix(in srgb, #efe5d4 72%, transparent);
    }
    
    .callout.preview-box .callout-header {
-     background: color-mix(in srgb, #e2e8f0 75%, transparent);
-     color: #334155;
+     background: color-mix(in srgb, #dfcfb8 74%, transparent);
+     color: #5e4632;
    }
    
    /* Historical Note: sepia */
    .callout.history-box {
      border-left-color: #8a5a32;
-     background: color-mix(in srgb, #fbf1e6 62%, transparent);
+     background: color-mix(in srgb, #f5ead8 72%, transparent);
    }
    
    .callout.history-box .callout-header {
@@ -557,13 +560,16 @@
      --rule: #293241;
      --rule-strong: #3a4657;
    
-     --accent: #8db7ff;
-     --accent-soft: #13233d;
-     --accent-deep: #c3d8ff;
+     --accent: #d9a3a9;
+     --accent-soft: #3a1d24;
+     --accent-deep: #f0c3c7;
    
      --gold: #d6a84f;
-     --green: #70c899;
-     --red: #f28b82;
+     --maroon: #d78898;
+     --plum: #c8a3bd;
+     --rust: #f0a083;
+     --taupe: #c7a89d;
+     --umber: #d3ad82;
    }
    
    body.quarto-dark {
@@ -605,12 +611,12 @@
    
    /* Dark mode custom callouts */
    body.quarto-dark .callout.math-depth {
-     background: color-mix(in srgb, #13233d 62%, transparent);
+     background: color-mix(in srgb, #2d2418 74%, transparent);
    }
    
    body.quarto-dark .callout.math-depth .callout-header {
-     background: color-mix(in srgb, #1a3155 75%, transparent);
-     color: #c3d8ff;
+     background: color-mix(in srgb, #3a2d1d 78%, transparent);
+     color: #e7c79b;
    }
    
    body.quarto-dark .callout.remark-box {
@@ -623,48 +629,48 @@
    }
    
    body.quarto-dark .callout.learning-box {
-     background: color-mix(in srgb, #11291d 68%, transparent);
+     background: color-mix(in srgb, #321a22 74%, transparent);
    }
    
    body.quarto-dark .callout.learning-box .callout-header {
-     background: color-mix(in srgb, #173625 78%, transparent);
-     color: #9be0b7;
+     background: color-mix(in srgb, #421f2b 78%, transparent);
+     color: #efb4bf;
    }
    
    body.quarto-dark .callout.precision-box {
-     background: color-mix(in srgb, #201b3f 68%, transparent);
+     background: color-mix(in srgb, #2a1f2b 74%, transparent);
    }
    
    body.quarto-dark .callout.precision-box .callout-header {
-     background: color-mix(in srgb, #2b2555 78%, transparent);
-     color: #c8bfff;
+     background: color-mix(in srgb, #352637 78%, transparent);
+     color: #e3bfd7;
    }
    
    body.quarto-dark .callout.failure-box {
-     background: color-mix(in srgb, #341614 68%, transparent);
+     background: color-mix(in srgb, #351c17 74%, transparent);
    }
    
    body.quarto-dark .callout.failure-box .callout-header {
-     background: color-mix(in srgb, #451c18 78%, transparent);
-     color: #ffb0a8;
+     background: color-mix(in srgb, #47251d 78%, transparent);
+     color: #f2b39e;
    }
    
    body.quarto-dark .callout.intuition-box {
-     background: color-mix(in srgb, #102a33 68%, transparent);
+     background: color-mix(in srgb, #30241f 74%, transparent);
    }
    
    body.quarto-dark .callout.intuition-box .callout-header {
-     background: color-mix(in srgb, #153945 78%, transparent);
-     color: #a4ecff;
+     background: color-mix(in srgb, #3c2c26 78%, transparent);
+     color: #dfc0b5;
    }
    
    body.quarto-dark .callout.preview-box {
-     background: color-mix(in srgb, #18202c 68%, transparent);
+     background: color-mix(in srgb, #2b251d 74%, transparent);
    }
    
    body.quarto-dark .callout.preview-box .callout-header {
-     background: color-mix(in srgb, #202a39 78%, transparent);
-     color: #cbd5e1;
+     background: color-mix(in srgb, #362d22 78%, transparent);
+     color: #d9c3a7;
    }
    
    body.quarto-dark .callout.history-box {

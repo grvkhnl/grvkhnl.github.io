@@ -134,7 +134,59 @@ The pullback construction shows that FIM is natural. A deeper result, due to Che
 
 ::: {.callout-tip .math-depth title="Mathematical Depth"}
 
-**Chentsov's Theorem [5] (informal).** The Fisher-Rao metric is the unique Riemannian metric on the statistical manifold, up to a positive scalar multiple, that is monotone/invariant under Markov morphisms, or equivalently under statistically sufficient transformations in the finite setting.
+**Chentsov's Theorem [5].** 
+
+***Informal Version.***
+
+The Fisher-Rao metric is the unique Riemannian metric on the statistical manifold, up to a positive scalar multiple, that is invariant under statistically sufficient transformations of the observations.
+
+Equivalently: if a transformation of the data preserves all information relevant to $\theta$, then it should preserve the geometry of the model. Fisher-Rao is the only Riemannian metric with this property.
+
+***A more formal version (finite-dimensional).*** 
+
+Let
+
+$$
+\Delta_n
+=
+\left\{
+p=(p_1,\ldots,p_n): p_i>0,\ \sum_{i=1}^n p_i=1
+\right\}
+$$
+
+be the interior of the probability simplex. Suppose that for each $n$, we assign a Riemannian metric $g^{(n)}$ on $\Delta_n$. The assignment is called **monotone under Markov maps** if, for every stochastic map $T:\Delta_n\to\Delta_m$,
+
+$$
+g^{(m)}_{Tp}(T_*u,T_*u)
+\leq
+g^{(n)}_p(u,u),
+$$
+
+for every tangent vector $u\in T_p\Delta_n$. In words: applying a noisy data-processing map cannot increase statistical distinguishability.
+
+Chentsov's theorem says that, up to an overall positive constant, the only such monotone Riemannian metric is the Fisher-Rao metric:
+
+$$
+g_p(u,v)
+=
+c\sum_{i=1}^n \frac{u_i v_i}{p_i},
+\qquad c>0.
+$$
+
+Equivalently, in a parametric model $p(x;\theta)$, this metric pulls back to the Fisher information matrix
+
+$$
+F_{ij}(\theta)
+=
+\mathbb E_\theta
+\left[
+\partial_i\log p(x;\theta)\,
+\partial_j\log p(x;\theta)
+\right].
+$$
+
+Thus Fisher geometry is not merely invariant under reparameterizing $\theta$; it is also the unique geometry that contracts under statistically noisy transformations of the observations.
+
 :::
 
 Chentsov is not saying the FIM is a natural choice among many. He is saying it is the only choice consistent with the principle that geometry should not depend on how data is represented. If two experimenters measure the same phenomenon but record their observations differently---and neither loses information---their geometric picture of the statistical model must agree. The FIM is the unique metric with this property.

@@ -1,0 +1,152 @@
+/* Warm essay callouts; loaded after Quarto's alert-like defaults. */
+.callout.math-depth {
+  border-left-color: var(--umber) !important;
+  background-color: color-mix(in srgb, #f3e6cc 72%, transparent) !important;
+}
+
+.callout.math-depth > .callout-header {
+  background-color: color-mix(in srgb, #ead2aa 76%, transparent) !important;
+  color: #6b3f1d !important;
+}
+
+.callout.remark-box {
+  border-left-color: var(--gold) !important;
+  background-color: color-mix(in srgb, #fff4dc 70%, transparent) !important;
+}
+
+.callout.remark-box > .callout-header {
+  background-color: color-mix(in srgb, #f1d9a8 74%, transparent) !important;
+  color: #70470f !important;
+}
+
+.callout.learning-box {
+  border-left-color: var(--maroon) !important;
+  background-color: color-mix(in srgb, #ead7da 70%, transparent) !important;
+}
+
+.callout.learning-box > .callout-header {
+  background-color: color-mix(in srgb, #dec1c8 74%, transparent) !important;
+  color: #6f1f31 !important;
+}
+
+.callout.precision-box {
+  border-left-color: var(--plum) !important;
+  background-color: color-mix(in srgb, #e7dbe2 72%, transparent) !important;
+}
+
+.callout.precision-box > .callout-header {
+  background-color: color-mix(in srgb, #d7c2cf 74%, transparent) !important;
+  color: #56324e !important;
+}
+
+.callout.failure-box {
+  border-left-color: var(--rust) !important;
+  background-color: color-mix(in srgb, #f0ddd4 72%, transparent) !important;
+}
+
+.callout.failure-box > .callout-header {
+  background-color: color-mix(in srgb, #e5c2b5 74%, transparent) !important;
+  color: #8c241c !important;
+}
+
+.callout.intuition-box {
+  border-left-color: var(--taupe) !important;
+  background-color: color-mix(in srgb, #eee0da 72%, transparent) !important;
+}
+
+.callout.intuition-box > .callout-header {
+  background-color: color-mix(in srgb, #e0cbc2 74%, transparent) !important;
+  color: #6d514a !important;
+}
+
+.callout.preview-box {
+  border-left-color: #7b5a3a !important;
+  background-color: color-mix(in srgb, #efe5d4 72%, transparent) !important;
+}
+
+.callout.preview-box > .callout-header {
+  background-color: color-mix(in srgb, #dfcfb8 74%, transparent) !important;
+  color: #5e4632 !important;
+}
+
+.callout.history-box {
+  border-left-color: var(--umber) !important;
+  background-color: color-mix(in srgb, #f5ead8 72%, transparent) !important;
+}
+
+.callout.history-box > .callout-header {
+  background-color: color-mix(in srgb, #f4dfc7 72%, transparent) !important;
+  color: #6f421f !important;
+}
+
+body.quarto-dark .callout.math-depth {
+  background-color: color-mix(in srgb, #2d2418 74%, transparent) !important;
+}
+
+body.quarto-dark .callout.math-depth > .callout-header {
+  background-color: color-mix(in srgb, #3a2d1d 78%, transparent) !important;
+  color: #e7c79b !important;
+}
+
+body.quarto-dark .callout.remark-box {
+  background-color: color-mix(in srgb, #2c2212 68%, transparent) !important;
+}
+
+body.quarto-dark .callout.remark-box > .callout-header {
+  background-color: color-mix(in srgb, #3a2d16 78%, transparent) !important;
+  color: #f0c875 !important;
+}
+
+body.quarto-dark .callout.learning-box {
+  background-color: color-mix(in srgb, #321a22 74%, transparent) !important;
+}
+
+body.quarto-dark .callout.learning-box > .callout-header {
+  background-color: color-mix(in srgb, #421f2b 78%, transparent) !important;
+  color: #efb4bf !important;
+}
+
+body.quarto-dark .callout.precision-box {
+  background-color: color-mix(in srgb, #2a1f2b 74%, transparent) !important;
+}
+
+body.quarto-dark .callout.precision-box > .callout-header {
+  background-color: color-mix(in srgb, #352637 78%, transparent) !important;
+  color: #e3bfd7 !important;
+}
+
+body.quarto-dark .callout.failure-box {
+  background-color: color-mix(in srgb, #351c17 74%, transparent) !important;
+}
+
+body.quarto-dark .callout.failure-box > .callout-header {
+  background-color: color-mix(in srgb, #47251d 78%, transparent) !important;
+  color: #f2b39e !important;
+}
+
+body.quarto-dark .callout.intuition-box {
+  background-color: color-mix(in srgb, #30241f 74%, transparent) !important;
+}
+
+body.quarto-dark .callout.intuition-box > .callout-header {
+  background-color: color-mix(in srgb, #3c2c26 78%, transparent) !important;
+  color: #dfc0b5 !important;
+}
+
+body.quarto-dark .callout.preview-box {
+  background-color: color-mix(in srgb, #2b251d 74%, transparent) !important;
+}
+
+body.quarto-dark .callout.preview-box > .callout-header {
+  background-color: color-mix(in srgb, #362d22 78%, transparent) !important;
+  color: #d9c3a7 !important;
+}
+
+body.quarto-dark .callout.history-box {
+  background-color: color-mix(in srgb, #2d2117 68%, transparent) !important;
+}
+
+body.quarto-dark .callout.history-box > .callout-header {
+  background-color: color-mix(in srgb, #3a2a1d 78%, transparent) !important;
+  color: #e7c49b !important;
+}

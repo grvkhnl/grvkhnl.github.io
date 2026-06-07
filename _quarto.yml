@@ -58,7 +58,9 @@ format:
     theme:
       light: [flatly, styles/light.scss, styles/theme.scss]
       dark: [darkly, styles/dark.scss, styles/theme.scss]
-    css: styles/custom.css
+    css:
+      - styles/custom.css
+      - styles/callouts.css
 
     page-layout: article
     toc: true
