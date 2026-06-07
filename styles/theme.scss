@@ -336,7 +336,7 @@
    }
 
    #refs {
-     font-family: $font-family-serif;
+     font-family: "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
      font-size: 0.98rem;
      line-height: 1.58;
      color: var(--muted-ink);
@@ -346,10 +346,15 @@
      margin-bottom: 0.85rem;
    }
 
-   #refs .csl-left-margin {
-     color: var(--accent);
-     font-family: $font-family-sans-serif;
-     font-weight: 650;
+   #quarto-bibliography #refs .csl-left-margin,
+   #quarto-bibliography #refs .csl-left-margin * {
+     color: var(--faint-ink);
+     font-family: "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif !important;
+     font-style: normal;
+     font-weight: 400;
+   }
+
+   #quarto-bibliography #refs .csl-left-margin {
      padding-right: 0.75rem;
    }
 
