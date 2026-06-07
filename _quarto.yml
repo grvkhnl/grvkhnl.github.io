@@ -56,8 +56,8 @@ website:
 format:
   html:
     theme:
-      light: [flatly, styles/theme.scss]
-      dark: [darkly, styles/theme.scss]
+      light: [flatly, styles/light.scss, styles/theme.scss]
+      dark: [darkly, styles/dark.scss, styles/theme.scss]
     css: styles/custom.css
 
     page-layout: article

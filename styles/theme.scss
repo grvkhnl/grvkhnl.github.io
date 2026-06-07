@@ -12,25 +12,6 @@
    $headings-font-weight: 650;
    $headings-line-height: 1.15;
    
-   /* ============================================================
-      Light theme palette: warm newspaper / FT-inspired
-      ============================================================ */
-   
-   $body-bg: #fff1dc;
-   $body-color: #1f1f1f;
-   $link-color: #1f4f8f;
-   $selection-bg: #ead2a8;
-   
-   $navbar-bg: #fff1dc;
-   $navbar-fg: #1f1f1f;
-   $navbar-hl: #1f4f8f;
-   
-   $code-bg: #f3dfbd;
-   $code-color: #6f2d1f;
-   
-   $border-color: #d8c7aa;
-   
-   
    /*-- scss:rules --*/
    
    /* ============================================================
@@ -564,7 +545,7 @@
       Dark mode
       ============================================================ */
    
-   [data-bs-theme="dark"] {
+   body.quarto-dark {
      --ink: #e5e7eb;
      --muted-ink: #aab3c2;
      --faint-ink: #8d98aa;
@@ -585,112 +566,112 @@
      --red: #f28b82;
    }
    
-   [data-bs-theme="dark"] body {
+   body.quarto-dark {
      background: var(--paper);
      color: var(--ink);
    }
    
-   [data-bs-theme="dark"] .navbar {
+   body.quarto-dark .navbar {
      background: rgba(13, 17, 23, 0.92);
      border-bottom: 1px solid var(--rule);
    }
    
-   [data-bs-theme="dark"] blockquote {
+   body.quarto-dark blockquote {
      color: #d8dee9;
    }
    
-   [data-bs-theme="dark"] .description,
-   [data-bs-theme="dark"] .quarto-title-meta,
-   [data-bs-theme="dark"] figcaption,
-   [data-bs-theme="dark"] .figure-caption {
+   body.quarto-dark .description,
+   body.quarto-dark .quarto-title-meta,
+   body.quarto-dark figcaption,
+   body.quarto-dark .figure-caption {
      color: var(--muted-ink);
    }
    
-   [data-bs-theme="dark"] pre.sourceCode {
+   body.quarto-dark pre.sourceCode {
      background-color: #151a22;
    }
    
-   [data-bs-theme="dark"] .card {
+   body.quarto-dark .card {
      background: rgba(255, 255, 255, 0.03);
    }
    
-   [data-bs-theme="dark"] .hero-links a {
+   body.quarto-dark .hero-links a {
      color: var(--ink);
    }
    
-   [data-bs-theme="dark"] .hero-links a:hover {
+   body.quarto-dark .hero-links a:hover {
      color: var(--accent);
    }
    
    /* Dark mode custom callouts */
-   [data-bs-theme="dark"] .callout.math-depth {
+   body.quarto-dark .callout.math-depth {
      background: color-mix(in srgb, #13233d 62%, transparent);
    }
    
-   [data-bs-theme="dark"] .callout.math-depth .callout-header {
+   body.quarto-dark .callout.math-depth .callout-header {
      background: color-mix(in srgb, #1a3155 75%, transparent);
      color: #c3d8ff;
    }
    
-   [data-bs-theme="dark"] .callout.remark-box {
+   body.quarto-dark .callout.remark-box {
      background: color-mix(in srgb, #2c2212 68%, transparent);
    }
    
-   [data-bs-theme="dark"] .callout.remark-box .callout-header {
+   body.quarto-dark .callout.remark-box .callout-header {
      background: color-mix(in srgb, #3a2d16 78%, transparent);
      color: #f0c875;
    }
    
-   [data-bs-theme="dark"] .callout.learning-box {
+   body.quarto-dark .callout.learning-box {
      background: color-mix(in srgb, #11291d 68%, transparent);
    }
    
-   [data-bs-theme="dark"] .callout.learning-box .callout-header {
+   body.quarto-dark .callout.learning-box .callout-header {
      background: color-mix(in srgb, #173625 78%, transparent);
      color: #9be0b7;
    }
    
-   [data-bs-theme="dark"] .callout.precision-box {
+   body.quarto-dark .callout.precision-box {
      background: color-mix(in srgb, #201b3f 68%, transparent);
    }
    
-   [data-bs-theme="dark"] .callout.precision-box .callout-header {
+   body.quarto-dark .callout.precision-box .callout-header {
      background: color-mix(in srgb, #2b2555 78%, transparent);
      color: #c8bfff;
    }
    
-   [data-bs-theme="dark"] .callout.failure-box {
+   body.quarto-dark .callout.failure-box {
      background: color-mix(in srgb, #341614 68%, transparent);
    }
    
-   [data-bs-theme="dark"] .callout.failure-box .callout-header {
+   body.quarto-dark .callout.failure-box .callout-header {
      background: color-mix(in srgb, #451c18 78%, transparent);
      color: #ffb0a8;
    }
    
-   [data-bs-theme="dark"] .callout.intuition-box {
+   body.quarto-dark .callout.intuition-box {
      background: color-mix(in srgb, #102a33 68%, transparent);
    }
    
-   [data-bs-theme="dark"] .callout.intuition-box .callout-header {
+   body.quarto-dark .callout.intuition-box .callout-header {
      background: color-mix(in srgb, #153945 78%, transparent);
      color: #a4ecff;
    }
    
-   [data-bs-theme="dark"] .callout.preview-box {
+   body.quarto-dark .callout.preview-box {
      background: color-mix(in srgb, #18202c 68%, transparent);
    }
    
-   [data-bs-theme="dark"] .callout.preview-box .callout-header {
+   body.quarto-dark .callout.preview-box .callout-header {
      background: color-mix(in srgb, #202a39 78%, transparent);
      color: #cbd5e1;
    }
    
-   [data-bs-theme="dark"] .callout.history-box {
+   body.quarto-dark .callout.history-box {
      background: color-mix(in srgb, #2d2117 68%, transparent);
    }
    
-   [data-bs-theme="dark"] .callout.history-box .callout-header {
+   body.quarto-dark .callout.history-box .callout-header {
      background: color-mix(in srgb, #3a2a1d 78%, transparent);
      color: #e7c49b;
    }
