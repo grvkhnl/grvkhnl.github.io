@@ -202,7 +202,7 @@ figcaption {
   font-size: clamp(1.55rem, 3vw, 2.1rem);
   line-height: 1.15;
   letter-spacing: 0;
-  color: var(--ink);
+  color: var(--muted-ink);
 }
 
 #refs {
@@ -229,12 +229,17 @@ figcaption {
 }
 
 .post-end {
-  margin: 3.5rem auto 0;
+  margin: 3.8rem auto 0;
   text-align: center;
   font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
-  font-size: 1.05rem;
-  color: var(--faint-ink);
+  font-size: 1.18rem;
+  line-height: 1;
+  color: color-mix(in srgb, var(--accent) 54%, var(--faint-ink));
   letter-spacing: 0;
+}
+
+.post-end p {
+  margin-bottom: 0;
 }
 
 .navbar {
@@ -256,6 +261,27 @@ figcaption {
   letter-spacing: -0.02em;
 }
 
+.quarto-listing .listing-title a,
+.quarto-listing .listing-subtitle a,
+.quarto-listing .listing-description a,
+.quarto-listing .metadata a {
+  color: inherit;
+  text-decoration-color: transparent;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+}
+
+.quarto-listing .listing-title a:hover,
+.quarto-listing .listing-title a:focus-visible,
+.quarto-listing .listing-subtitle a:hover,
+.quarto-listing .listing-subtitle a:focus-visible,
+.quarto-listing .listing-description a:hover,
+.quarto-listing .listing-description a:focus-visible,
+.quarto-listing .metadata a:hover,
+.quarto-listing .metadata a:focus-visible {
+  color: var(--accent);
+  text-decoration-color: color-mix(in srgb, var(--accent) 68%, transparent);
+}
+
 .quarto-listing .listing-description {
   line-height: 1.55;
 }
@@ -264,10 +290,40 @@ figcaption {
   color: var(--faint-ink);
 }
 
+.quarto-listing-category .category {
+  color: var(--muted-ink);
+  cursor: pointer;
+  transition: color 160ms ease, background-color 160ms ease;
+}
+
+.quarto-listing-category .category:hover,
+.quarto-listing-category .category:focus-visible,
+.quarto-listing-category .category.active {
+  color: var(--accent);
+}
+
+.quarto-listing-category .category:hover .quarto-category-count,
+.quarto-listing-category .category:focus-visible .quarto-category-count,
+.quarto-listing-category .category.active .quarto-category-count {
+  color: color-mix(in srgb, var(--accent) 72%, var(--muted-ink));
+}
+
 .quarto-category {
   border-radius: 999px;
   font-size: 0.78rem;
   padding: 0.2rem 0.55rem;
+}
+
+.listing-category {
+  cursor: pointer;
+  transition: border-color 160ms ease, color 160ms ease, background-color 160ms ease;
+}
+
+.listing-category:hover,
+.listing-category:focus-visible {
+  border-color: color-mix(in srgb, var(--accent) 42%, var(--rule));
+  color: var(--accent);
+  background-color: color-mix(in srgb, var(--accent-soft) 50%, transparent);
 }
 
 #TOC {
