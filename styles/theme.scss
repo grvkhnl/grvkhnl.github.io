@@ -7,42 +7,46 @@
    $font-family-sans-serif: "Inter", "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
    $font-family-serif: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
    $font-family-monospace: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
-   
+
    $headings-font-family: $font-family-serif;
    $headings-font-weight: 650;
    $headings-line-height: 1.15;
-   
+
    /*-- scss:rules --*/
-   
+
    /* ============================================================
       Web fonts
       ============================================================ */
-   
+
    @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,650;8..60,700&family=JetBrains+Mono:wght@400;500;600&display=swap");
-   
+
    /* ============================================================
       Global variables
       ============================================================ */
-   
+
    :root {
      --essay-max-width: 780px;
      --wide-max-width: 1080px;
-   
+
      --ink: #1f1f1f;
      --muted-ink: #5f5a52;
      --faint-ink: #7c7468;
-   
+
      --paper: #fff1dc;
      --paper-soft: #f8e8cc;
      --paper-deep: #efd5a8;
-   
+
      --rule: #d8c7aa;
      --rule-strong: #bda984;
-   
+
+     --math-scrollbar-track: rgba(122, 36, 53, 0.08);
+     --math-scrollbar-thumb: rgba(122, 36, 53, 0.32);
+     --math-scrollbar-thumb-hover: rgba(122, 36, 53, 0.48);
+
      --accent: #7a2435;
      --accent-soft: #ead7da;
      --accent-deep: #5b1625;
-   
+
      --gold: #9a6a1f;
      --maroon: #7a2435;
      --plum: #5f3b57;
@@ -50,15 +54,15 @@
      --taupe: #7c5f58;
      --umber: #8a5a32;
    }
-   
+
    /* ============================================================
       Base rendering
       ============================================================ */
-   
+
    html {
      scroll-behavior: smooth;
    }
-   
+
    body {
      font-family: $font-family-sans-serif;
      font-feature-settings: "liga" 1, "kern" 1;
@@ -66,16 +70,16 @@
      background: var(--paper);
      color: var(--ink);
    }
-   
+
    /* Main content width */
    main.content {
      max-width: var(--essay-max-width);
    }
-   
+
    /* ============================================================
       Essay prose
       ============================================================ */
-   
+
    main.content p:not(.hero-subtitle):not(.card p):not(.hero p),
    main.content li:not(.hero-links li),
    main.content blockquote {
@@ -83,15 +87,15 @@
      font-size: 1.08rem;
      line-height: 1.78;
    }
-   
+
    main.content p:not(.hero-subtitle):not(.card p):not(.hero p) {
      margin-bottom: 1.05rem;
    }
-   
+
    main.content li:not(.hero-links li) {
      margin-bottom: 0.35rem;
    }
-   
+
    /* Keep UI/meta/listing text modern */
    .navbar,
    .nav-footer,
@@ -106,11 +110,11 @@
    .callout-header {
      font-family: $font-family-sans-serif;
    }
-   
+
    /* ============================================================
       Title blocks and headings
       ============================================================ */
-   
+
    .quarto-title-block .title {
      font-family: $font-family-serif;
      font-size: clamp(2.25rem, 5vw, 4.25rem);
@@ -118,19 +122,19 @@
      letter-spacing: -0.04em;
      margin-bottom: 0.45rem;
    }
-   
+
    .quarto-title-block .subtitle {
      font-family: $font-family-serif;
      font-size: clamp(1.1rem, 2vw, 1.45rem);
      line-height: 1.35;
      color: var(--muted-ink);
    }
-   
+
    .description,
    .quarto-title-meta {
      color: var(--faint-ink);
    }
-   
+
    h1,
    h2,
    h3,
@@ -138,45 +142,91 @@
      font-family: $font-family-serif;
      letter-spacing: -0.025em;
    }
-   
+
    h2 {
      margin-top: 2.75rem;
      padding-top: 0.55rem;
      border-top: 1px solid var(--rule);
    }
-   
+
    h3 {
      margin-top: 2rem;
    }
-   
+
    /* ============================================================
       Links
       ============================================================ */
-   
+
    a {
      text-decoration-thickness: 0.075em;
      text-underline-offset: 0.2em;
    }
-   
+
    /* ============================================================
       Math
       ============================================================ */
-   
+
    .math.display,
    .quarto-figure {
      margin-top: 1.45rem;
      margin-bottom: 1.45rem;
    }
-   
+
+   .math.display {
+     display: block;
+     max-width: 100%;
+     overflow-x: auto;
+     overflow-y: hidden;
+     padding-bottom: 0.2rem;
+     scrollbar-width: thin;
+     scrollbar-color: var(--math-scrollbar-thumb) var(--math-scrollbar-track);
+   }
+
+   .math.display::-webkit-scrollbar {
+     height: 5px;
+   }
+
+   .math.display::-webkit-scrollbar-track {
+     background: var(--math-scrollbar-track);
+     border-radius: 999px;
+   }
+
+   .math.display::-webkit-scrollbar-thumb {
+     background: var(--math-scrollbar-thumb);
+     border-radius: 999px;
+   }
+
+   .math.display::-webkit-scrollbar-thumb:hover {
+     background: var(--math-scrollbar-thumb-hover);
+   }
+
    mjx-container {
      font-size: 104%;
      color: var(--ink);
    }
-   
+
+   mjx-container[display="true"],
+   mjx-container[jax="CHTML"][display="true"] {
+     display: block;
+     max-width: 100%;
+     overflow: visible !important;
+     padding-bottom: 0;
+   }
+
+   .callout .math.display,
+   .callout mjx-container[display="true"] {
+     max-width: 100%;
+   }
+
+   .math.display mjx-container[display="true"],
+   .math.display mjx-container[jax="CHTML"][display="true"] {
+     min-width: max-content;
+   }
+
    /* ============================================================
       Blockquotes
       ============================================================ */
-   
+
    blockquote {
      border-left: 3px solid var(--accent);
      background: var(--paper-soft);
@@ -184,44 +234,44 @@
      color: #2c2a25;
      border-radius: 0 10px 10px 0;
    }
-   
+
    blockquote p:last-child {
      margin-bottom: 0;
    }
-   
+
    /* ============================================================
       Code
       ============================================================ */
-   
+
    pre.sourceCode {
      background-color: #f5e3c4;
      border: 1px solid var(--rule);
      border-radius: 12px;
      padding: 1rem;
    }
-   
+
    code {
      font-family: $font-family-monospace;
      border-radius: 4px;
      padding: 0.08rem 0.22rem;
    }
-   
+
    /* ============================================================
       Tables
       ============================================================ */
-   
+
    table {
      font-size: 0.94rem;
    }
-   
+
    thead {
      border-bottom: 2px solid var(--rule);
    }
-   
+
    /* ============================================================
       Default Quarto callouts
       ============================================================ */
-   
+
    .callout {
      border-radius: 13px;
      border-left-width: 4px;
@@ -229,33 +279,33 @@
      margin-bottom: 1.45rem;
      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
    }
-   
+
    .callout.callout-style-default > .callout-header {
      font-family: $font-family-sans-serif;
      font-weight: 700;
    }
-   
+
    .callout-note {
      border-left-color: var(--accent);
    }
-   
+
    .callout-important {
      border-left-color: var(--gold);
    }
-   
+
    .callout-tip {
      border-left-color: var(--maroon);
    }
-   
+
    .callout-warning,
    .callout-caution {
      border-left-color: var(--rust);
    }
-   
+
    /* ============================================================
       Figures
       ============================================================ */
-   
+
    .figure-caption,
    figcaption {
      font-family: $font-family-sans-serif;
@@ -263,81 +313,129 @@
      color: var(--muted-ink);
      line-height: 1.5;
    }
-   
+
+   /* ============================================================
+      References
+      ============================================================ */
+
+   #quarto-appendix.default {
+     margin-top: 4rem;
+     border-top: 1px solid var(--rule);
+     padding-top: 1.4rem;
+   }
+
+   #quarto-bibliography .quarto-appendix-heading {
+     margin-top: 0;
+     padding-top: 0;
+     border-top: 0;
+     font-family: $font-family-serif;
+     font-size: clamp(1.55rem, 3vw, 2.1rem);
+     line-height: 1.15;
+     letter-spacing: 0;
+     color: var(--ink);
+   }
+
+   #refs {
+     font-family: $font-family-serif;
+     font-size: 0.98rem;
+     line-height: 1.58;
+     color: var(--muted-ink);
+   }
+
+   #refs .csl-entry {
+     margin-bottom: 0.85rem;
+   }
+
+   #refs .csl-left-margin {
+     color: var(--accent);
+     font-family: $font-family-sans-serif;
+     font-weight: 650;
+     padding-right: 0.75rem;
+   }
+
+   .post-end {
+     margin: 3.5rem auto 0;
+     text-align: center;
+     font-family: $font-family-serif;
+     font-size: 1.05rem;
+     color: var(--faint-ink);
+     letter-spacing: 0;
+   }
+
    /* ============================================================
       Navbar
       ============================================================ */
-   
+
    .navbar {
      background: rgba(255, 241, 220, 0.94);
      border-bottom: 1px solid var(--rule);
      backdrop-filter: blur(8px);
    }
-   
+
    .navbar-title {
      font-family: $font-family-serif;
      font-weight: 650;
      letter-spacing: -0.025em;
    }
-   
+
    /* ============================================================
       Listing pages
       ============================================================ */
-   
+
    .quarto-listing .listing-title {
      font-family: $font-family-serif;
      font-size: 1.35rem;
      font-weight: 650;
      letter-spacing: -0.02em;
    }
-   
+
    .quarto-listing .listing-description {
      line-height: 1.55;
    }
-   
+
    .quarto-listing .listing-date {
      color: var(--faint-ink);
    }
-   
+
    .quarto-category {
      border-radius: 999px;
      font-size: 0.78rem;
      padding: 0.2rem 0.55rem;
    }
-   
+
    /* ============================================================
       Table of contents
       ============================================================ */
-   
+
    #TOC {
      font-size: 0.9rem;
    }
-   
+
    #TOC a {
      color: var(--muted-ink);
    }
-   
+
    #TOC a.active {
      color: var(--accent);
      font-weight: 600;
    }
-   
+
    /* ============================================================
       Footer
       ============================================================ */
-   
+
    .nav-footer {
      border-top: 1px solid var(--rule);
    }
-   
+
    /* ============================================================
       Homepage hero
       ============================================================ */
-   
+
    .hero {
      padding: 4.5rem 0 3.5rem 0;
    }
-   
+
    .hero .hero-title,
    .hero-title {
      font-family: $font-family-serif;
@@ -346,7 +444,7 @@
      letter-spacing: -0.055em;
      margin-bottom: 1rem;
    }
-   
+
    .hero p,
    .hero-subtitle {
      max-width: 720px;
@@ -356,18 +454,18 @@
      line-height: 1.55;
      margin-bottom: 0;
    }
-   
+
    .hero-links {
      display: flex;
      gap: 0.8rem;
      flex-wrap: wrap;
      margin-top: 1.6rem;
    }
-   
+
    .hero-links p {
      margin: 0;
    }
-   
+
    .hero-links a {
      display: inline-block;
      border: 1px solid var(--rule-strong);
@@ -379,43 +477,43 @@
      font-size: 1rem;
      line-height: 1.2;
    }
-   
+
    .hero-links a:hover {
      border-color: var(--accent);
      color: var(--accent);
    }
-   
+
    /* ============================================================
       Cards
       ============================================================ */
-   
+
    .card-grid {
      display: grid;
      grid-template-columns: repeat(auto-fit, minmax(245px, 1fr));
      gap: 1rem;
      margin-top: 1.25rem;
    }
-   
+
    .card {
      border: 1px solid var(--rule);
      border-radius: 16px;
      padding: 1rem 1.1rem;
      background: rgba(255, 247, 235, 0.65);
    }
-   
+
    .card h3 {
      margin-top: 0;
    }
-   
+
    .card p {
      margin-bottom: 0;
      color: var(--muted-ink);
    }
-   
+
    /* ============================================================
       Custom callout vocabulary for mathematical essays
       ============================================================ */
-   
+
    /* Shared custom callout polish */
    .callout.math-depth,
    .callout.remark-box,
@@ -432,7 +530,7 @@
      border-bottom: 1px solid var(--rule);
      box-shadow: 0 1px 0 rgba(0, 0, 0, 0.025);
    }
-   
+
    .callout.math-depth .callout-header,
    .callout.remark-box .callout-header,
    .callout.learning-box .callout-header,
@@ -446,7 +544,7 @@
      font-weight: 700;
      letter-spacing: 0.01em;
    }
-   
+
    .callout.math-depth .callout-body,
    .callout.remark-box .callout-body,
    .callout.learning-box .callout-body,
@@ -458,117 +556,121 @@
    .callout.history-box .callout-body {
      font-family: "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
    }
-   
+
    /* Mathematical Depth: soft rose */
    .callout.math-depth {
      border-left-color: var(--plum);
      background: color-mix(in srgb, #ead7da 72%, transparent);
    }
-   
+
    .callout.math-depth .callout-header {
      background: color-mix(in srgb, #dec1c8 76%, transparent);
      color: #6f1f31;
    }
-   
+
    /* Remark: warm gold */
    .callout.remark-box {
      border-left-color: var(--gold);
      background: color-mix(in srgb, #fff4dc 70%, transparent);
    }
-   
+
    .callout.remark-box .callout-header {
      background: color-mix(in srgb, #f1d9a8 74%, transparent);
      color: #70470f;
    }
-   
+
    /* Consequence for Learning: terracotta oxblood */
    .callout.learning-box,
    .callout.consequence-box {
      border-left-color: var(--maroon);
      background: color-mix(in srgb, #f2d6d0 76%, transparent);
    }
-   
+
    .callout.learning-box .callout-header,
    .callout.consequence-box .callout-header {
      background: color-mix(in srgb, #dfaaa0 78%, transparent);
      color: #7a2435;
    }
-   
+
    /* Precision Point: muted plum */
    .callout.precision-box {
      border-left-color: var(--plum);
      background: color-mix(in srgb, #e7dbe2 72%, transparent);
    }
-   
+
    .callout.precision-box .callout-header {
      background: color-mix(in srgb, #d7c2cf 74%, transparent);
      color: #56324e;
    }
-   
+
    /* Failure Mode: clay rust */
    .callout.failure-box {
      border-left-color: var(--rust);
      background: color-mix(in srgb, #f0ddd4 72%, transparent);
    }
-   
+
    .callout.failure-box .callout-header {
      background: color-mix(in srgb, #e5c2b5 74%, transparent);
      color: #8c241c;
    }
-   
+
    /* Intuition: rose taupe */
    .callout.intuition-box {
      border-left-color: var(--taupe);
      background: color-mix(in srgb, #eee0da 72%, transparent);
    }
-   
+
    .callout.intuition-box .callout-header {
      background: color-mix(in srgb, #e0cbc2 74%, transparent);
      color: #6d514a;
    }
-   
+
    /* Preview: warm umber */
    .callout.preview-box {
      border-left-color: #7b5a3a;
      background: color-mix(in srgb, #efe5d4 72%, transparent);
    }
-   
+
    .callout.preview-box .callout-header {
      background: color-mix(in srgb, #dfcfb8 74%, transparent);
      color: #5e4632;
    }
-   
+
    /* Historical Note: sepia */
    .callout.history-box {
      border-left-color: #8a5a32;
      background: color-mix(in srgb, #f5ead8 72%, transparent);
    }
-   
+
    .callout.history-box .callout-header {
      background: color-mix(in srgb, #f4dfc7 72%, transparent);
      color: #6f421f;
    }
-   
+
    /* ============================================================
       Dark mode
       ============================================================ */
-   
+
    body.quarto-dark {
      --ink: #e5e7eb;
      --muted-ink: #aab3c2;
      --faint-ink: #8d98aa;
-   
+
      --paper: #0d1117;
      --paper-soft: #151a22;
      --paper-deep: #1c2330;
-   
+
      --rule: #293241;
      --rule-strong: #3a4657;
-   
+
+     --math-scrollbar-track: rgba(217, 163, 169, 0.1);
+     --math-scrollbar-thumb: rgba(217, 163, 169, 0.38);
+     --math-scrollbar-thumb-hover: rgba(217, 163, 169, 0.56);
+
      --accent: #d9a3a9;
      --accent-soft: #3a1d24;
      --accent-deep: #f0c3c7;
-   
+
      --gold: #d6a84f;
      --maroon: #d78898;
      --plum: #c8a3bd;
@@ -576,139 +678,138 @@
      --taupe: #c7a89d;
      --umber: #d3ad82;
    }
-   
+
    body.quarto-dark {
      background: var(--paper);
      color: var(--ink);
    }
-   
+
    body.quarto-dark .navbar {
      background: rgba(13, 17, 23, 0.92);
      border-bottom: 1px solid var(--rule);
    }
-   
+
    body.quarto-dark blockquote {
      color: #d8dee9;
    }
-   
+
    body.quarto-dark .description,
    body.quarto-dark .quarto-title-meta,
    body.quarto-dark figcaption,
    body.quarto-dark .figure-caption {
      color: var(--muted-ink);
    }
-   
+
    body.quarto-dark pre.sourceCode {
      background-color: #151a22;
    }
-   
+
    body.quarto-dark .card {
      background: rgba(255, 255, 255, 0.03);
    }
-   
+
    body.quarto-dark .hero-links a {
      color: var(--ink);
    }
-   
+
    body.quarto-dark .hero-links a:hover {
      color: var(--accent);
    }
-   
+
    /* Dark mode custom callouts */
    body.quarto-dark .callout.math-depth {
      background: color-mix(in srgb, #321a22 74%, transparent);
    }
-   
+
    body.quarto-dark .callout.math-depth .callout-header {
      background: color-mix(in srgb, #421f2b 78%, transparent);
      color: #efb4bf;
    }
-   
+
    body.quarto-dark .callout.remark-box {
      background: color-mix(in srgb, #2c2212 68%, transparent);
    }
-   
+
    body.quarto-dark .callout.remark-box .callout-header {
      background: color-mix(in srgb, #3a2d16 78%, transparent);
      color: #f0c875;
    }
-   
+
    body.quarto-dark .callout.learning-box,
    body.quarto-dark .callout.consequence-box {
      background: color-mix(in srgb, #351b1f 76%, transparent);
    }
-   
+
    body.quarto-dark .callout.learning-box .callout-header,
    body.quarto-dark .callout.consequence-box .callout-header {
      background: color-mix(in srgb, #4a2429 80%, transparent);
      color: #f0b5ad;
    }
-   
+
    body.quarto-dark .callout.precision-box {
      background: color-mix(in srgb, #2a1f2b 74%, transparent);
    }
-   
+
    body.quarto-dark .callout.precision-box .callout-header {
      background: color-mix(in srgb, #352637 78%, transparent);
      color: #e3bfd7;
    }
-   
+
    body.quarto-dark .callout.failure-box {
      background: color-mix(in srgb, #351c17 74%, transparent);
    }
-   
+
    body.quarto-dark .callout.failure-box .callout-header {
      background: color-mix(in srgb, #47251d 78%, transparent);
      color: #f2b39e;
    }
-   
+
    body.quarto-dark .callout.intuition-box {
      background: color-mix(in srgb, #30241f 74%, transparent);
    }
-   
+
    body.quarto-dark .callout.intuition-box .callout-header {
      background: color-mix(in srgb, #3c2c26 78%, transparent);
      color: #dfc0b5;
    }
-   
+
    body.quarto-dark .callout.preview-box {
      background: color-mix(in srgb, #2b251d 74%, transparent);
    }
-   
+
    body.quarto-dark .callout.preview-box .callout-header {
      background: color-mix(in srgb, #362d22 78%, transparent);
      color: #d9c3a7;
    }
-   
+
    body.quarto-dark .callout.history-box {
      background: color-mix(in srgb, #2d2117 68%, transparent);
    }
-   
+
    body.quarto-dark .callout.history-box .callout-header {
      background: color-mix(in srgb, #3a2a1d 78%, transparent);
      color: #e7c49b;
    }
-   
+
    /* ============================================================
       Mobile refinements
       ============================================================ */
-   
+
    @media (max-width: 768px) {
      .quarto-title-block .title {
        font-size: 2.35rem;
      }
-   
+
      main.content {
        padding-left: 1rem;
        padding-right: 1rem;
      }
-   
+
      .hero {
        padding-top: 2.5rem;
      }
-   
+
      .hero-title {
        font-size: 3.2rem;
      }
    }
-   

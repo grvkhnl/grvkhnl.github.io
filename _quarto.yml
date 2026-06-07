@@ -89,3 +89,4 @@ execute:
   message: false
 
 bibliography: references.bib
+csl: styles/numbered-references.csl

@@ -96,9 +96,55 @@ a {
   margin-bottom: 1.45rem;
 }
 
+.math.display {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0.2rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--math-scrollbar-thumb) var(--math-scrollbar-track);
+}
+
+.math.display::-webkit-scrollbar {
+  height: 5px;
+}
+
+.math.display::-webkit-scrollbar-track {
+  background: var(--math-scrollbar-track);
+  border-radius: 999px;
+}
+
+.math.display::-webkit-scrollbar-thumb {
+  background: var(--math-scrollbar-thumb);
+  border-radius: 999px;
+}
+
+.math.display::-webkit-scrollbar-thumb:hover {
+  background: var(--math-scrollbar-thumb-hover);
+}
+
 mjx-container {
   font-size: 104%;
   color: var(--ink);
+}
+
+mjx-container[display="true"],
+mjx-container[jax="CHTML"][display="true"] {
+  display: block;
+  max-width: 100%;
+  overflow: visible !important;
+  padding-bottom: 0;
+}
+
+.callout .math.display,
+.callout mjx-container[display="true"] {
+  max-width: 100%;
+}
+
+.math.display mjx-container[display="true"],
+.math.display mjx-container[jax="CHTML"][display="true"] {
+  min-width: max-content;
 }
 
 blockquote {
@@ -140,6 +186,50 @@ figcaption {
   font-size: 0.9rem;
   color: var(--muted-ink);
   line-height: 1.5;
+}
+
+#quarto-appendix.default {
+  margin-top: 4rem;
+  border-top: 1px solid var(--rule);
+  padding-top: 1.4rem;
+}
+
+#quarto-bibliography .quarto-appendix-heading {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: clamp(1.55rem, 3vw, 2.1rem);
+  line-height: 1.15;
+  letter-spacing: 0;
+  color: var(--ink);
+}
+
+#refs {
+  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 0.98rem;
+  line-height: 1.58;
+  color: var(--muted-ink);
+}
+
+#refs .csl-entry {
+  margin-bottom: 0.85rem;
+}
+
+#refs .csl-left-margin {
+  color: var(--accent);
+  font-family: "Inter", "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-weight: 650;
+  padding-right: 0.75rem;
+}
+
+.post-end {
+  margin: 3.5rem auto 0;
+  text-align: center;
+  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-size: 1.05rem;
+  color: var(--faint-ink);
+  letter-spacing: 0;
 }
 
 .navbar {
