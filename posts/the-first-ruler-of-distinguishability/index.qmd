@@ -445,11 +445,12 @@ p(\cdot\,;\theta + d\theta)
 $$ {#eq-kl-local-fisher-expansion-reverse}
 
 This is why Fisher geometry is the *local symmetric part* of KL. The asymmetry of KL is real, but it does not show up in the quadratic approximation; it appears only at third order and beyond.
+:::
 
 This means two things. First, any algorithm that minimizes KL divergence inherits Fisher geometry in its local second-order behavior. Minimizing KL gives Fisher as the local geometry, but the actual update rule may still use Euclidean gradients---this is precisely the gap that natural gradient descent, which will be discussed in future posts, is designed to close. Second, the Fisher metric inherits its symmetry from the Hessian operation: even though KL itself is asymmetric (because $\text{KL}(p\|q) \neq \text{KL}(q\|p)$ in general), its second-order term is a symmetric bilinear form---the metric tensor $F_{ij}$.
 
 The asymmetry of KL beyond second order encodes something important: the two directions of KL correspond to qualitatively different behaviors (mode-covering vs. mode-seeking). I will examine this asymmetry in detail and show how it points directly toward *Schrödinger bridge*.
-:::
+
 
 ::: {.callout-important .consequence-box title="Consequence for Learning"}
 
