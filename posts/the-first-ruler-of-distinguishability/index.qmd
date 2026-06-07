@@ -76,8 +76,6 @@ F_{ij}(\theta)
 \right].
 $$ {#eq-fisher-information-matrix}
 
-There is an important computational caveat. For a model with $N$ parameters, the FIM is an $N \times N$ matrix. In modern neural networks, where $N$ can be millions or billions, explicitly constructing this matrix is impossible. Practical methods therefore rely on matrix-free Fisher-vector products, diagonal approximations, low-rank approximations, or structured block approximations such as K-FAC. These approximations change the computation, but not the underlying geometric object.
-
 This matrix is not merely a useful statistic. It is a *Riemannian metric tensor* on the parameter manifold $\mathcal{M}$: a smooth varying inner product on each tangent space $T_{\theta}\mathcal{M}$, encoding the infinitesimal statistical distinguishability of nearby distributions. The systematic study of this structure is the subject of information geometry [@amari2000; @amari2016].
 
 ## The FIM as a Pullback Metric
@@ -458,6 +456,8 @@ Many learning objectives compare distributions through KL divergence or likeliho
 
 Ordinary gradient descent ignores this geometry. It treats parameter space as Euclidean, so a step of the same coordinate size is treated as equally important in every direction. Natural gradient descent corrects this by using $F(\theta)^{-1}\nabla L$, the steepest descent direction measured in distribution space rather than raw coordinates.
 
+For modern neural networks, however, the full FIM is impossible to form explicitly: with $N$ parameters, it is an $N\times N$ matrix. Practical methods therefore use matrix-free Fisher-vector products, diagonal approximations, low-rank approximations, or structured approximations such as K-FAC. These approximations change the computation, but not the underlying geometric object.
+
 This is the first practical lesson of Fisher geometry: learning is not just about the slope of the loss, but about the geometry of how parameters change distributions.
 
 :::
@@ -550,8 +550,8 @@ F^{(\alpha)}_{ab}
 =
 \sum_{i,j}
 F^{(\theta)}_{ij}
-\frac{\partial \theta_i}{\partial \alpha^a}
-\frac{\partial \theta_j}{\partial \alpha^b}.
+\frac{\partial \theta^i}{\partial \alpha^a}
+\frac{\partial \theta^j}{\partial \alpha^b}.
 $$ {#eq-fisher-coordinate-transform}
 
 Applying this transformation gives
@@ -617,7 +617,7 @@ This post introduced the first ruler: Fisher information, the local geometry of 
 
 Together, these two rulers set up the main tension of the series. Fisher asks how distributions differ statistically; Wasserstein asks how probability mass moves spatially. Learning needs both perspectives.
 
-From there, the story becomes more interesting. KL divergence will appear as the asymmetric object underlying Fisher geometry. Schrödinger bridges will connect entropy and transport into a single stochastic path. Hodge decomposition will reveal an algebraic structure hidden beneath optimal flows. Natural gradient will show what it means for optimization to respect statistical geometry. Langevin dynamics will then add calibrated noise, turning gradient descent from a mode-seeking optimizer into a sampler over distributions.
+From there, the story becomes more interesting. KL divergence will appear as the asymmetric object underlying Fisher geometry. Schrödinger bridges will connect entropy and transport into a single stochastic path. Hodge decomposition will reveal the algebraic anatomy of optimal flows. Natural gradient will show what it means for optimization to respect statistical geometry. Langevin dynamics will then add calibrated noise, turning gradient descent from a mode-seeking optimizer into a sampler over distributions.
 
 Finally, these ideas will reappear in modern machine learning, where diffusion models, flow matching, natural gradients, Langevin samplers, and Bayesian methods can all be understood as approximations to pieces of this geometry.
 
