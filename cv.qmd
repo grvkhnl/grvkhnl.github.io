@@ -22,4 +22,4 @@ You can place a short academic CV here.
 
 ## Selected projects
 
-- The Geometry of Probability
+- The Natural Geometry of Learning

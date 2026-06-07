@@ -420,6 +420,7 @@
    .callout.math-depth,
    .callout.remark-box,
    .callout.learning-box,
+   .callout.consequence-box,
    .callout.precision-box,
    .callout.failure-box,
    .callout.intuition-box,
@@ -435,6 +436,7 @@
    .callout.math-depth .callout-header,
    .callout.remark-box .callout-header,
    .callout.learning-box .callout-header,
+   .callout.consequence-box .callout-header,
    .callout.precision-box .callout-header,
    .callout.failure-box .callout-header,
    .callout.intuition-box .callout-header,
@@ -448,6 +450,7 @@
    .callout.math-depth .callout-body,
    .callout.remark-box .callout-body,
    .callout.learning-box .callout-body,
+   .callout.consequence-box .callout-body,
    .callout.precision-box .callout-body,
    .callout.failure-box .callout-body,
    .callout.intuition-box .callout-body,
@@ -456,15 +459,15 @@
      font-family: "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
    }
    
-   /* Mathematical Depth: muted plum */
+   /* Mathematical Depth: soft rose */
    .callout.math-depth {
      border-left-color: var(--plum);
-     background: color-mix(in srgb, #e9d9e2 76%, transparent);
+     background: color-mix(in srgb, #ead7da 72%, transparent);
    }
    
    .callout.math-depth .callout-header {
-     background: color-mix(in srgb, #d8becd 78%, transparent);
-     color: #56324e;
+     background: color-mix(in srgb, #dec1c8 76%, transparent);
+     color: #6f1f31;
    }
    
    /* Remark: warm gold */
@@ -478,15 +481,17 @@
      color: #70470f;
    }
    
-   /* Consequence for Learning: oxblood */
-   .callout.learning-box {
+   /* Consequence for Learning: terracotta oxblood */
+   .callout.learning-box,
+   .callout.consequence-box {
      border-left-color: var(--maroon);
-     background: color-mix(in srgb, #ead7da 70%, transparent);
+     background: color-mix(in srgb, #f2d6d0 76%, transparent);
    }
    
-   .callout.learning-box .callout-header {
-     background: color-mix(in srgb, #dec1c8 74%, transparent);
-     color: #6f1f31;
+   .callout.learning-box .callout-header,
+   .callout.consequence-box .callout-header {
+     background: color-mix(in srgb, #dfaaa0 78%, transparent);
+     color: #7a2435;
    }
    
    /* Precision Point: muted plum */
@@ -611,12 +616,12 @@
    
    /* Dark mode custom callouts */
    body.quarto-dark .callout.math-depth {
-     background: color-mix(in srgb, #2a1f2b 76%, transparent);
+     background: color-mix(in srgb, #321a22 74%, transparent);
    }
    
    body.quarto-dark .callout.math-depth .callout-header {
-     background: color-mix(in srgb, #382638 80%, transparent);
-     color: #e3bfd7;
+     background: color-mix(in srgb, #421f2b 78%, transparent);
+     color: #efb4bf;
    }
    
    body.quarto-dark .callout.remark-box {
@@ -628,13 +633,15 @@
      color: #f0c875;
    }
    
-   body.quarto-dark .callout.learning-box {
-     background: color-mix(in srgb, #321a22 74%, transparent);
+   body.quarto-dark .callout.learning-box,
+   body.quarto-dark .callout.consequence-box {
+     background: color-mix(in srgb, #351b1f 76%, transparent);
    }
    
-   body.quarto-dark .callout.learning-box .callout-header {
-     background: color-mix(in srgb, #421f2b 78%, transparent);
-     color: #efb4bf;
+   body.quarto-dark .callout.learning-box .callout-header,
+   body.quarto-dark .callout.consequence-box .callout-header {
+     background: color-mix(in srgb, #4a2429 80%, transparent);
+     color: #f0b5ad;
    }
    
    body.quarto-dark .callout.precision-box {
