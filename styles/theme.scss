@@ -5,7 +5,7 @@
    ============================================================ */
 
    $font-family-sans-serif: "Inter", "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-   $font-family-serif: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+   $font-family-serif: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
    $font-family-monospace: "JetBrains Mono", "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 
    $headings-font-family: $font-family-serif;
@@ -18,7 +18,7 @@
       Web fonts
       ============================================================ */
 
-   @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:opsz,wght@8..60,400;8..60,500;8..60,650;8..60,700&family=JetBrains+Mono:wght@400;500;600&display=swap");
+   @import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,650;0,8..60,700;1,8..60,400;1,8..60,500;1,8..60,650;1,8..60,700&family=JetBrains+Mono:wght@400;500;600&display=swap");
 
    /* ============================================================
       Global variables
@@ -83,7 +83,7 @@
    main.content p:not(.hero-subtitle):not(.card p):not(.hero p),
    main.content li:not(.hero-links li),
    main.content blockquote {
-     font-family: "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+     font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
      font-size: 1.08rem;
      line-height: 1.78;
    }
@@ -336,7 +336,7 @@
    }
 
    #refs {
-     font-family: "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+     font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
      font-size: 0.98rem;
      line-height: 1.58;
      color: var(--muted-ink);
@@ -349,7 +349,7 @@
    #quarto-bibliography #refs .csl-left-margin,
    #quarto-bibliography #refs .csl-left-margin * {
      color: var(--faint-ink);
-     font-family: "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif !important;
+     font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif !important;
      font-style: normal;
      font-weight: 400;
    }
@@ -615,7 +615,7 @@
    .callout.intuition-box .callout-body,
    .callout.preview-box .callout-body,
    .callout.history-box .callout-body {
-     font-family: "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+     font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
    }
 
    /* Mathematical Depth: soft rose */

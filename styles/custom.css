@@ -20,7 +20,7 @@ main.content {
 main.content p:not(.hero-subtitle):not(.card p):not(.hero p),
 main.content li:not(.hero-links li),
 main.content blockquote {
-  font-family: "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
   font-size: 1.08rem;
   line-height: 1.78;
 }
@@ -48,7 +48,7 @@ table,
 }
 
 .quarto-title-block .title {
-  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
   font-size: clamp(2.25rem, 5vw, 4.25rem);
   line-height: 0.98;
   letter-spacing: -0.04em;
@@ -56,7 +56,7 @@ table,
 }
 
 .quarto-title-block .subtitle {
-  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
   font-size: clamp(1.1rem, 2vw, 1.45rem);
   line-height: 1.35;
   color: var(--muted-ink);
@@ -71,7 +71,7 @@ h1,
 h2,
 h3,
 h4 {
-  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
   letter-spacing: -0.025em;
 }
 
@@ -198,7 +198,7 @@ figcaption {
   margin-top: 0;
   padding-top: 0;
   border-top: 0;
-  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
   font-size: clamp(1.55rem, 3vw, 2.1rem);
   line-height: 1.15;
   letter-spacing: 0;
@@ -206,7 +206,7 @@ figcaption {
 }
 
 #refs {
-  font-family: "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
   font-size: 0.98rem;
   line-height: 1.58;
   color: var(--muted-ink);
@@ -219,7 +219,7 @@ figcaption {
 #quarto-bibliography #refs .csl-left-margin,
 #quarto-bibliography #refs .csl-left-margin * {
   color: var(--faint-ink);
-  font-family: "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif !important;
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif !important;
   font-style: normal;
   font-weight: 400;
 }
@@ -231,7 +231,7 @@ figcaption {
 .post-end {
   margin: 3.8rem auto 0;
   text-align: center;
-  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
   font-size: 1.18rem;
   line-height: 1;
   color: color-mix(in srgb, var(--accent) 54%, var(--faint-ink));
@@ -249,13 +249,13 @@ figcaption {
 }
 
 .navbar-title {
-  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
   font-weight: 650;
   letter-spacing: -0.025em;
 }
 
 .quarto-listing .listing-title {
-  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
   font-size: 1.35rem;
   font-weight: 650;
   letter-spacing: -0.02em;
@@ -349,7 +349,7 @@ figcaption {
 
 .hero .hero-title,
 .hero-title {
-  font-family: "Source Serif 4", "Iowan Old Style BT", "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, serif;
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
   font-size: clamp(3rem, 8vw, 6.5rem);
   line-height: 0.92;
   letter-spacing: -0.055em;
