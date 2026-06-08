@@ -422,10 +422,10 @@ $$ {#eq-local-kl-hessian-fisher}
 Therefore, the Taylor expansion begins at second order:
 
 $$
-\text{KL}(p(\cdot\,;\theta + d\theta)\,\Vert\,p(\cdot\,;\theta))
+\text{KL}(p(\cdot\,;\theta + \delta)\,\Vert\,p(\cdot\,;\theta))
 =
-\frac{1}{2}\,F_{ij}(\theta)d\theta^i d\theta^j
-+ \mathcal{O}(\|d\theta\|^3).
+\frac{1}{2}\,F_{ij}(\theta)\delta^i \delta^j
++ \mathcal{O}(\|\delta\|^3).
 $$ {#eq-kl-local-fisher-expansion}
 
 The same second-order term appears if the KL direction is reversed:
@@ -435,11 +435,11 @@ $$
 \left(
 p(\cdot\,;\theta)
 \,\Vert\,
-p(\cdot\,;\theta + d\theta)
+p(\cdot\,;\theta + \delta)
 \right)
 =
-\frac{1}{2}\,F_{ij}(\theta)d\theta^i d\theta^j
-+ \mathcal{O}(\|d\theta\|^3).
+\frac{1}{2}\,F_{ij}(\theta)\delta^i \delta^j
++ \mathcal{O}(\|\delta\|^3).
 $$ {#eq-kl-local-fisher-expansion-reverse}
 
 This is why Fisher geometry is the *local symmetric part* of KL. The asymmetry of KL is real, but it does not show up in the quadratic approximation; it appears only at third order and beyond.
