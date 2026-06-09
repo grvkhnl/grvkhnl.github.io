@@ -28,7 +28,9 @@ $$
 \sqrt{ \int \left( p(x)-q(x) \right)^2\,dx}
 $$ {#eq-l2-norm}
 
-is indifferent to where the points of the sample space $X$ sit relative to each other. Consider a narrow Gaussian concentrated near pixel $i$ of an image. Shifting it one pixel to the right produces a distribution that is nearly identical to the original in any intuitive sense. But for narrow distributions with little overlap, the $L^2$ norm can treat a small spatial shift almost as harshly as a much larger shift, because it sees pointwise mismatch rather than displacement cost. The norm sees only pointwise differences in probability mass; it has no vocabulary for the cost of moving that mass through space. For most problems of interest, this is exactly wrong.
+is indifferent to where the points of the sample space $X$ sit relative to each other. Consider a narrow Gaussian concentrated near pixel $i$ of an image. Shifting it one pixel to the right produces a distribution that is nearly identical to the original in any intuitive sense. But when the distributions are narrow and have little overlap, the $L^2$ norm can treat a small spatial shift almost as harshly as a much larger shift, because it sees pointwise mismatch rather than displacement cost.
+
+This example is deliberately extreme. For broader distributions, $L^2$ certainly responds to overlap. The deeper problem is not that $L^2$ is always insensitive, but that it is not transport-aware: it penalizes pointwise differences regardless of whether probability mass moved a little or a lot. The norm sees only differences in probability mass at each location; it has no vocabulary for the cost of moving that mass through space. For most problems of interest, this is exactly the missing structure.
 
 A better answer requires first deciding what structure the distance should respect: there are two natural answers and they come from completely different directions. In this post, we discuss the first one.
 
@@ -103,9 +105,11 @@ $$
 g_{f(p)}\left(df_p(u),df_p(v)\right)
 $$ {#eq-pullback-metric}
 
-where $df_p: T_p M \to T_{f(p)} N$ is the differential of $f$ at $p$, and $u,v \in M$ are tangent vectors. Intuitively, to measure vectors in $M$, push them forward to $N$ using $df$ and measure them using $g$. For $f^{*}g$ to be a genuine metric (positive definite), $f$ must be an immersion, i.e., its differential must be injective at each point.
+where $df_p: T_p M \to T_{f(p)} N$ is the differential of $f$ at $p$, and $u,v \in T_pM$ are tangent vectors. Intuitively, to measure vectors in $M$, push them forward to $N$ using $df$ and measure them using $g$. For $f^{*}g$ to be a genuine metric (positive definite), $f$ must be an immersion, i.e., its differential must be injective at each point.
 
-***The FIM as a pullback.*** Let $\mathcal{P}$ be the space of probability distributions, equipped with the $L^2$ inner product on score functions: $\langle u,v \rangle = \mathbb{E}_p[u \cdot v]$. The parametric family defines a map
+***The FIM as a pullback.*** Let $\mathcal{P}$ be the space of probability distributions, equipped with the $L^2$ inner product on score functions: $\langle u,v \rangle = \mathbb{E}_p[u \cdot v]$, where $\mathbb E_p$ means expectation under the distribution $p$.
+
+In the general pullback notation above, the parameter manifold $\mathcal M$ plays the role of $M$, and the probability space $\mathcal P$ plays the role of $N$. The parametric family defines the model map
 
 $$
 f:\mathcal{M} \to \mathcal{P}, \quad \theta \mapsto p(\cdot\,;\theta).
@@ -182,7 +186,7 @@ p=(p_1,\ldots,p_n): p_i>0,\ \sum_{i=1}^n p_i=1
 \right\}
 $$ {#eq-simplex-interior}
 
-be the interior of the probability simplex. Suppose that for each $n$, we assign a Riemannian metric $g^{(n)}$ on $\Delta_n$. The assignment is called *monotone under Markov maps* if, for every stochastic map $T:\Delta_n\to\Delta_m$,
+be the interior of the probability simplex. This is the finite/discrete setting: points of $\Delta_n$ are categorical probability distributions over $n$ outcomes. Suppose that for each $n$, we assign a Riemannian metric $g^{(n)}$ on $\Delta_n$. The assignment is called *monotone under Markov maps* if, for every stochastic map $T:\Delta_n\to\Delta_m$ (equivalently, a Markov transition matrix),
 
 $$
 g^{(m)}_{Tp}(T_*u,T_*u)
@@ -223,11 +227,11 @@ Chentsov is not saying the FIM is a natural choice among many. He is saying it i
 
 This is a strong and somewhat surprising result. It says the geometry of statistical inference is not a convention or a convenience: it is forced by the structure of the problem.
 
-::: {.callout-note .remark-box title="Remark"}
-***Locality.*** The Fisher metric is local and infinitesimal. It is a tensor at each point of parameter space, giving an inner product on tangent vectors. It measures how fast nearby distributions diverge statistically, but it says nothing directly about distributions that are far apart.
+This uniqueness result is local. The Fisher metric is an infinitesimal object: it is a tensor at each point of parameter space, giving an inner product on tangent vectors. It measures how fast nearby distributions diverge statistically, but it says nothing directly about distributions that are far apart.
 
 Recovering a global distance requires integrating along geodesics in the Fisher metric, which is generally difficult and depends on the path. For many parametric families (such as Gaussians, exponential families, etc.), geodesics can be computed explicitly. In general, though, they cannot. This locality is a strength (it gives a clean Riemannian theory that is well-defined and coordinate-free) and a genuine limitation (it is not a ready-made global distance between arbitrary distributions).
-:::
+
+This is the first major contrast with Wasserstein geometry. Fisher gives a local ruler for statistical distinguishability; Wasserstein will give a global ruler for displacement through the sample space.
 
 ## The Cramér-Rao Bound: Geometry in Action
 
@@ -236,22 +240,22 @@ The Fisher metric does more than organize the geometry of a statistical model. I
 For an unbiased estimator $\hat{\theta}$ of a scalar parameter $\theta$, the bound states:
 
 $$
-\mathbb{V}_{\theta}(\hat{\theta})
+\operatorname{Var}_{\theta}(\hat{\theta})
 \geq
 \frac{1}{\mathcal{I}(\theta)}
 $$ {#eq-cramer-rao-bound}
 
-Here $\mathbb V_\theta$ denotes variance under $p(\cdot\,;\theta)$.
+Here $\operatorname{Var}_\theta$ denotes variance under $p(\cdot\,;\theta)$.
 
 In vector form, for an unbiased estimator $\hat{\theta}$ of $\theta \in \mathbb{R}^n$:
 
 $$
-\mathrm{Cov}_{\theta}(\hat{\theta})
+\operatorname{Cov}_{\theta}(\hat{\theta})
 \succeq
 F(\theta)^{-1}
 $$ {#eq-cramer-rao-bound-vector}
 
-where $\mathrm{Cov}_\theta$ denotes covariance under $p(\cdot\,;\theta)$, and $\succeq$ denotes the Loewner partial order on positive semidefinite matrices. No unbiased estimator can have covariance smaller than $F(\theta)^{-1}$.
+where $\operatorname{Cov}_\theta$ denotes covariance under $p(\cdot\,;\theta)$, and $\succeq$ denotes the Loewner partial order on positive semidefinite matrices: $A\succeq B$ means $A-B$ is positive semidefinite. No unbiased estimator can have covariance smaller than $F(\theta)^{-1}$.
 
 For deep learning, this statement should not be read too literally. We are usually not searching for an unbiased estimator of a true parameter vector; neural networks are overparameterized, non-identifiable, and trained for predictive performance rather than classical parameter recovery. The relevance is geometric: the inverse Fisher describes how sensitive the model distribution is to parameter movement. In optimization language, it acts like a curvature-aware preconditioner, shaping stable step sizes and update directions.
 
@@ -330,15 +334,15 @@ $$ {#eq-cramer-rao-covariance-score}
 Now apply the Cauchy-Schwarz inequality to this covariance:
 
 $$
-\mathrm{Cov}(\hat{\theta},s)^2
+\operatorname{Cov}_{\theta}(\hat{\theta},s)^2
 \leq
-\mathbb{V}(\hat{\theta})\cdot\mathbb{V}(s)
+\operatorname{Var}_{\theta}(\hat{\theta})\cdot\operatorname{Var}_{\theta}(s)
 $$ {#eq-cauchy-schwarz-covariance}
 
 The left side is $1$, and the variance of the score is the Fisher information:
 
 $$
-\mathbb{V}_{\theta}(s)
+\operatorname{Var}_{\theta}(s)
 =
 \mathbb{E}_{\theta}[s^2]
 =
@@ -350,13 +354,13 @@ Therefore,
 $$
 1
 \leq
-\mathbb{V}_{\theta}(\hat{\theta})\mathcal{I}(\theta),
+\operatorname{Var}_{\theta}(\hat{\theta})\mathcal{I}(\theta),
 $$ {#eq-cramer-rao-scalar-intermediate}
 
 which is equivalent to
 
 $$
-\mathbb{V}_{\theta}(\hat{\theta})
+\operatorname{Var}_{\theta}(\hat{\theta})
 \geq
 \frac{1}{\mathcal{I}(\theta)}.
 $$ {#eq-cramer-rao-scalar-derived}
@@ -378,7 +382,7 @@ $$ {#eq-multivariate-score-identity}
 This is the vector analogue of the scalar covariance identity above. Applying the matrix Cauchy-Schwarz inequality yields
 
 $$
-\mathrm{Cov}_\theta(\hat{\theta}) \succeq F(\theta)^{-1}.
+\operatorname{Cov}_{\theta}(\hat{\theta}) \succeq F(\theta)^{-1}.
 $$ {#eq-matrix-cramer-rao-proof}
 
 One way to read this step is through a Schur-complement argument: the joint covariance block matrix of the estimator error and the score is positive semidefinite, and using $\mathbb{E}_\theta[(\hat{\theta}-\theta)s^\top]=I$ forces the estimator covariance block to dominate the inverse Fisher block. This is exactly the matrix version of the scalar inequality above.
@@ -392,7 +396,7 @@ The Fisher metric is defined entirely within parameter space. It requires a para
 
 If you relabel the points of $X$ arbitrarily---i.e., apply any measurable bijection to the data---the Fisher metric does not change. This is exactly Chentsov's invariance property that we touched earlier, and it is both, a strength and a limitation.
 
-It is a strength because it means the geometry is intrinsic to the statistical model, not an artifact of data representation. It is a limitation because it means the Fisher metric has no vocabulary for the spatial layout of the data. It cannot tell you that the image of a cat shifted two pixels to the right is closer to the original than a completely different image. It lives entirely in the vertical direction, how probability weights change, and is blind to the horizontal direction of where points live in space.
+It is a strength because it means the geometry is intrinsic to the statistical model, not an artifact of data representation. It is a limitation because it means the Fisher metric has no vocabulary for the spatial layout of the data. To visualize the distinction, imagine a density plot: the horizontal axis is the sample space, while the vertical axis records how much probability mass sits at each location. Fisher sees changes in the heights of that plot, but not the geometry along the horizontal axis. It cannot tell you that the image of a cat shifted two pixels to the right is closer to the original than a completely different image. It lives entirely in the vertical direction, how probability weights change, and is blind to the horizontal direction of where points live in space.
 
 ::: {.callout-note .learning-box title="Consequence for Learning"}
 Learning algorithms that minimize *Kullback-Leibler (KL) divergence* (maximum likelihood estimation, variational autoencoders, and most of classical statistical inference) are navigating Fisher geometry locally [@amari2000; @wainwright2008]. This is not merely an analogy; Chapter 3 makes the connection precise. For now, the key point is that KL-based objectives are sensitive to the parametric structure of the model and indifferent to the spatial layout of the data.
@@ -492,7 +496,7 @@ Many learning objectives compare distributions through KL divergence or likeliho
 
 Ordinary gradient descent ignores this geometry. It treats parameter space as Euclidean, so a step of the same coordinate size is treated as equally important in every direction. Natural gradient descent corrects this by using $F(\theta)^{-1}\nabla L$, the steepest descent direction measured in distribution space rather than raw coordinates.
 
-For modern neural networks, however, the full FIM is impossible to form explicitly: with $N$ parameters, it is an $N\times N$ matrix. Practical methods therefore use matrix-free Fisher-vector products, diagonal approximations, low-rank approximations, or structured approximations such as K-FAC. These approximations change the computation, but not the underlying geometric object.
+For modern neural networks, however, the full FIM is impossible to form explicitly: with $N$ parameters, it is an $N\times N$ matrix. Practical methods therefore use approximations such as empirical Fisher estimates, matrix-free Fisher-vector products, diagonal approximations, low-rank approximations, or structured approximations such as K-FAC. These approximations are an active research area: they change the computation, but not the underlying geometric object.
 
 This is the first practical lesson of Fisher geometry: learning is not just about the slope of the loss, but about the geometry of how parameters change distributions.
 
@@ -556,7 +560,7 @@ F_{ij}
   \left(T_j-\partial_j A(\theta)\right)
 \right]
 =
-\mathrm{Cov}_{\theta}(T_i,T_j)
+\operatorname{Cov}_{\theta}(T_i,T_j)
 =
 \partial_i\partial_j A(\theta)
 $$ {#eq-exponential-family-fisher-covariance}
