@@ -76,6 +76,18 @@ F_{ij}(\theta)
 \right].
 $$ {#eq-fisher-information-matrix}
 
+::: {.callout-note .precision-box title="Notation"}
+Here $\mathbb E_\theta[\cdot]$ means expectation with respect to $x\sim p(\cdot\,;\theta)$. The symbol $\partial_i$ means differentiation with respect to the $i$th parameter coordinate, $\partial/\partial\theta^i$. Later, when expressions such as $F_{ij}(\theta)\delta^i\delta^j$ appear without an explicit summation sign, they use the standard repeated-index convention:
+
+$$
+F_{ij}(\theta)\delta^i\delta^j
+=
+\sum_{i,j}F_{ij}(\theta)\delta^i\delta^j.
+$$
+
+Finally, $T_\theta\mathcal M$ denotes the tangent space to the parameter manifold at $\theta$: the vector space of infinitesimal parameter directions.
+:::
+
 This matrix is not merely a useful statistic. It is a *Riemannian metric tensor* on the parameter manifold $\mathcal{M}$: a smooth varying inner product on each tangent space $T_{\theta}\mathcal{M}$, encoding the infinitesimal statistical distinguishability of nearby distributions. The systematic study of this structure is the subject of information geometry [@amari2000; @amari2016].
 
 ## The FIM as a Pullback Metric
@@ -180,6 +192,8 @@ $$ {#eq-markov-monotonicity}
 
 for every tangent vector $u\in T_p\Delta_n$. In words: applying a noisy data-processing map cannot increase statistical distinguishability.
 
+Here $T_*u$ denotes the pushforward of the tangent vector $u$ by the map $T$: it is the infinitesimal direction obtained after applying the data-processing map.
+
 Chentsov's theorem says that, up to an overall positive constant, the only such monotone Riemannian metric is the Fisher-Rao metric:
 
 $$
@@ -227,6 +241,8 @@ $$
 \frac{1}{\mathcal{I}(\theta)}
 $$ {#eq-cramer-rao-bound}
 
+Here $\mathbb V_\theta$ denotes variance under $p(\cdot\,;\theta)$.
+
 In vector form, for an unbiased estimator $\hat{\theta}$ of $\theta \in \mathbb{R}^n$:
 
 $$
@@ -235,7 +251,7 @@ $$
 F(\theta)^{-1}
 $$ {#eq-cramer-rao-bound-vector}
 
-where $\succeq$ denotes the Loewner partial order on positive semidefinite matrices. No unbiased estimator can have covariance smaller than $F(\theta)^{-1}$.
+where $\mathrm{Cov}_\theta$ denotes covariance under $p(\cdot\,;\theta)$, and $\succeq$ denotes the Loewner partial order on positive semidefinite matrices. No unbiased estimator can have covariance smaller than $F(\theta)^{-1}$.
 
 For deep learning, this statement should not be read too literally. We are usually not searching for an unbiased estimator of a true parameter vector; neural networks are overparameterized, non-identifiable, and trained for predictive performance rather than classical parameter recovery. The relevance is geometric: the inverse Fisher describes how sensitive the model distribution is to parameter movement. In optimization language, it acts like a curvature-aware preconditioner, shaping stable step sizes and update directions.
 
@@ -461,6 +477,8 @@ p(\cdot\,;\theta + \delta)
 $$ {#eq-kl-local-fisher-expansion-reverse}
 
 This is why Fisher geometry is the *local symmetric part* of KL. The asymmetry of KL is real, but it does not show up in the quadratic approximation; it appears only at third order and beyond.
+
+Here $\mathcal{O}(\|\delta\|^3)$ means that the omitted terms are of cubic order or higher in the displacement size $\|\delta\|$.
 :::
 
 This means two things. First, any algorithm that minimizes KL divergence inherits Fisher geometry in its local second-order behavior. Minimizing KL gives Fisher as the local geometry, but the actual update rule may still use Euclidean gradients---this is precisely the gap that natural gradient descent, which will be discussed in future posts, is designed to close. Second, the Fisher metric inherits its symmetry from the Hessian operation: even though KL itself is asymmetric (because $\mathrm{KL}(p\|q) \neq \mathrm{KL}(q\|p)$ in general), its second-order term is a symmetric bilinear form---the metric tensor $F_{ij}$.
