@@ -6,4 +6,4 @@ page-layout: article
 
 This section is for shorter technical notes, derivations, and paper summaries.
 
-Eventually, this can be split into separate note collections.
+

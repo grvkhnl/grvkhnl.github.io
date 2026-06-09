@@ -121,7 +121,20 @@ $$ {#eq-pullback-l2-inner-product}
 
 The FIM is the metric that $\mathcal{M}$ inherits from $\mathcal{P}$. Geometry flows *downward* from the space of distributions to the parameter space.
 
-***Coordinate invariance.*** Under a reparameterization $\tilde{\theta}=\phi(\theta)$, the FIM transforms as a $(0,2)$-tensor
+***Coordinate invariance.*** The entries of the Fisher Information Matrix depend on the coordinates used to describe the parameter space. But the underlying geometric object does not.
+
+Mathematically, the FIM is a $(0,2)$-tensor: at each point $\theta$, it takes two tangent vectors $u,v \in T_\theta\mathcal M$ and returns a scalar,
+
+$$
+F_\theta(u,v)
+=
+\sum_{i,j}
+F_{ij}(\theta)u^i v^j.
+$$ {#eq-fisher-bilinear-form}
+
+In other words, the Fisher matrix is the coordinate representation of an intrinsic inner product on parameter directions. The matrix entries may change when we change coordinates, but the scalar quantity $F_\theta(u,v)$ does not.
+
+Under a reparameterization $\tilde{\theta}=\phi(\theta)$, the FIM transforms as a $(0,2)$-tensor:
 
 $$
 \tilde F_{kl}
@@ -132,7 +145,7 @@ F_{ij}
 \frac{\partial \theta^j}{\partial \tilde\theta^l}.
 $$ {#eq-reparameterized-fim}
 
-This is the transformation law of the Riemannian metric. The FIM captures intrinsic geometry, not a coordinate artifact. In essence, changing how you label the parameter does not change the geometry.
+This is exactly the transformation law for a Riemannian metric. The FIM captures intrinsic geometry, not a coordinate artifact. Changing how we label the parameters changes the matrix entries, but not the statistical distance measured by the metric.
 :::
 
 ## Chentsov's Theorem: The Unique Invariant Metric
@@ -141,13 +154,13 @@ The pullback construction shows that FIM is natural. A deeper result, Chentsov's
 
 ::: {.callout-tip .math-depth title="Mathematical Depth"}
 
-**Chentsov's Theorem.**
+***Chentsov's Theorem.***
 
-***Informal Version.*** The Fisher-Rao metric is the unique Riemannian metric on the statistical manifold, up to a positive scalar multiple, that is invariant under statistically sufficient transformations of the observations.
+**Informal Version.** The Fisher-Rao metric is the unique Riemannian metric on the statistical manifold, up to a positive scalar multiple, that is invariant under statistically sufficient transformations of the observations.
 
 Equivalently: if a transformation of the data preserves all information relevant to $\theta$, then it should preserve the geometry of the model. Fisher-Rao is the only Riemannian metric with this property.
 
-***A more formal version (finite-dimensional).*** Let
+**A more formal version (finite-dimensional).** Let
 
 $$
 \Delta_n
@@ -157,7 +170,7 @@ p=(p_1,\ldots,p_n): p_i>0,\ \sum_{i=1}^n p_i=1
 \right\}
 $$ {#eq-simplex-interior}
 
-be the interior of the probability simplex. Suppose that for each $n$, we assign a Riemannian metric $g^{(n)}$ on $\Delta_n$. The assignment is called **monotone under Markov maps** if, for every stochastic map $T:\Delta_n\to\Delta_m$,
+be the interior of the probability simplex. Suppose that for each $n$, we assign a Riemannian metric $g^{(n)}$ on $\Delta_n$. The assignment is called *monotone under Markov maps* if, for every stochastic map $T:\Delta_n\to\Delta_m$,
 
 $$
 g^{(m)}_{Tp}(T_*u,T_*u)
@@ -217,7 +230,7 @@ $$ {#eq-cramer-rao-bound}
 In vector form, for an unbiased estimator $\hat{\theta}$ of $\theta \in \mathbb{R}^n$:
 
 $$
-\text{Cov}_{\theta}(\hat{\theta})
+\mathrm{Cov}_{\theta}(\hat{\theta})
 \succeq
 F(\theta)^{-1}
 $$ {#eq-cramer-rao-bound-vector}
@@ -301,7 +314,7 @@ $$ {#eq-cramer-rao-covariance-score}
 Now apply the Cauchy-Schwarz inequality to this covariance:
 
 $$
-\text{Cov}(\hat{\theta},s)^2
+\mathrm{Cov}(\hat{\theta},s)^2
 \leq
 \mathbb{V}(\hat{\theta})\cdot\mathbb{V}(s)
 $$ {#eq-cauchy-schwarz-covariance}
@@ -349,7 +362,7 @@ $$ {#eq-multivariate-score-identity}
 This is the vector analogue of the scalar covariance identity above. Applying the matrix Cauchy-Schwarz inequality yields
 
 $$
-\text{Cov}_\theta(\hat{\theta}) \succeq F(\theta)^{-1}.
+\mathrm{Cov}_\theta(\hat{\theta}) \succeq F(\theta)^{-1}.
 $$ {#eq-matrix-cramer-rao-proof}
 
 One way to read this step is through a Schur-complement argument: the joint covariance block matrix of the estimator error and the score is positive semidefinite, and using $\mathbb{E}_\theta[(\hat{\theta}-\theta)s^\top]=I$ forces the estimator covariance block to dominate the inverse Fisher block. This is exactly the matrix version of the scalar inequality above.
@@ -383,10 +396,10 @@ The Fisher metric does not stand alone. It is the local, symmetric residue of a 
 $$
 D_{\theta}(\delta)
 =
-\text{KL}
+\mathrm{KL}
 \left(
 p(\cdot\,;\theta+\delta)
-\,\Vert\,
+\,\Big\|\,
 p(\cdot\,;\theta)
 \right).
 $$ {#eq-local-kl-function}
@@ -422,7 +435,12 @@ $$ {#eq-local-kl-hessian-fisher}
 Therefore, the Taylor expansion begins at second order:
 
 $$
-\text{KL}(p(\cdot\,;\theta + \delta)\,\Vert\,p(\cdot\,;\theta))
+\mathrm{KL}
+\left(
+p(\cdot\,;\theta + \delta)
+\,\Big\|\,
+p(\cdot\,;\theta)
+\right)
 =
 \frac{1}{2}\,F_{ij}(\theta)\delta^i \delta^j
 + \mathcal{O}(\|\delta\|^3).
@@ -431,10 +449,10 @@ $$ {#eq-kl-local-fisher-expansion}
 The same second-order term appears if the KL direction is reversed:
 
 $$
-\text{KL}
+\mathrm{KL}
 \left(
 p(\cdot\,;\theta)
-\,\Vert\,
+\,\Big\|\,
 p(\cdot\,;\theta + \delta)
 \right)
 =
@@ -445,7 +463,7 @@ $$ {#eq-kl-local-fisher-expansion-reverse}
 This is why Fisher geometry is the *local symmetric part* of KL. The asymmetry of KL is real, but it does not show up in the quadratic approximation; it appears only at third order and beyond.
 :::
 
-This means two things. First, any algorithm that minimizes KL divergence inherits Fisher geometry in its local second-order behavior. Minimizing KL gives Fisher as the local geometry, but the actual update rule may still use Euclidean gradients---this is precisely the gap that natural gradient descent, which will be discussed in future posts, is designed to close. Second, the Fisher metric inherits its symmetry from the Hessian operation: even though KL itself is asymmetric (because $\text{KL}(p\|q) \neq \text{KL}(q\|p)$ in general), its second-order term is a symmetric bilinear form---the metric tensor $F_{ij}$.
+This means two things. First, any algorithm that minimizes KL divergence inherits Fisher geometry in its local second-order behavior. Minimizing KL gives Fisher as the local geometry, but the actual update rule may still use Euclidean gradients---this is precisely the gap that natural gradient descent, which will be discussed in future posts, is designed to close. Second, the Fisher metric inherits its symmetry from the Hessian operation: even though KL itself is asymmetric (because $\mathrm{KL}(p\|q) \neq \mathrm{KL}(q\|p)$ in general), its second-order term is a symmetric bilinear form---the metric tensor $F_{ij}$.
 
 The asymmetry of KL beyond second order encodes something important: the two directions of KL correspond to qualitatively different behaviors (mode-covering vs. mode-seeking). I will examine this asymmetry in detail and show how it points directly toward *Schrödinger bridge*.
 
@@ -476,7 +494,7 @@ p(x;\theta)
 h(x)\exp\,\{\theta^{\top}\,T(x)-A(\theta)\}
 $$ {#eq-exponential-family-density}
 
-where $T(x)$ are the sufficient statistics, $\theta$ are the natural parameters, and $A(\theta)$ is the log-partition function. A direct calculation shows that the FIM is the Hessian of A:
+where $T(x)$ are the sufficient statistics, $\theta$ are the natural parameters, and $A(\theta)$ is the log-partition function. A direct calculation shows that the FIM is the Hessian of $A$:
 
 $$
 F_{ij}
@@ -520,7 +538,7 @@ F_{ij}
   \left(T_j-\partial_j A(\theta)\right)
 \right]
 =
-\text{Cov}_{\theta}(T_i,T_j)
+\mathrm{Cov}_{\theta}(T_i,T_j)
 =
 \partial_i\partial_j A(\theta)
 $$ {#eq-exponential-family-fisher-covariance}

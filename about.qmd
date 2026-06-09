@@ -2,4 +2,11 @@
 title: "About"
 ---
 
-About this site
+My personal site where I discuss my achievements, projects and synthesis of topics in Machine Learning, Mathematics, Optimization, Geometry, Algebra and more...
+
+To connect, reach out at:
+
+```
+khanalgaurav137@gmail.com
+gaurav.khanal@etu.univ-cotedazur.fr
+```

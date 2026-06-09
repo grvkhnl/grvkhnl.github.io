@@ -19,6 +19,7 @@ You can place a short academic CV here.
 - SciML / AI4Science
 - Medical Image Registration and Analysis
 - Biomedical Signal Processing
+- Group Theory
 
 ## Selected projects
 
