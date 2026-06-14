@@ -1,7 +1,7 @@
 ---
 title: "The Second Ruler of Displacement"
 subtitle: "Why Wasserstein distance is the global geometry of moving probability mass"
-description: "A draft post in The Natural Geometry of Learning series on Wasserstein distance, optimal transport, and the geometry of displacement."
+description: "This post introduces Wasserstein distance as the second “ruler” for probability distributions: a global metric that measures the cost of moving probability mass through space. We will see why it arises from the Earth Mover’s problem, why the quadratic case has special geometric structure through Brenier’s theorem, and how the Benamou--Brenier formulation turns optimal transport into a dynamic geometry of probability flows."
 date: 2026-06-13
 categories:
   - Optimal Transport
