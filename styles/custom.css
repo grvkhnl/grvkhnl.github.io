@@ -172,8 +172,52 @@ code {
   padding: 0.08rem 0.22rem;
 }
 
-table {
-  font-size: 0.94rem;
+.quarto-float-tbl > div {
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: thin;
+  scrollbar-color: var(--math-scrollbar-thumb) var(--math-scrollbar-track);
+}
+
+.quarto-float-tbl > div::-webkit-scrollbar {
+  height: 8px;
+}
+
+.quarto-float-tbl > div::-webkit-scrollbar-track {
+  background: var(--math-scrollbar-track);
+  border-radius: 999px;
+}
+
+.quarto-float-tbl > div::-webkit-scrollbar-thumb {
+  background: var(--math-scrollbar-thumb);
+  border-radius: 999px;
+}
+
+.quarto-float-tbl > div::-webkit-scrollbar-thumb:hover {
+  background: var(--math-scrollbar-thumb-hover);
+}
+
+.quarto-float-tbl table {
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
+}
+
+.quarto-float-tbl figcaption,
+.quarto-float-tbl .quarto-float-caption {
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
+}
+
+.compact-table table {
+  font-size: 0.88rem;
+  line-height: 1.4;
+}
+
+.wide-table table {
+  min-width: 38rem;
+}
+
+.label-first-column th:first-child,
+.label-first-column td:first-child {
+  text-align: left;
 }
 
 thead {

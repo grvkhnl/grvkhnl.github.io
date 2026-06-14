@@ -1,0 +1,306 @@
+---
+title: "The Second Ruler of Displacement"
+subtitle: "Why Wasserstein distance is the global geometry of moving probability mass"
+description: "A draft post in The Natural Geometry of Learning series on Wasserstein distance, optimal transport, and the geometry of displacement."
+date: 2026-06-13
+categories:
+  - Optimal Transport
+  - Wasserstein Distance
+  - Brenier Theorem
+  - Benamou-Brenier
+  - Otto's Calculus
+author: "Gaurav Khanal"
+bibliography: ../../references.bib
+toc: true
+number-sections: true
+---
+
+## A Different Kind of Distance
+
+My previous post attempted to answer the question "how far apart are two distributions?" using statistical distinguishability: the Fisher metric measures how rapidly distributions diverge as the parameter moves. It is a local, infinitesimal ruler defined entirely within a parametric model. 
+
+This post answers the same question using a different kind of principle: *physical effort*. Instead of asking how well you can tell two distributions apart, ask how much work it takes to transform one into the other.
+
+The two answers are not in competition: they are sensitive to different structures. The Fisher metric sees the shape of the statistical model and is blind to the geometry of the sample space. The distance introduced here sees the geometry of the sample space and requires no model at all. Together, they describe complementary aspects of the geometry of distributions. 
+
+## The Earth Mover's Distance
+
+The previous post opened with the inability of the $L^2$ norm: a narrow Gaussian shifted one pixel to the right is intuitively close to the original, yet $\|p-q\|_{L^2}$ treats this as far apart because it sees only pointwise differences, not spatial displacement. The Earth Mover's Distance resolves exactly this failure. Moving a narrow Gaussian one pixel to the right requires only a short transport of mass---the Wasserstein cost is small, matching intuition. Moving it across the image requires a long transport---the cost is large. The metric *charges for displacement*, which is precisely what $L^2$ cannot do. 
+
+Imagine two piles of soil. How much work does it take to rearrange one pile into the shape of the other? The answer depends not only on how different the piles are in abstract, but on where the soil is and how far it must travel. Nearby soil is cheap to move; distant soil is expensive. 
+
+This physical intuition, formalized by Kantorovich [@kantorovich1942], is the Earth Mover's Distance. Given two probability distributions $\mu$ and $\nu$ on a metric space $(X, d)$, where $X$ is the sample space and $d$ measures distance within that space, the idea is to find the most efficient way to "transport" the mass of $\mu$ into the configuration of $\nu$.
+
+A *transport plan* is a joint distribution $\gamma$ on $X \times X$ whose marginals are $\mu$ and $\nu$:
+
+$$
+\gamma (A \times X)
+=
+\mu(A),
+\quad
+\gamma (X \times B)
+=
+\nu(B)
+$$ {#eq-transport-plan-marginals}
+
+for all measurable sets $A,B \subseteq X$. The value $\gamma(A \times B)$ is the amount of mass transported from $A$ to $B$. For $p\geq 1$, the cost of a plan $\gamma$ under the $p$-th power cost is $\int_{X \times X}d(x,y)^p\,d\gamma(x,y)$.
+
+The *Wasserstein-$p$ distance* [@villani2003, @villani2009] minimizes this cost over all valid plans:
+
+$$
+W_p(\mu,\nu)
+=
+\left(
+\inf_{\gamma\in\Gamma(\mu,\nu)}
+\int_{X \times X}
+d(x,y)^pd\gamma(x,y)
+\right)^{1/p}
+$$ {#eq-wasserstein-p-distance}
+
+where $\Gamma(\mu,\nu)$ denotes the set of all transport plans with marginals $\mu$ and $\nu$.
+
+## What Wasserstein Distance Measures
+
+The Wasserstein distance measures the minimum cost of transforming one distribution into another by moving probability mass through the underlying space.
+
+This is the crucial difference from pointwise distances and divergences. The $L^2$ norm compares densities at the same location. KL divergence compares relative probability values at the same location. Wasserstein distance allows mass to move. It asks not only *how much* the distributions differ, but also *where* the difference is located.
+
+A simple example makes the idea precise. Let
+
+$$
+\mu = \delta_0,
+\qquad
+\nu = \delta_a,
+$$ {#eq-dirac-point-masses}
+
+where $\delta_0$ is a unit point mass at $0$ and $\delta_a$ is a unit point mass at $a$. Since all the mass must move from $0$ to $a$,
+
+$$
+W_p(\delta_0,\delta_a)
+=
+|a|.
+$$ {#eq-wasserstein-dirac-distance}
+
+The answer depends exactly on the distance traveled. A small shift gives a small Wasserstein distance; a large shift gives a large Wasserstein distance.
+
+For general distributions, Wasserstein distance solves the same problem at scale. It finds the cheapest way to match mass in $\mu$ to mass in $\nu$. Moving a small amount of mass a long distance may be cheaper than moving a large amount of mass a short distance, depending on the cost. The distance therefore captures both *how much* probability mass changes and *where* that mass has to go.
+
+This is why Wasserstein distance is useful whenever the geometry of the sample space matters: images, shapes, spatial densities, physical particles, point clouds, probability flows, and generative modeling. It gives a meaningful notion of distance even when two distributions have little or no overlap, because it can still measure how far mass must travel.
+
+In short, Wasserstein distance does not merely compare probability values. It measures the effort required to rearrange one distribution into another.
+
+::: {.callout-tip .math-depth title="Mathematical Depth"}
+
+$W_p$ is a *genuine* metric. For $p \geq 1$ and distributions with finite $p$-th moments, $W_p$ satisfies all metric axioms [2]:
+
+- *Nonnegativity:* $W_p(\mu,\nu) \geq 0$, with equality iff $\mu=\nu$.
+
+- *Symmetry:* $W_p(\mu,\nu)=W_p(\nu,\mu)$ (the cost of the optimal plan is the same in both directions, by symmetry of $d(x,y)^p$).
+
+- *Triangle inequality:* $W_p(\mu,\rho)\leq W_p(\mu,\nu)+W_p(\nu,\rho)$.
+
+The triangle inequality follows from a coupling argument: given optimal plans from $\mu$ to $\nu$ and $\nu$ to $\rho$, one can construct a feasible (not necessarily optimal) plan from $\mu$ to $\rho$ whose cost is bounded by the sum. 
+
+This is in sharp contrast to the Fisher metric, which is a local Riemannian metric and does not directly give a global distance, and to KL divergence, which fails both symmetry and triangle inequality. $W_p$ is a genuine distance on the space of distributions.
+
+:::
+
+
+## Why *$W_2$* is Special: Brenier's Theorem
+
+The Wasserstein family ($W_p : p \geq 1$) contains many distances, but $W_2$---the case $p=2$ with quadratic cost---has exceptional geometric structure that the others lack.
+
+The key result is Brenier's theorem [@brenier1991].
+
+::: {.callout-tip .math-depth title="Mathematical Depth"}
+
+***Brenier's Theorem.*** Let $\mu$ and $\nu$ be probability measures on $\mathbb{R}^n$, with $\mu$ absolutely continuous with respect to Lebesgue measure. Then the $W_2$-optimal transport between $\mu$ and $\nu$ is uniquely realized $\mu$-almost everywhere by a map $T : \mathbb{R}^n \to \mathbb{R}^n$ satisfying $T_{\#} \mu = \nu$ (the pushforward of $\mu$ under $T$ is $\nu$). Moreover, $T=\nabla \varphi$ for some convex function $\varphi : \mathbb{R}^n \to \mathbb{R}$. The optimal transport is uniquely realized by a gradient-of-convex-potential map. 
+
+:::
+
+For $p=2$, the optimal transport map takes the especially clean form $T=\nabla\varphi$: it is the gradient field, derived from a scalar potential. This structure is specific to the quadratic cost. For $p\neq 2$, the optimal maps may still be characterized through potential functions related to the $c$-transform of the cost, but the clean form $T=\nabla\varphi$ with $\varphi$ convex is lost. The Riemannian geometric structure developed below depends essentially on this gradient form; for $p \neq 2$ the geometry becomes closer to Finsler than Riemannian, and the elegant theory described here does not carry over [@villani2009, @santambrogio2015].
+
+The fact that the optimal $W_2$ map is a gradient field---that it has no rotational component---is already hinting at an algebraic preference for a particular kind of flow. In a future post, when we decompose vector fields into gradient, rotational, and topological components via the Hodge decomposition, this preference will become precise. 
+
+::: {.callout-note .remark-box title="Remark"}
+
+***Uniqueness and canonicality.*** Brenier's theorem is the second uniqueness result in this series of blog posts. The first post established that the Fisher metric is the unique invariant Riemannian metric on the statistical manifold (Chentsov [@chentsov1982]). Here, under Brenier's assumptions, the $W_2$-optimal transport is uniquely realized by a map of the form $T=\nabla\varphi$ for convex $\varphi$.
+
+Both results support the same lesson from different directions: once natural requirements are imposed, the geometry is strongly constrained. There is no room for convention. 
+
+:::
+
+## The Dynamic View: Benamou-Brenier and Otto Calculus
+
+Brenier's theorem identifies the optimal transport map for $W_2$. A deeper question is whether $W_2$ defines a Riemannian geometry on the space of distributions itself---not just a distance, but a full geometric structure with tangent spaces, inner products, and geodesics. 
+
+The first step toward this is the dynamic formulation of Benamou and Brenier [@benamoubrenier2000], which reinterprets the Kantorovich problem as a variational problem over *flows* rather than couplings. 
+
+::: {.callout-tip .math-depth title="Mathematical Depth"}
+
+***The Benamou-Brenier Formula.*** Kantorovich's formulation finds the cheapest *coupling* between $\mu$ and $\nu$---a static picture. The Benamou-Brenier formula finds the cheapest *movie*: a time-dependent flow $(\rho_t,v_t)_{t\in[0,1]}$ carrying $\rho_0=\mu$ to $\rho_1=\nu$, where $\rho_t$ is a density and $v_t$ is a velocity field satisfying the continuity equation
+
+$$
+\partial_t \rho_t
++ \nabla \cdot (\rho_t v_t) = 0.
+$$ {#eq-continuity-equation}
+
+Here $\partial_t$ denotes time differentiation, and $\nabla\cdot$ denotes divergence in the sample space. The $W_2$ distance is then
+
+$$
+W_2^2(\mu,\nu)
+=
+\inf_{(\rho_t,v_t)}
+\int_0^1
+\int_X
+\|v_t(x)\|^2\rho_t(x)dxdt,
+$$ {#eq-benamou-brenier-formula}
+
+subject to the continuity equation and the boundary conditions $\rho_0=\mu$, $\rho_1=\nu$.
+
+The integrand $\int_X |v_t(x)|^2 \rho_t(x)\,dx$ is the kinetic energy of the flow at time $t$: the $L^2(\rho_t)$ norm of the velocity field, weighted by the mass distribution. The infimum over all flows minimizes the total kinetic energy---it finds the most efficient movie. 
+
+For the geodesic flow induced by the Brenier map $T=\nabla\varphi$, each particle starting at $x$ follows the straight-line characteristic
+
+$$
+x_t = (1-t)x+tT(x), \quad t\in[0,1],
+$$ {#eq-displacement-interpolation-particles}
+
+with constant velocity $\dot{x}_t=T(x)-x$. The corresponding Eulerian velocity field $v_t$ is the field satisfying $v_t(x_t)=T(x)-x$ along each characteristic. Along this geodesic,
+
+$$
+W_2^2(\mu,\nu)
+=
+\int_0^1 g_{\rho_t}(v_t,v_t)dt,
+\quad \text{where  }
+g_{\rho_t}(v,v)
+=
+\int_X |v(x)|^2 \rho (x) dx.
+$$ {#eq-otto-geodesic-energy}
+
+This is exactly the Riemannian length-squared of the geodesic in Otto's calculus.
+
+:::
+
+The Benamou-Brenier formulation is more than a computational device. It recasts optimal transport as a problem about *dynamics*: find the flow that carries mass from $\mu$ to $\nu$ at minimum kinetic energy cost. This dynamic picture is the direct precursor to the Schrödinger bridge (covered in a future post), which asks the same question with an added entropic regularization term---the cheapest *stochastic* movie rather than the cheapest deterministic one. 
+
+The formal Riemannian structure on distribution space, due to Otto [@otto2001], emerges naturally from this dynamic picture. 
+
+::: {.callout-tip .math-depth title="Mathematical Depth"}
+
+***The Otto Calculus.*** The Benamou-Brenier formula defines, at each density $\rho$, an inner product on the space of velocity fields $v$ satisfying the continuity equation. Here $\rho$ denotes the current probability density, and $v$ denotes the velocity field that moves mass:
+
+$$
+g_{\rho}(v,v)
+=
+\int_X |v(x)|^2 \rho (x) dx.
+$$ {#eq-otto-metric}
+
+This is the $L^2(\rho)$ norm of $v$, weighted by the current mass distribution. Strictly speaking, the tangent vector is the density variation $\dot{\rho}=-\nabla\cdot(\rho v)$, and the Otto metric assigns it the minimum kinetic energy over all velocity fields producing that variation. The minimizing representative is a gradient field $v=\nabla\phi$, where $\phi$ is a scalar potential. As $\rho$ varies over distributions, this family of minimum-energy inner products defines a formal Riemannian metric on $\mathcal{P}_2(X)$, the space of probability distributions on $X$ with finite second moment. The geodesics in the metric are the displacement interpolations: for $\rho_0=\mu$ and $\rho_1=\nu$ with Brenier map $T=\nabla\varphi$,
+
+$$
+\rho_t
+=
+\left(
+(1-t)\text{id}+tT
+\right)_{\#} \mu, \quad t \in [0,1].
+$$ {#eq-displacement-interpolation-density}
+
+Here $\mathrm{id}$ is the identity map on $X$, and the subscript $\#$ denotes pushforward of a measure. Mass particles move along straight-line characteristics between their starting and target locations; in the optimal representation, no unnecessary rotational component is introduced.
+
+:::
+
+The Otto calculus reveals $W_2$ as a Riemannian metric on distribution space in a way that is both geometrically natural and computationally significant. It connects optimal transport to gradient flows, Fokker-Planck equations, and the dynamics of diffusion---topics we return to in future blog posts. 
+
+::: {.callout-note .remark-box title="Remark"}
+
+***Rigorous foundations.*** The geometric intuition of the Otto calculus is fully trustworthy: displacement interpolations are genuine geodesics in $W_2$, and the kinetic energy formula is exact. The qualification is about the infinite-dimensional setting. The space $\mathcal{P}_2(X)$ is not a finite-dimensional manifold, so the standard machinery of Riemannian geometry---exponential map, sectional curvature, completeness---requires careful treatment. The exponential map is not globally defined: geodesics can break down when the Brenier map is not sufficiently regular. 
+
+The rigorous foundation uses the framework of gradient flows in metric spaces, developed by Ambrosio, Gigli and Savaré [@ambrosio2008] building on Villani's work [@villani2003]. This framework confirms the geometric picture described above and extends it to settings where classical Riemannian tools do not directly apply. Think of the Otto calculus as the right geometric intuition, with the Ambrosio-Gigli-Savaré theory providing its rigorous underpinning.
+
+:::
+
+
+
+## What the Wasserstein Metric Cannot See
+
+::: {.callout-note .remark-box title="Remark"}
+
+***Both rulers through pullback geometry.*** My first post showed that the Fisher metric is a literal pullback: parameter space inherits its metric from distribution space via the parametric map $\theta \mapsto p(\cdot;\theta)$, pulling back the $L^2$ inner product on score functions. 
+
+The $W_2$ metric admits an analogous---though formally less elementary---description via the Otto calculus. Velocity fields satisfying the continuity equation are the tangent vectors to the distribution space, and the $L^2(\rho)$ cost $g_{\rho} (v,v) = \int |v|^2 dx$ is the inner product on that tangent space. Formally, this is the pullback of the $L^2$ metric on vector fields, weighted by $\rho$, via the map that sends a velocity field to its induced flow on densities. 
+
+In this sense, both metrics share the same abstract structure: a map into a richer ambient space, pulling back an $L^2$-type inner product. Fisher pulls back from a *statistical* function space (score functions, encoding model shape). $W_2$ pulls back from a *physical* vector field space (velocity fields, encoding spatial displacement). The structural unity is real and productive; the two cases differ in the rigor of their respective foundations, as the caveat on the Otto calculus above makes clear. 
+
+:::
+
+The Wasserstein metric is defined on the sample space $X$: it requires a metric $d$ on $X$ and is sensitive to where mass sits and how far it must travel. It does not have a concept of a parametric model. Relabeling the distributions within a parametric family---changing the coordinate system on $\mathcal{M}$ while keeping the distributions themselves fixed---leaves $W_2$ unchanged.
+
+The Wasserstein metric can of course be restricted to a parametric family, but its notion of distance still comes from the geometry of the sample space. It does not measure statistical distinguishability in the Fisher sense: how sensitive likelihoods are to parameter perturbations, or how efficiently a parameter can be estimated from data.
+
+::: {.compact-table .wide-table .label-first-column}
+
+| Aspect | Fisher / FIM | Wasserstein $W_2$ |
+|---|---|---|
+| What it measures | Statistical distinguishability | Cost of mass transport |
+| Depends on | Model structure | Geometry of sample space $X$ |
+| Scope | Local (infinitesimal) | Global |
+| Requires model | Yes | No |
+| Support mismatch | KL may be $\infty$; Fisher path may be singular or model-dependent | Still finite if second moments exist |
+| Riemannian structure | Finite-dimensional when restricted to regular identifiable models | Formal/infinite-dimensional via Otto calculus; rigorous via metric-space gradient flows |
+| Uniqueness result | Chentsov [@chentsov1982] | Brenier [@brenier1991] |
+
+: Fisher and Wasserstein as complementary rulers. {#tbl-fisher-wasserstein}
+
+:::
+
+The two metrics are not two approximations to the same ideal distance. They are answers to fundamentally different questions, each of which is the right question in different contexts. The Fisher metric is the right tool when the problem concerns statistical inference, estimation efficiency, and the parametric structure of the model. The Wasserstein metric is the right tool when the problem concerns the spatial layout of data, comparison between distributions without a shared model, or transport of mass through a structured space.
+
+::: {.callout-note .remark-box title="Remark"}
+
+***On completeness.*** It would be wrong to say that either metric is *insufficient* in any absolute sense. Each is perfectly adequate for its intended purpose. The limitation I am pointing to is relative: *as a full geometry of learning*---one that must simultaneously account for both the statistical structure of a model and the spatial structure of the data---each metric, taken alone, is incomplete. A learning system that only uses Fisher geometry cannot perceive spatial relationships in the data. One that uses only Wasserstein geometry cannot perceive the curvature of the model manifold. Accounting for both requires a richer picture, which the next posts will gradually develop.
+
+:::
+
+
+## Wasserstein Geometry in Practice
+
+The Wasserstein distance is not only theoretically natural; it has concrete consequences for modern machine learning. Its main contribution is not merely that it gives another scalar discrepancy between distributions, but that it turns distribution comparison into a problem of moving mass along paths.
+
+This path-based view is especially important in modern generative modeling, where models often learn transformations from a simple source distribution, such as Gaussian noise, to the data distribution.
+
+::: {.callout-note .learning-box title="Consequence for Learning"}
+
+***Flow matching and transport paths.*** Modern generative models increasingly learn not only densities, but *paths between distributions*. In flow matching, one trains a neural network to approximate a time-dependent velocity field $v_t(x)$ that transports a simple source distribution, such as Gaussian noise, into the data distribution.
+
+This is exactly the language of the Benamou--Brenier formulation: a time-indexed density $\rho_t$ evolves through a continuity equation,
+
+$$
+\partial_t \rho_t + \nabla \cdot (\rho_t v_t)=0,
+$$ {#eq-flow-matching-continuity-equation}
+
+and the velocity field determines how probability mass moves through space.
+
+In the simplest flow-matching constructions, the path between noise and data is chosen by hand, often through linear interpolation. But a central question is geometric: can we choose or learn paths that are straighter, lower-curvature, or closer to optimal transport paths? This matters because straighter transport trajectories require fewer numerical integration steps at sampling time.
+
+This is why optimal transport has become important in modern flow-based generative modeling. OT-based couplings, rectified flows, and optimal-flow-matching methods all try, in different ways, to learn velocity fields that move probability mass efficiently rather than arbitrarily [@lipman2022; @liu2023rectified; @tong2024improving; @kornilov2024].
+
+The connection should not be overstated: flow matching is not automatically optimal transport, and recent work shows that additional assumptions are needed before rectified or gradient-constrained flows can be identified with true OT maps [@hertrich2025relation]. But the geometric principle is clear: Wasserstein geometry gives a language for understanding why the *shape of the probability path* matters.
+
+:::
+
+
+## The Two Rulers Together
+
+We now have two rulers for probability distributions. The Fisher metric measures local statistical distinguishability; the Wasserstein metric measures global mass displacement. Each is the unique answer, in its own setting, to a natural question about the geometry of distributions. 
+
+The two rulers are not two descriptions of the same subject. They differ in kind: Fisher is local, Wasserstein is global; Fisher requires a model, Wasserstein requires a sample space metric; Fisher is rigorous as a Riemannian metric, Wasserstein is formally Riemannian via the Otto calculus.
+
+But they are not unrelated either. They both can be understood through pullback-like constructions. Both are associated with uniqueness theorems. And both turn out to be facets of a geometry that is more than the sum of its parts. 
+
+The object that sits between them---living in the tension between local statistical geometry and global spatial geometry---is not a metric at all. It is an asymmetric divergence: the KL divergence. My next post will examine why KL is richer than a metric, how its two directions produce different learning behaviors, how Fisher geometry appears as its local second-order shadow, and how path-space KL points directly toward the Schrödinger bridge.
+
+
+::: {.post-end}
+༺  The End  ༻
+:::
