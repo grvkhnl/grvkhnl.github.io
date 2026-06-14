@@ -468,6 +468,57 @@
      line-height: 1.55;
    }
 
+   #listing-listing .quarto-post .listing-description {
+     position: relative;
+     margin-bottom: 0.25rem;
+   }
+
+   #listing-listing .quarto-post .listing-description p {
+     margin-bottom: 0;
+   }
+
+   #listing-listing .quarto-post:not(.description-expanded) .listing-description p {
+     display: -webkit-box;
+     -webkit-box-orient: vertical;
+     -webkit-line-clamp: 2;
+     overflow: hidden;
+   }
+
+   #listing-listing .quarto-post:not(.description-expanded) .listing-description::after {
+     content: "";
+     position: absolute;
+     right: 0;
+     bottom: 0;
+     width: 42%;
+     height: 1.55em;
+     pointer-events: none;
+     background: linear-gradient(
+       90deg,
+       color-mix(in srgb, var(--paper) 0%, transparent),
+       var(--paper) 82%
+     );
+   }
+
+   .listing-description-toggle {
+     appearance: none;
+     border: 0;
+     background: transparent;
+     color: var(--accent);
+     font: 600 0.82rem/1.2 $font-family-sans-serif;
+     padding: 0;
+     margin: 0.15rem 0 0;
+     text-decoration: underline;
+     text-decoration-color: color-mix(in srgb, var(--accent) 42%, transparent);
+     text-underline-offset: 0.18em;
+     cursor: pointer;
+   }
+
+   .listing-description-toggle:hover,
+   .listing-description-toggle:focus-visible {
+     color: var(--accent-deep);
+     text-decoration-color: currentColor;
+   }
+
    .quarto-listing .listing-date {
      color: var(--faint-ink);
    }

@@ -11,3 +11,33 @@ listing:
 ---
 
 Essays, notes, and technical writing on mathematics, machine learning, information geometry, and related topics.
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("#listing-listing .quarto-post").forEach((post) => {
+    const description = post.querySelector(".listing-description");
+    if (!description || description.dataset.expandReady === "true") {
+      return;
+    }
+
+    description.dataset.expandReady = "true";
+
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "listing-description-toggle";
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.textContent = "Read more";
+
+    toggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const expanded = post.classList.toggle("description-expanded");
+      toggle.setAttribute("aria-expanded", String(expanded));
+      toggle.textContent = expanded ? "Show less" : "Read more";
+    });
+
+    description.insertAdjacentElement("afterend", toggle);
+  });
+});
+</script>
