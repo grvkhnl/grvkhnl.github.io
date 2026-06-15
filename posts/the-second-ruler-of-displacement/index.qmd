@@ -114,7 +114,27 @@ The key result is Brenier's theorem [@brenier1991].
 
 ::: {.callout-tip .math-depth title="Mathematical Depth"}
 
-***Brenier's Theorem.*** Let $\mu$ and $\nu$ be probability measures on $\mathbb{R}^n$, with $\mu$ absolutely continuous with respect to Lebesgue measure. Then the $W_2$-optimal transport between $\mu$ and $\nu$ is uniquely realized $\mu$-almost everywhere by a map $T : \mathbb{R}^n \to \mathbb{R}^n$ satisfying $T_{\#} \mu = \nu$ (the pushforward of $\mu$ under $T$ is $\nu$). Moreover, $T=\nabla \varphi$ for some convex function $\varphi : \mathbb{R}^n \to \mathbb{R}$. The optimal transport is uniquely realized by a gradient-of-convex-potential map. 
+***Brenier's Theorem.*** Let $\mu$ and $\nu$ be probability measures on $\mathbb{R}^n$, and assume that $\mu$ is absolutely continuous with respect to Lebesgue measure. Then the $W_2$-optimal transport from $\mu$ to $\nu$ is induced by a map
+
+$$
+T:\mathbb{R}^n\to\mathbb{R}^n
+$$ {#eq-brenier-map}
+
+satisfying
+
+$$
+T_{\#}\mu=\nu.
+$$ {#eq-brenier-pushforward}
+
+Moreover, this map is unique $\mu$-almost everywhere and has the form
+
+$$
+T=\nabla\varphi
+$$ {#eq-brenier-gradient-potential}
+
+for some convex function $\varphi:\mathbb{R}^n\to\mathbb{R}$.
+
+In other words, under Brenier's assumptions, the optimal way to move mass for the quadratic cost is not an arbitrary transport plan. It is a deterministic map, and that map is the gradient of a convex potential.
 
 :::
 
@@ -138,47 +158,103 @@ The first step toward this is the dynamic formulation of Benamou and Brenier [@b
 
 ::: {.callout-tip .math-depth title="Mathematical Depth"}
 
-***The Benamou-Brenier Formula.*** Kantorovich's formulation finds the cheapest *coupling* between $\mu$ and $\nu$---a static picture. The Benamou-Brenier formula finds the cheapest *movie*: a time-dependent flow $(\rho_t,v_t)_{t\in[0,1]}$ carrying $\rho_0=\mu$ to $\rho_1=\nu$, where $\rho_t$ is a density and $v_t$ is a velocity field satisfying the continuity equation
+***The Benamou--Brenier Dynamic Formulation.*** The static Kantorovich formulation defines $W_2$ by minimizing over couplings:
+
+$$
+W_2^2(\mu,\nu)
+=
+\inf_{\gamma\in\Gamma(\mu,\nu)}
+\int_{X\times X}
+\|x-y\|^2\,d\gamma(x,y).
+$$ {#eq-kantorovich-w2}
+
+Benamou and Brenier showed that the same quantity can be computed dynamically. Instead of choosing a coupling all at once, choose a time-dependent density $\rho_t$ and velocity field $v_t$ that move mass from $\mu$ to $\nu$. The evolution must satisfy the continuity equation
 
 $$
 \partial_t \rho_t
-+ \nabla \cdot (\rho_t v_t) = 0.
-$$ {#eq-continuity-equation}
++
+\nabla\cdot(\rho_t v_t)
+=
+0,
+$$ {#eq-benamou-brenier-continuity}
 
-Here $\partial_t$ denotes time differentiation, and $\nabla\cdot$ denotes divergence in the sample space. The $W_2$ distance is then
+with boundary conditions
+
+$$
+\rho_0=\mu,
+\qquad
+\rho_1=\nu.
+$$ {#eq-benamou-brenier-boundary}
+
+The theorem states that
 
 $$
 W_2^2(\mu,\nu)
 =
-\inf_{(\rho_t,v_t)}
+\inf_{\rho_t,v_t}
 \int_0^1
 \int_X
-\|v_t(x)\|^2\rho_t(x)dxdt,
+\|v_t(x)\|^2\,\rho_t(x)\,dx\,dt,
 $$ {#eq-benamou-brenier-formula}
 
-subject to the continuity equation and the boundary conditions $\rho_0=\mu$, $\rho_1=\nu$.
+where the infimum is taken over all pairs $(\rho_t,v_t)$ satisfying the continuity equation and endpoint constraints.
 
-The integrand $\int_X |v_t(x)|^2 \rho_t(x)\,dx$ is the kinetic energy of the flow at time $t$: the $L^2(\rho_t)$ norm of the velocity field, weighted by the mass distribution. The infimum over all flows minimizes the total kinetic energy---it finds the most efficient movie. 
-
-For the geodesic flow induced by the Brenier map $T=\nabla\varphi$, each particle starting at $x$ follows the straight-line characteristic
+The integrand
 
 $$
-x_t = (1-t)x+tT(x), \quad t\in[0,1],
-$$ {#eq-displacement-interpolation-particles}
+\int_X
+\|v_t(x)\|^2\,\rho_t(x)\,dx
+$$ {#eq-flow-kinetic-energy}
 
-with constant velocity $\dot{x}_t=T(x)-x$. The corresponding Eulerian velocity field $v_t$ is the field satisfying $v_t(x_t)=T(x)-x$ along each characteristic. Along this geodesic,
+is the kinetic energy of the probability flow at time $t$. Thus $W_2^2(\mu,\nu)$ is the least total kinetic energy required to transport $\mu$ into $\nu$.
+
+This is the dynamic meaning of Wasserstein geometry: a distance between distributions becomes an action-minimization problem over paths of distributions. Kantorovich gives the cheapest matching; Benamou--Brenier gives the cheapest movie.
+
+When the optimal transport is induced by a Brenier map $T=\nabla\varphi$, define the interpolation map
+
+$$
+S_t(x)
+=
+(1-t)x+tT(x),
+\qquad
+t\in[0,1].
+$$ {#eq-interpolation-map}
+
+The corresponding displacement interpolation of distributions is
+
+$$
+\rho_t
+=
+(S_t)_{\#}\mu.
+$$ {#eq-displacement-interpolation-pushforward}
+
+Equivalently, particles follow straight-line characteristics from their starting position $x$ to their target position $T(x)$.
+
+$$
+x_t=(1-t)x+tT(x),
+$$ {#eq-straight-line-characteristic}
+
+and the Eulerian velocity field $v_t$ satisfies
+
+$$
+v_t(x_t)=T(x)-x.
+$$ {#eq-eulerian-velocity-characteristic}
+
+Along this optimal path,
 
 $$
 W_2^2(\mu,\nu)
 =
-\int_0^1 g_{\rho_t}(v_t,v_t)dt,
-\quad \text{where  }
+\int_0^1
+g_{\rho_t}(v_t,v_t)\,dt,
+\qquad
 g_{\rho_t}(v,v)
 =
-\int_X |v(x)|^2 \rho (x) dx.
+\int_X
+\|v(x)\|^2\rho_t(x)\,dx.
 $$ {#eq-otto-geodesic-energy}
 
-This is exactly the Riemannian length-squared of the geodesic in Otto's calculus.
+This is the starting point of Otto calculus: $W_2$ behaves like a Riemannian metric whose squared length is kinetic energy.
 
 :::
 
