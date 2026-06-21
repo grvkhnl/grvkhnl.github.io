@@ -20,9 +20,9 @@
   pullbackarrow/.style={->, line width=1.2pt, warmgold},
   dfstyle/.style={->, line width=0.9pt, midblue, dashed},
   tanvec/.style={->, line width=1.5pt},
-  mbox/.style={fill=manifoldcolor, draw=deepblue!40,
+  mbox/.style={fill=none, draw=deepblue!32,
                line width=0.8pt, rounded corners=5pt, inner sep=8pt},
-  pbox/.style={fill=distcolor, draw=softgreen!50,
+  pbox/.style={fill=none, draw=softgreen!38,
                line width=0.8pt, rounded corners=5pt, inner sep=8pt},
 }
 \begin{document}
@@ -50,7 +50,7 @@
   \draw[tanvec, deepblue!55] (th) -- ++(0.8,-0.50)
     node[right, font=\footnotesize] {$\partial_j$};
  
-  \draw[deepblue, thick, fill=lightblue, fill opacity=0.3,
+  \draw[deepblue, thick, fill=deepblue, fill opacity=0.08,
         rotate around={18:(th)}] (th) ellipse (0.56cm and 0.30cm);
  
   \node[deepblue!70, font=\scriptsize] at (-0.4,-0.65)

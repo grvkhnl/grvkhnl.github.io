@@ -20,24 +20,22 @@
   pullbackarrow/.style={->, line width=1.2pt, warmgold},
   dfstyle/.style={->, line width=0.9pt, midblue, dashed},
   tanvec/.style={->, line width=1.5pt},
-  mbox/.style={fill=manifoldcolor, draw=deepblue!40,
+  mbox/.style={fill=none, draw=deepblue!32,
                line width=0.8pt, rounded corners=5pt, inner sep=8pt},
-  pbox/.style={fill=distcolor, draw=softgreen!50,
+  pbox/.style={fill=none, draw=softgreen!38,
                line width=0.8pt, rounded corners=5pt, inner sep=8pt},
 }
 \begin{document}
 \begin{tikzpicture}[font=\small, scale=0.90]
-  \fill[manifoldcolor, rounded corners=5pt]
-    (-5.3,-3.1) rectangle (5.3,2.8);
-  \draw[deepblue!25, rounded corners=5pt, thick]
+  \draw[deepblue!18, rounded corners=5pt, thick]
     (-5.3,-3.1) rectangle (5.3,2.8);
   \foreach \ya in {-1.7,-0.2,1.3}{
-    \draw[deepblue!18,thick]
+    \draw[deepblue!12,thick]
       (-5.2,\ya-0.25) .. controls (-1.8,\ya+0.38)
                       and (1.8,\ya-0.38) .. (5.2,\ya+0.2);
   }
   \foreach \xa in {-3.4,-0.9,1.7,4.1}{
-    \draw[deepblue!18,thick]
+    \draw[deepblue!12,thick]
       (\xa-0.35,-3.1) .. controls (\xa+0.28,-1.0)
                       and (\xa-0.28,1.0) .. (\xa+0.2,2.8);
   }
@@ -48,7 +46,7 @@
   \filldraw[deepblue] (ptA) circle (2.3pt);
   \node[deepblue,above left=3pt,font=\footnotesize\bfseries]
     at (ptA) {$\theta_A$};
-  \draw[deepblue,thick,fill=lightblue,fill opacity=0.35,
+  \draw[deepblue,thick,fill=deepblue,fill opacity=0.08,
         rotate around={22:(ptA)}]
     (ptA) ellipse (0.32cm and 0.82cm);
   \draw[tanvec,deepblue,rotate around={22:(ptA)}]
@@ -66,7 +64,7 @@
   \filldraw[deepblue] (ptB) circle (2.3pt);
   \node[deepblue,above right=3pt,font=\footnotesize\bfseries]
     at (ptB) {$\theta_B$};
-  \draw[deepblue,thick,fill=lightblue,fill opacity=0.35,
+  \draw[deepblue,thick,fill=deepblue,fill opacity=0.08,
         rotate around={-12:(ptB)}]
     (ptB) ellipse (0.90cm and 0.46cm);
   % "cheap" now correctly along the LONG axis (0.90cm)
@@ -87,15 +85,15 @@
     {$\{d\theta:d\theta^{\!\top}F(\theta)\,d\theta=1\}$};
  
   % Cramer-Rao inset — left side
-  \draw[warmgold,thick,rounded corners=3pt,
-        fill=warmgold!10,fill opacity=0.97]
+  \draw[warmgold!90!black,thick,rounded corners=3pt,
+        fill=warmgold,fill opacity=0.06]
     (-5.25,-3.08) rectangle (-1.55,-1.55);
   \node[warmgold!80!black,font=\footnotesize\bfseries]
     at (-3.40,-1.78) {Cram\'{e}r--Rao bound};
   \node[font=\scriptsize,align=center,text width=3.0cm,deepblue!80]
     at (-3.40,-2.28)
     {$\mathrm{Cov}(\hat\theta)\succeq F(\theta)^{-1}$};
-  \node[font=\scriptsize,align=center,text width=3.0cm,gray!65]
+  \node[font=\scriptsize,align=center,text width=3.0cm,gray!58]
     at (-3.40,-2.72)
     {Inverse metric bounds\\estimation uncertainty.};
  
