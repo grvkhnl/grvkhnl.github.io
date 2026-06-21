@@ -138,6 +138,8 @@ In other words, under Brenier's assumptions, the optimal way to move mass for th
 
 :::
 
+![Kantorovich transport plans versus Brenier maps. A general transport plan $\gamma$ may split mass across many destinations, while Brenier's theorem identifies conditions under which the $W_2$-optimal transport is induced by a deterministic gradient map $T=\nabla\varphi$.](figures/transport-plan-vs-brenier-map.svg){#fig-transport-plan-vs-brenier-map width="100%" fig-alt="Diagram comparing a Kantorovich transport plan with many faint mass-splitting connections to a Brenier deterministic map with one arrow from each source bin to a target bin."}
+
 For $p=2$, the optimal transport map takes the especially clean form $T=\nabla\varphi$: it is the gradient field, derived from a scalar potential. This structure is specific to the quadratic cost. For $p\neq 2$, the optimal maps may still be characterized through potential functions related to the $c$-transform of the cost, but the clean form $T=\nabla\varphi$ with $\varphi$ convex is lost. The Riemannian geometric structure developed below depends essentially on this gradient form; for $p \neq 2$ the geometry becomes closer to Finsler than Riemannian, and the elegant theory described here does not carry over [@villani2009, @santambrogio2015].
 
 The fact that the optimal $W_2$ map is a gradient field---that it has no rotational component---is already hinting at an algebraic preference for a particular kind of flow. In a future post, when we decompose vector fields into gradient, rotational, and topological components via the Hodge decomposition, this preference will become precise. 
@@ -257,6 +259,8 @@ $$ {#eq-otto-geodesic-energy}
 This is the starting point of Otto calculus: $W_2$ behaves like a Riemannian metric whose squared length is kinetic energy.
 
 :::
+
+![Displacement interpolation as the cheapest movie between distributions. The top row shows density snapshots over time, while the space-time diagram shows straight-line characteristic paths from $\mu$ to $\nu$ and the intermediate distribution $\rho_{1/2}$.](figures/displacement-interpolation.svg){#fig-displacement-interpolation width="100%" fig-alt="Diagram showing density snapshots at t equals 0, 0.5, and 1 above a space-time plot of straight-line transport paths from mu to nu, with the midpoint density marked as displacement interpolation."}
 
 The Benamou-Brenier formulation is more than a computational device. It recasts optimal transport as a problem about *dynamics*: find the flow that carries mass from $\mu$ to $\nu$ at minimum kinetic energy cost. This dynamic picture is the direct precursor to the Schrödinger bridge (covered in a future post), which asks the same question with an added entropic regularization term---the cheapest *stochastic* movie rather than the cheapest deterministic one. 
 
