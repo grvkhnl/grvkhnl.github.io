@@ -164,6 +164,8 @@ $$ {#eq-reparameterized-fim}
 This is exactly the transformation law for a Riemannian metric. The FIM captures intrinsic geometry, not a coordinate artifact. Changing how we label the parameters changes the matrix entries, but not the statistical distance measured by the metric.
 :::
 
+![The pullback origin of the Fisher Information Matrix. The parameter manifold $\mathcal M$ maps into the space of distributions $\mathcal P$ through the model map $f$, tangent directions push forward to score functions, and the $L^2$ inner product on scores pulls back to the Fisher metric.](figures/fim-pullback-origin.svg){#fig-fim-pullback width="100%" fig-alt="Diagram showing parameter space mapping into distribution space, with tangent vectors pushed forward to score functions and the Fisher metric obtained as a pullback."}
+
 ## Chentsov's Theorem: The Unique Invariant Metric
 
 The pullback construction shows that FIM is natural. A deeper result, Chentsov's theorem [@chentsov1982], shows it is unique.
@@ -260,6 +262,8 @@ where $\operatorname{Cov}_\theta$ denotes covariance under $p(\cdot\,;\theta)$, 
 For deep learning, this statement should not be read too literally. We are usually not searching for an unbiased estimator of a true parameter vector; neural networks are overparameterized, non-identifiable, and trained for predictive performance rather than classical parameter recovery. The relevance is geometric: the inverse Fisher describes how sensitive the model distribution is to parameter movement. In optimization language, it acts like a curvature-aware preconditioner, shaping stable step sizes and update directions.
 
 The geometric reading is direct: $F(\theta)^{-1}$ is the dual metric on the cotangent space, and the bound says that estimation uncertainty is bounded below by the inverse of the local metric scale of the statistical manifold. Where the Fisher metric is large in a direction---where distributions are highly distinguishable and change rapidly along that direction---estimation is easy. Conversely, where the local distinguishability is small, estimation is hard.
+
+![Fisher ellipses and the Cramér-Rao bound. The local Fisher metric changes the shape of unit balls on the parameter manifold: narrow directions correspond to high local distinguishability, while wide directions correspond to directions where estimation is harder.](figures/fisher-ellipses-cramer-rao.svg){#fig-fisher-ellipses-cramer-rao width="100%" fig-alt="Diagram of a statistical manifold with Fisher ellipses at two parameter points and an inset showing the Cramér-Rao covariance bound."}
 
 ::: {.callout-tip .math-depth title="Mathematical Depth"}
 ***Proof sketch.*** Fix an unbiased estimator $\hat{\theta}$ of a scalar parameter $\theta \in \mathbb{R}$. Unbiasedness means
