@@ -202,7 +202,7 @@
 
    mjx-container {
      font-size: 104%;
-     color: var(--ink);
+     color: inherit;
    }
 
    mjx-container[display="true"],
@@ -352,7 +352,7 @@
 
    .figure-caption,
    figcaption {
-     font-family: $font-family-sans-serif;
+     font-family: $font-family-serif;
      font-size: 0.9rem;
      color: var(--muted-ink);
      line-height: 1.5;

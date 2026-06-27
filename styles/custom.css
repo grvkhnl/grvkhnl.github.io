@@ -126,7 +126,7 @@ a {
 
 mjx-container {
   font-size: 104%;
-  color: var(--ink);
+  color: inherit;
 }
 
 mjx-container[display="true"],
@@ -226,7 +226,7 @@ thead {
 
 .figure-caption,
 figcaption {
-  font-family: "Inter", "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
   font-size: 0.9rem;
   color: var(--muted-ink);
   line-height: 1.5;
