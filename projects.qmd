@@ -2,34 +2,41 @@
 title: "Projects"
 description: "Selected projects and research work."
 page-layout: article
+toc: false
 ---
 
-Selected research projects in scientific machine learning, inverse problems, topology-aware modeling, and biomedical signal analysis.
+Selected research projects in scientific machine learning, inverse problems, topology-aware modeling, and biomedical signal analysis. I am especially interested in methods that combine machine learning with physical structure, geometry, topology, or mechanistic interpretability.
 
 ::: {.card-grid .project-grid}
 
 ::: {.card .project-card}
 
-<p class="project-meta">Jan-Apr 2026 · Scientific ML · Soft-tissue mechanics</p>
+<p class="project-meta">Jan-Apr 2026 · Scientific ML · Soft-tissue mechanics · PINNs</p>
 
 ### Physics-Informed Image Registration for Hyperelastic Material Identification
 
-A unified PINN framework for soft-tissue characterization that couples differentiable image registration with Ogden hyperelastic parameter identification. Instead of treating displacement extraction and constitutive fitting as separate stages, the project formulates both as a single differentiable inverse problem.
+**Context.** Soft biological tissue characterization often relies on digital image correlation to extract displacement fields, followed by separate constitutive model fitting. This sequential workflow can propagate errors from image tracking into material-parameter estimation, and for very soft tissues it also depends on estimating a zero-strain reference state that may be distorted by gravity-induced pre-compression.
+
+**What I built.** I developed a unified physics-informed neural network framework that performs image registration and Ogden hyperelastic parameter identification within a single differentiable inverse problem. The model combines differentiable image similarity, hyperelastic equilibrium constraints, explicit gravity loading, boundary-condition penalties, and multi-step reaction-force losses.
 
 ::: {.project-so-what}
-**Why it matters:** image similarity, mechanical equilibrium, gravity loading, boundary conditions, and reaction-force history are optimized together, reducing error propagation and addressing zero-strain reference-state ambiguity in classical soft-tissue characterization.
+**Why it matters:** instead of treating displacement extraction and material fitting as disconnected stages, the framework allows image data, mechanics, gravity, boundary conditions, and force measurements to constrain one another during optimization. This provides a proof of concept for end-to-end material characterization directly from image sequences.
 :::
 
 ::: {.project-result}
-**Result:** recovered Ogden parameters on synthetic Gao-Desai-style validation with relative errors of 0.02% for $\mu$ and 0.006% for $\alpha$.
+**Validation:** generated FEM-based synthetic tissue image sequences replicating the Gao-Desai porcine liver experiment, including gravity pre-compression, tensile loading, natural texture synthesis, and imaging noise. The model recovered Ogden parameters with relative errors of 0.02% for $\mu$ and 0.006% for $\alpha$ on synthetic validation.
 :::
+
+**Scope.** Current validation is synthetic and two-dimensional, but the framework points toward image-based inverse mechanics pipelines for experimental soft-tissue characterization.
 
 <div class="project-tags">
 <span>PINNs</span>
 <span>Hyperelasticity</span>
 <span>Image registration</span>
 <span>Inverse problems</span>
+<span>Soft tissue mechanics</span>
 <span>JAX</span>
+<span>Equinox</span>
 </div>
 
 <p class="project-links">
@@ -40,25 +47,31 @@ A unified PINN framework for soft-tissue characterization that couples different
 
 ::: {.card .project-card}
 
-<p class="project-meta">Sep-Dec 2025 · Topological data analysis · Spatial omics</p>
+<p class="project-meta">Sep-Dec 2025 · Topological data analysis · Spatial transcriptomics</p>
 
 ### PERSIST: Topology-Guided Multiscale Domain Identification in Spatial Transcriptomics
 
-PERSIST is an unsupervised topology-guided framework for spatial transcriptomics domain identification. It uses persistent homology to infer intrinsic tissue scales, then builds a discrete exterior calculus based multiscale stability field to identify stable domains, transition regions, and spatial boundaries.
+**Context.** Spatial transcriptomics preserves gene expression together with tissue architecture, but many domain-identification pipelines depend on fixed clustering resolutions, neighborhood sizes, or smoothing assumptions. This makes it difficult to distinguish intrinsic tissue organization from artifacts of a chosen spatial scale.
+
+**What I built.** I developed **PERSIST**, an unsupervised topology-guided framework for multiscale spatial domain identification. The method constructs Alpha-complex filtrations over tissue coordinates, uses $H_1$ persistent homology birth-time distributions to infer intrinsic geometric scales, and then builds a discrete-exterior-calculus-based multiscale stability field over the tissue.
 
 ::: {.project-so-what}
-**Why it matters:** many spatial transcriptomics pipelines depend on fixed clustering resolutions or smoothing radii. PERSIST reframes segmentation as a topology-informed stability problem rather than a single-resolution clustering task.
+**Why it matters:** PERSIST uses topology not merely as a descriptor, but as a scale-discovery mechanism. It reframes spatial transcriptomics segmentation as a topology-informed stability problem: stable tissue cores, transition regions, and high-gradient boundaries emerge from the geometry of the tissue rather than from a single clustering resolution.
 :::
 
 ::: {.project-result}
-**Applied to:** breast cancer, human lymph node, and mouse brain datasets, recovering biologically interpretable tissue organization supported by marker enrichment and H&amp;E overlays.
+**Validation:** applied the framework to breast cancer, human lymph node, and mouse brain spatial transcriptomics datasets. The inferred domains recovered biologically interpretable organization, including tumor microenvironment compartments, lymph-node immune zones, and mouse-brain laminar or regional anatomy, supported by marker enrichment and H&E overlays.
 :::
+
+**Methodological components:** Moran's-I filtering, PC1 scalar-field construction, Alpha-complex persistent homology, DEC-style Laplacian smoothing and discrete gradients, topology-weighted local variation, bootstrap robust-core estimation, and Morse-like basin decomposition.
 
 <div class="project-tags">
 <span>Persistent homology</span>
+<span>Alpha complexes</span>
 <span>Discrete exterior calculus</span>
 <span>Spatial transcriptomics</span>
 <span>Multiscale analysis</span>
+<span>Gudhi</span>
 <span>Python</span>
 </div>
 
@@ -74,26 +87,32 @@ PERSIST is an unsupervised topology-guided framework for spatial transcriptomics
 
 ::: {.card .project-card}
 
-<p class="project-meta">May-Aug 2025 · Deep learning · Wave-based inverse problems</p>
+<p class="project-meta">May-Aug 2025 · Deep learning · Wave-based inverse problems · HPC</p>
 
 ### Deep Learning for Full Waveform Inversion: Seismic Waveforms to Velocity Fields
 
-A data-driven full waveform inversion framework that learns the inverse map from multi-source seismic shot gathers to subsurface velocity fields. The model combines a Swin V2 Transformer encoder with an enhanced U-Net decoder for high-fidelity reconstruction of layers, faults, and heterogeneous geological structures.
+**Context.** Full waveform inversion aims to recover subsurface velocity structure from seismic measurements. Classical FWI is a large-scale nonlinear inverse problem that can be computationally expensive, ill-posed, and vulnerable to cycle skipping, especially in complex geological settings.
+
+**What I built.** I developed a data-driven FWI pipeline that learns the inverse map from multi-source seismic shot gathers to subsurface velocity models. The model uses a hybrid Swin V2 Transformer encoder and enhanced U-Net decoder, combining long-range wavefield dependency modeling with high-fidelity spatial reconstruction of layers, faults, and heterogeneous structures.
 
 ::: {.project-so-what}
-**Why it matters:** conventional full waveform inversion is computationally expensive, ill-posed, and vulnerable to cycle skipping. This project explores deep learning as a fast surrogate inverse model for wavefield-to-structure reconstruction.
+**Why it matters:** the project explores deep learning as a fast surrogate inverse model for wavefield-to-structure reconstruction. The architecture was designed to combine the global context modeling of self-attention with the spatial precision and inductive bias of U-Net-style decoding.
 :::
 
 ::: {.project-result}
-**Scale:** trained on roughly 470,000 OpenFWI Vel/Fault/Style samples using PyTorch DDP/AMP on H100 GPUs; achieved 63.27 m/s validation MAE and SSIM between 0.8725 and 0.9188 across dataset families.
+**Scale and result:** trained on roughly 470,000 OpenFWI Vel/Fault/Style samples using memory-mapped loading, GPU augmentations, PyTorch Distributed Data Parallel, automatic mixed precision, EMA checkpointing, and H100 GPUs. The best model achieved 63.27 m/s validation MAE and SSIM values between 0.8725 and 0.9188 across dataset families.
 :::
+
+**What was nontrivial:** beyond the model architecture, the project required building a scalable training system for large scientific data: stratified dataset splitting, class-frequency weighting, Huber/gradient/total-variation losses, warm restarts, robust checkpointing, and distributed training on Grid5000.
 
 <div class="project-tags">
 <span>Full waveform inversion</span>
-<span>Swin Transformer</span>
+<span>Swin Transformer V2</span>
 <span>U-Net</span>
 <span>OpenFWI</span>
+<span>Inverse problems</span>
 <span>PyTorch DDP</span>
+<span>HPC</span>
 </div>
 
 <p class="project-links">
@@ -112,21 +131,27 @@ A data-driven full waveform inversion framework that learns the inverse map from
 
 ### Graph Signal Processing for Characterization of Multipolar Electrograms in AF
 
-A geometry-aware graph signal processing framework for multipolar intracardiac electrograms. PentaRay catheter electrodes are modeled as graph nodes, allowing atrial fibrillation recordings to be analyzed as signals over catheter geometry rather than as isolated electrode waveforms.
+**Context.** Atrial fibrillation is sustained by complex spatiotemporal propagation patterns, including rotors, wavefront collision, conduction block, and re-entry. Many electrogram-analysis methods treat catheter electrodes independently, even though multipolar catheters contain spatial information through their electrode geometry.
+
+**What I built.** I developed a geometry-aware graph signal processing framework for multipolar intracardiac electrograms. PentaRay catheter electrodes were modeled as graph nodes, and electrogram recordings were analyzed as graph signals over the catheter geometry using graph total variation and joint Short-Time Fourier Transform / Graph Fourier Transform analysis.
 
 ::: {.project-so-what}
-**Why it matters:** rotor-proximal atrial fibrillation activity is a spatial propagation phenomenon. Joint STFT-GFT analysis and graph total variation capture wavefront collision and spatial discordance that per-channel temporal features cannot see.
+**Why it matters:** rotor-proximal AF activity is not just a local waveform abnormality; it is a spatial propagation phenomenon. By embedding catheter geometry into the analysis, the framework can detect spatial discordance and intermittent wavefront-collision patterns that per-channel temporal features structurally cannot see.
 :::
 
 ::: {.project-result}
-**Proof of concept:** AF-band JGFT kurtosis achieved 87.5% accuracy and AUC = 1.00 for close-vs-far rotor classification on a small simulated OpenCARP dataset.
+**Proof of concept:** on a small simulated OpenCARP dataset with close-vs-far rotor catheter positions, AF-band JGFT kurtosis achieved 87.5% accuracy and AUC = 1.00, outperforming conventional time-domain and phase-mapping baselines. Because the dataset contained only eight simulated recordings, the result should be interpreted as a proof of concept rather than clinical validation.
 :::
+
+**Extension idea:** I also proposed edge-flow representations based on voltage, local-activation-time, and phase differences across catheter edges. This reframes electrogram analysis from isolated node signals to propagation-flow patterns, opening a route toward Helmholtz-Hodge-style separation of planar activation, rotor-like circulation, and obstacle-related harmonic flow.
 
 <div class="project-tags">
 <span>Graph signal processing</span>
 <span>JGFT</span>
 <span>Atrial fibrillation</span>
+<span>Electrograms</span>
 <span>OpenCARP</span>
+<span>Rotor proximity</span>
 <span>Biomedical signals</span>
 </div>
 
