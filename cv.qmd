@@ -6,21 +6,61 @@ page-layout: article
 
 ## Gaurav Khanal
 
-[Under construction]
+MSc Data Science and Artificial Intelligence student focused on scientific machine learning, physics-informed modeling, inverse problems, and topology- and geometry-aware AI for physical and biomedical systems.
+
+<div class="cv-actions">
+<a href="assets/cv/CV_KHANAL_JUN2026.pdf">Download full PDF CV &rarr;</a>
+</div>
 
 ## Education
 
-- MSc in Data Science and Artificial Intelligence (DSAI), Université Côte d'Azur, France (2024-2026)
+**MSc in Data Science and Artificial Intelligence**<br>
+Université Côte d'Azur, Sophia Antipolis, France<br>
+Sep 2024-Aug 2026<br>
+EFELIA Bourse d'Excellence 2025
 
-## Research interests
+**BA in Economics and Accounting**<br>
+Westminster College, Fulton, Missouri, USA<br>
+Aug 2009-May 2013
 
-- Geometric Deep Learning
-- Topological Deep Learning
-- SciML / AI4Science
-- Medical Image Registration and Analysis
-- Biomedical Signal Processing
-- Group Theory
+## Current Research
 
-## Selected projects
+**Research Intern, Predictive Constitutive Modeling of Atrial Appendage Tissue**<br>
+Mines Saint-Étienne | Centre Ingénierie et Santé | SAINBIOSE Lab Inserm U1059<br>
+Apr 2026-Present
 
-- The Natural Geometry of Learning
+Developing mechanics-informed machine learning models to infer specimen-specific force response and constitutive behavior of atrial appendage tissue from projected 2D thickness maps and 3D surface mesh scans. Current work includes 3D morphology and anisotropy descriptors, point-cloud and mesh representation learning, topology-aware shape descriptors, and hybrid constitutive layers for force-response prediction.
+
+## Selected Research Projects
+
+[**Physics-Informed Image Registration for Hyperelastic Material Identification**](projects.html#physics-informed-image-registration-for-hyperelastic-material-identification)<br>
+Developed a unified PINN framework coupling differentiable image registration with Ogden hyperelastic parameter identification, replacing the classical DIC to displacement extraction to constitutive fitting pipeline.
+
+[**Deep Learning for Full Waveform Inversion**](projects.html#deep-learning-for-full-waveform-inversion-seismic-waveforms-to-velocity-fields)<br>
+Built a hybrid Swin V2 Transformer and enhanced U-Net framework for reconstructing subsurface velocity fields from multi-source seismic shot gathers, trained at OpenFWI scale with PyTorch DDP/AMP on H100 GPUs.
+
+[**PERSIST: Topology-Guided Multiscale Domain Identification**](projects.html#persist-topology-guided-multiscale-domain-identification-in-spatial-transcriptomics)<br>
+Designed an unsupervised topology-guided framework for spatial transcriptomics using persistent homology and discrete exterior calculus based multiscale stability fields.
+
+[**Graph Signal Processing for Characterization of Multipolar Electrograms in AF**](projects.html#graph-signal-processing-for-characterization-of-multipolar-electrograms-in-af)<br>
+Developed a geometry-aware graph signal processing framework for multipolar intracardiac electrograms, using joint time-graph spectral analysis and graph total variation to detect rotor-proximal spatial discordance.
+
+## Research Interests
+
+- Scientific machine learning and AI for science
+- Physics-informed modeling and inverse problems
+- Geometric and topological deep learning
+- Information geometry, optimal transport, and learning dynamics
+- Medical image registration and biomedical signal analysis
+
+## Skills
+
+**Programming:** Python, R, MATLAB<br>
+**Machine learning:** PyTorch, JAX, Equinox, Flax, TensorFlow, scikit-learn<br>
+**Scientific computing and geometry:** NumPy, pandas, SciPy, CuPy, Gudhi, Trimesh, PyVista, ParaView<br>
+**HPC and development:** Grid5000, OAR, CUDA, PyTorch DDP, Git, Docker, MLflow, TensorBoard<br>
+**Languages:** English, French, Spanish
+
+## Earlier Professional Experience
+
+Before returning to graduate study in data science and AI, I worked in consulting across the United States and Australia, including roles at Ernst & Young, Protiviti, and PricewaterhouseCoopers.

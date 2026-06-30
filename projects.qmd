@@ -33,7 +33,7 @@ A unified PINN framework for soft-tissue characterization that couples different
 </div>
 
 <p class="project-links">
-<a href="https://github.com/grvkhnl/Hyperelastic-Image-Registration">Code &rarr;</a>
+<a href="https://github.com/grvkhnl/Hyperelastic-Image-Registration">Repo &rarr;</a>
 </p>
 
 :::
@@ -63,7 +63,7 @@ PERSIST is an unsupervised topology-guided framework for spatial transcriptomics
 </div>
 
 <p class="project-links">
-<a href="https://github.com/grvkhnl/Persistence-Guided-Multiscale-Domain-Identification">Code &rarr;</a>
+<a href="https://github.com/grvkhnl/Persistence-Guided-Multiscale-Domain-Identification">Repo &rarr;</a>
 <span aria-hidden="true">&middot;</span>
 <a href="https://www.researchgate.net/publication/408156552_PERSIST_Persistence-Guided_Multiscale_Domain_Identification_Using_Stability_Field_Analysis_in_Spatial_Transcriptomics">Report &rarr;</a>
 <span aria-hidden="true">&middot;</span>
@@ -97,7 +97,7 @@ A data-driven full waveform inversion framework that learns the inverse map from
 </div>
 
 <p class="project-links">
-<a href="https://github.com/grvkhnl/Geophysical-Full-Waveform-Inversion">Code &rarr;</a>
+<a href="https://github.com/grvkhnl/Geophysical-Full-Waveform-Inversion">Repo &rarr;</a>
 <span aria-hidden="true">&middot;</span>
 <a href="https://www.researchgate.net/publication/399128881_Deep_Learning_for_Full_Waveform_Inversion_Exploring_hybrid_CNN-Transformer_approach_to_reconstruct_high-fidelity_velocity_models_from_seismic_waveforms">Report &rarr;</a>
 <span aria-hidden="true">&middot;</span>
@@ -110,7 +110,7 @@ A data-driven full waveform inversion framework that learns the inverse map from
 
 <p class="project-meta">Oct 2025-Mar 2026 · Graph signal processing · Cardiac electrophysiology</p>
 
-### Graph Signal Processing for Rotor-Proximity Classification in Atrial Fibrillation
+### Graph Signal Processing for Characterization of Multipolar Electrograms in AF
 
 A geometry-aware graph signal processing framework for multipolar intracardiac electrograms. PentaRay catheter electrodes are modeled as graph nodes, allowing atrial fibrillation recordings to be analyzed as signals over catheter geometry rather than as isolated electrode waveforms.
 

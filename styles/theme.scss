@@ -766,6 +766,27 @@
      text-decoration: underline;
    }
 
+   .cv-actions {
+     margin: 1.25rem 0 2rem;
+   }
+
+   .cv-actions a {
+     display: inline-block;
+     border: 1px solid var(--rule-strong);
+     border-radius: 999px;
+     padding: 0.45rem 0.85rem;
+     color: var(--ink);
+     font-family: $font-family-sans-serif;
+     font-size: 0.95rem;
+     line-height: 1.2;
+     text-decoration: none;
+   }
+
+   .cv-actions a:hover {
+     border-color: var(--accent);
+     color: var(--accent);
+   }
+
    /* ============================================================
       Custom callout vocabulary for mathematical essays
       ============================================================ */
