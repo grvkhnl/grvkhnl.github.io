@@ -512,6 +512,106 @@ figcaption {
   color: var(--muted-ink);
 }
 
+.project-grid {
+  grid-template-columns: 1fr;
+  gap: 1.15rem;
+  align-items: stretch;
+}
+
+.project-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  border-radius: 8px;
+  padding: 1.15rem 1.25rem;
+}
+
+.project-card > section {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  gap: 0.55rem;
+}
+
+.project-card h3 {
+  margin: 0;
+  font-size: 1.28rem;
+  line-height: 1.18;
+}
+
+.project-card p,
+.project-tags p {
+  margin: 0;
+}
+
+.project-card p:not(.project-meta):not(.project-links) {
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
+  font-size: 1.02rem;
+  line-height: 1.62;
+}
+
+.project-meta {
+  font-family: "Inter", "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.045em;
+  text-transform: uppercase;
+  color: var(--faint-ink);
+}
+
+.project-card .project-so-what {
+  border-left: 3px solid var(--rule-strong);
+  padding-left: 0.8rem;
+  color: var(--ink);
+}
+
+.project-card .project-result {
+  color: var(--muted-ink);
+}
+
+.project-tags {
+  margin-top: 0.15rem;
+}
+
+.project-tags p {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+.project-tags span {
+  border: 1px solid var(--rule);
+  border-radius: 999px;
+  padding: 0.18rem 0.5rem;
+  color: var(--muted-ink);
+  font-family: "Inter", "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.76rem;
+  line-height: 1.2;
+}
+
+.project-links {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.35rem;
+  margin-top: auto !important;
+  padding-top: 0.35rem;
+  font-family: "Inter", "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 0.92rem;
+}
+
+.project-links span {
+  color: var(--faint-ink);
+}
+
+.project-links a {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.project-links a:hover {
+  text-decoration: underline;
+}
+
 /* Better mobile title spacing */
 @media (max-width: 768px) {
   .quarto-title-block .title {
@@ -582,6 +682,14 @@ body.quarto-dark pre.sourceCode {
 
 body.quarto-dark .card {
   background: rgba(255, 255, 255, 0.03);
+}
+
+body.quarto-dark .project-tags span {
+  border-color: var(--rule-strong);
+}
+
+body.quarto-dark .project-card .project-so-what {
+  border-left-color: var(--rule-strong);
 }
 
 body.quarto-dark .hero-links a {

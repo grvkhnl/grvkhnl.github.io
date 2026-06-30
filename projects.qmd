@@ -4,32 +4,132 @@ description: "Selected projects and research work."
 page-layout: article
 ---
 
-A selection of projects in mathematics, machine learning, and computation.
+Selected research projects in scientific machine learning, inverse problems, topology-aware modeling, and biomedical signal analysis.
 
-<div class="card-grid">
+::: {.card-grid .project-grid}
 
-<div class="card">
+::: {.card .project-card}
 
-### The Natural Geometry of Learning
+<p class="project-meta">Jan-Apr 2026 · Scientific ML · Soft-tissue mechanics</p>
 
-The Natural Geometry of Learning is an expository blog series exploring how probability, information, transport, and modern machine learning are tied together by geometry. It begins with Fisher information as the local geometry of statistical distinguishability, Wasserstein distance as the geometry of spatial displacement, and KL divergence as the asymmetric geometry of inference. It then develops Schrödinger bridges as stochastic paths between distributions, Hodge decomposition as the algebra of learned flows, and natural gradient as the computational expression of information geometry. The goal is not to propose a new theory, but to synthesize a fragmented landscape into a coherent map for students and practitioners interested in geometric approaches to learning. Once the series is complete, I plan to revise it into a PDF booklet.
+### Physics-Informed Image Registration for Hyperelastic Material Identification
 
+A unified PINN framework for soft-tissue characterization that couples differentiable image registration with Ogden hyperelastic parameter identification. Instead of treating displacement extraction and constitutive fitting as separate stages, the project formulates both as a single differentiable inverse problem.
+
+::: {.project-so-what}
+**Why it matters:** image similarity, mechanical equilibrium, gravity loading, boundary conditions, and reaction-force history are optimized together, reducing error propagation and addressing zero-strain reference-state ambiguity in classical soft-tissue characterization.
+:::
+
+::: {.project-result}
+**Result:** recovered Ogden parameters on synthetic Gao-Desai-style validation with relative errors of 0.02% for $\mu$ and 0.006% for $\alpha$.
+:::
+
+<div class="project-tags">
+<span>PINNs</span>
+<span>Hyperelasticity</span>
+<span>Image registration</span>
+<span>Inverse problems</span>
+<span>JAX</span>
 </div>
 
-<div class="card">
+<p class="project-links">
+<a href="https://github.com/grvkhnl/Hyperelastic-Image-Registration">Code &rarr;</a>
+</p>
 
-### Machine Learning Experiments
+:::
 
-Experiments, implementations, and technical explorations.
+::: {.card .project-card}
 
+<p class="project-meta">Sep-Dec 2025 · Topological data analysis · Spatial omics</p>
+
+### PERSIST: Topology-Guided Multiscale Domain Identification in Spatial Transcriptomics
+
+PERSIST is an unsupervised topology-guided framework for spatial transcriptomics domain identification. It uses persistent homology to infer intrinsic tissue scales, then builds a discrete exterior calculus based multiscale stability field to identify stable domains, transition regions, and spatial boundaries.
+
+::: {.project-so-what}
+**Why it matters:** many spatial transcriptomics pipelines depend on fixed clustering resolutions or smoothing radii. PERSIST reframes segmentation as a topology-informed stability problem rather than a single-resolution clustering task.
+:::
+
+::: {.project-result}
+**Applied to:** breast cancer, human lymph node, and mouse brain datasets, recovering biologically interpretable tissue organization supported by marker enrichment and H&amp;E overlays.
+:::
+
+<div class="project-tags">
+<span>Persistent homology</span>
+<span>Discrete exterior calculus</span>
+<span>Spatial transcriptomics</span>
+<span>Multiscale analysis</span>
+<span>Python</span>
 </div>
 
-<div class="card">
+<p class="project-links">
+<a href="https://github.com/grvkhnl/Persistence-Guided-Multiscale-Domain-Identification">Code &rarr;</a>
+<span aria-hidden="true">&middot;</span>
+<a href="https://www.researchgate.net/publication/408156552_PERSIST_Persistence-Guided_Multiscale_Domain_Identification_Using_Stability_Field_Analysis_in_Spatial_Transcriptomics">Report &rarr;</a>
+<span aria-hidden="true">&middot;</span>
+<span>DOI: 10.13140/RG.2.2.24684.73606</span>
+</p>
 
-### Notes and Derivations
+:::
 
-Mathematical notes that may later become essays or papers.
+::: {.card .project-card}
 
+<p class="project-meta">May-Aug 2025 · Deep learning · Wave-based inverse problems</p>
+
+### Deep Learning for Full Waveform Inversion: Seismic Waveforms to Velocity Fields
+
+A data-driven full waveform inversion framework that learns the inverse map from multi-source seismic shot gathers to subsurface velocity fields. The model combines a Swin V2 Transformer encoder with an enhanced U-Net decoder for high-fidelity reconstruction of layers, faults, and heterogeneous geological structures.
+
+::: {.project-so-what}
+**Why it matters:** conventional full waveform inversion is computationally expensive, ill-posed, and vulnerable to cycle skipping. This project explores deep learning as a fast surrogate inverse model for wavefield-to-structure reconstruction.
+:::
+
+::: {.project-result}
+**Scale:** trained on roughly 470,000 OpenFWI Vel/Fault/Style samples using PyTorch DDP/AMP on H100 GPUs; achieved 63.27 m/s validation MAE and SSIM between 0.8725 and 0.9188 across dataset families.
+:::
+
+<div class="project-tags">
+<span>Full waveform inversion</span>
+<span>Swin Transformer</span>
+<span>U-Net</span>
+<span>OpenFWI</span>
+<span>PyTorch DDP</span>
 </div>
 
+<p class="project-links">
+<a href="https://github.com/grvkhnl/Geophysical-Full-Waveform-Inversion">Code &rarr;</a>
+<span aria-hidden="true">&middot;</span>
+<a href="https://www.researchgate.net/publication/399128881_Deep_Learning_for_Full_Waveform_Inversion_Exploring_hybrid_CNN-Transformer_approach_to_reconstruct_high-fidelity_velocity_models_from_seismic_waveforms">Report &rarr;</a>
+<span aria-hidden="true">&middot;</span>
+<span>DOI: 10.13140/RG.2.2.20339.39205</span>
+</p>
+
+:::
+
+::: {.card .project-card}
+
+<p class="project-meta">Oct 2025-Mar 2026 · Graph signal processing · Cardiac electrophysiology</p>
+
+### Graph Signal Processing for Rotor-Proximity Classification in Atrial Fibrillation
+
+A geometry-aware graph signal processing framework for multipolar intracardiac electrograms. PentaRay catheter electrodes are modeled as graph nodes, allowing atrial fibrillation recordings to be analyzed as signals over catheter geometry rather than as isolated electrode waveforms.
+
+::: {.project-so-what}
+**Why it matters:** rotor-proximal atrial fibrillation activity is a spatial propagation phenomenon. Joint STFT-GFT analysis and graph total variation capture wavefront collision and spatial discordance that per-channel temporal features cannot see.
+:::
+
+::: {.project-result}
+**Proof of concept:** AF-band JGFT kurtosis achieved 87.5% accuracy and AUC = 1.00 for close-vs-far rotor classification on a small simulated OpenCARP dataset.
+:::
+
+<div class="project-tags">
+<span>Graph signal processing</span>
+<span>JGFT</span>
+<span>Atrial fibrillation</span>
+<span>OpenCARP</span>
+<span>Biomedical signals</span>
 </div>
+
+:::
+
+:::
