@@ -78,13 +78,13 @@
  
     \draw[tanvec, softgreen!80!black]
       (pfth) -- ++(1.05, 0.50)
-      node[right, font=\footnotesize] {$\partial_i\log p$};
+      node[right, font=\footnotesize] {$\partial_i p$};
     \draw[tanvec, softgreen!50!black]
       (pfth) -- ++(0.85,-0.58)
-      node[right, font=\footnotesize] {$\partial_j\log p$};
+      node[right, font=\footnotesize] {$\partial_j p$};
  
     \node[softgreen!70!black, font=\footnotesize\bfseries]
-      at (0.0,-1.55) {$g_{\mathcal{P}}(u,v)=\mathbb{E}_p[uv]$};
+      at (0.0,-1.55) {$g_p(\dot p,\dot q)=\int \dot p\dot q/p$};
   \end{scope}
  
   % ---- Map arrow f (above centre) ----
@@ -99,7 +99,7 @@
   \draw[dfstyle]
     (2.35,-0.35) -- (5.25,-0.35)
     node[midway, below=3pt, font=\scriptsize, midblue]
-      {$df_\theta\colon\partial_i\mapsto\partial_i\log p$};
+      {$df_\theta\colon\partial_i\mapsto\partial_i p$};
  
   % ---- Pullback arc (below both boxes) ----
   \draw[pullbackarrow]

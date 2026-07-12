@@ -49,7 +49,7 @@ s(x;\theta)
 \log p(x;\theta).
 $$ {#eq-score-function}
 
-The score measures, infinitesimally, how the distribution changes as you move in the parameter space. It is the velocity of the distribution in the direction of $\theta$.
+The score measures, infinitesimally, how the log-density changes as you move in parameter space. It is the logarithmic velocity of the distribution in the direction of $\theta$.
 
 To quantify how large this velocity is---how much the distribution changes per unit movement in $\theta$---Fisher took the expected squared magnitude of the score. In 1-D, this gives the *Fisher information* [@fisher1925; @rao1945]:
 
@@ -90,7 +90,7 @@ $$
 Finally, $T_\theta\mathcal M$ denotes the tangent space to the parameter manifold at $\theta$: the vector space of infinitesimal parameter directions.
 :::
 
-This matrix is not merely a useful statistic. It is a *Riemannian metric tensor* on the parameter manifold $\mathcal{M}$: a smooth varying inner product on each tangent space $T_{\theta}\mathcal{M}$, encoding the infinitesimal statistical distinguishability of nearby distributions. The systematic study of this structure is the subject of information geometry [@amari2000; @amari2016].
+This matrix is not merely a useful statistic. For a regular, locally identifiable model, it is a *Riemannian metric tensor* on the parameter manifold $\mathcal{M}$: a smoothly varying inner product on each tangent space $T_{\theta}\mathcal{M}$, encoding the infinitesimal statistical distinguishability of nearby distributions. If the parameterization is redundant, the matrix may instead be singular and define only a positive semidefinite form. The systematic study of this structure is the subject of information geometry [@amari2000; @amari2016].
 
 ## The FIM as a Pullback Metric
 
@@ -107,7 +107,22 @@ $$ {#eq-pullback-metric}
 
 where $df_p: T_p M \to T_{f(p)} N$ is the differential of $f$ at $p$, and $u,v \in T_pM$ are tangent vectors. Intuitively, to measure vectors in $M$, push them forward to $N$ using $df$ and measure them using $g$. For $f^{*}g$ to be a genuine metric (positive definite), $f$ must be an immersion, i.e., its differential must be injective at each point.
 
-***The FIM as a pullback.*** Let $\mathcal{P}$ be the space of probability distributions, equipped with the $L^2$ inner product on score functions: $\langle u,v \rangle = \mathbb{E}_p[u \cdot v]$, where $\mathbb E_p$ means expectation under the distribution $p$.
+***The FIM as a pullback.*** Let $\mathcal{P}$ be the space of strictly positive probability densities. A tangent vector at $p$ can be represented by a density perturbation $\dot p$ satisfying $\int \dot p(x)\,dx=0$. The Fisher--Rao inner product on two such perturbations is
+
+$$
+g_p(\dot p,\dot q)
+=
+\int
+\frac{\dot p(x)\dot q(x)}{p(x)}\,dx.
+$$ {#eq-fisher-rao-density-tangent}
+
+Equivalently, after writing the perturbations in logarithmic form as $u=\dot p/p$ and $v=\dot q/p$, this becomes the $L^2(p)$ inner product on score-like functions:
+
+$$
+g_p(\dot p,\dot q)
+=
+\mathbb E_p[u v].
+$$ {#eq-fisher-rao-score-inner-product}
 
 In the general pullback notation above, the parameter manifold $\mathcal M$ plays the role of $M$, and the probability space $\mathcal P$ plays the role of $N$. The parametric family defines the model map
 
@@ -115,20 +130,32 @@ $$
 f:\mathcal{M} \to \mathcal{P}, \quad \theta \mapsto p(\cdot\,;\theta).
 $$ {#eq-parametric-family-map}
 
-Its differential sends parameter directions to score functions:
+Its differential sends a parameter direction to a density perturbation:
 
 $$
 df_\theta(\partial_i)
 =
-\partial_i \log p(\cdot\,;\theta).
-$$ {#eq-parametric-family-differential-score}
+\partial_i p(\cdot\,;\theta).
+$$ {#eq-parametric-family-differential}
 
-This equation is the bridge between parameter geometry and distribution geometry. A coordinate direction $\partial_i$ in parameter space becomes a score function on the sample space. The pullback of the $L^2$ inner product is then
+Dividing this perturbation by $p$ gives its logarithmic representation,
+
+$$
+\frac{df_\theta(\partial_i)}{p(\cdot\,;\theta)}
+=
+\frac{\partial_i p(\cdot\,;\theta)}{p(\cdot\,;\theta)}
+=
+\partial_i\log p(\cdot\,;\theta),
+$$ {#eq-density-tangent-score-representation}
+
+which is precisely the score component. This is the bridge between parameter geometry and distribution geometry. Pulling back the Fisher--Rao inner product gives
 
 $$
 \left(f^{*}g\right)_{ij}
 =
-\langle df(\partial_i),df(\partial_j)\rangle
+=
+\int
+\frac{\partial_i p\,\partial_j p}{p}\,dx
 =
 \mathbb{E}_{\theta}\left[\partial_i \log p \cdot \partial_j \log p \right]
 =
@@ -164,7 +191,7 @@ $$ {#eq-reparameterized-fim}
 This is exactly the transformation law for a Riemannian metric. The FIM captures intrinsic geometry, not a coordinate artifact. Changing how we label the parameters changes the matrix entries, but not the statistical distance measured by the metric.
 :::
 
-![The pullback origin of the Fisher Information Matrix. The parameter manifold $\mathcal M$ maps into the space of distributions $\mathcal P$ through the model map $f$, tangent directions push forward to score functions, and the $L^2$ inner product on scores pulls back to the Fisher metric.](figures/fim-pullback-origin.svg){#fig-fim-pullback width="100%" fig-alt="Diagram showing parameter space mapping into distribution space, with tangent vectors pushed forward to score functions and the Fisher metric obtained as a pullback."}
+![The pullback origin of the Fisher Information Matrix. The parameter manifold $\mathcal M$ maps into the space of distributions $\mathcal P$ through the model map $f$. Parameter directions push forward to density perturbations, whose logarithmic representations are score functions, and the Fisher--Rao inner product pulls back to the Fisher metric.](figures/fim-pullback-origin.svg){#fig-fim-pullback width="100%" fig-alt="Diagram showing parameter space mapping into distribution space, with tangent vectors represented logarithmically as score functions and the Fisher metric obtained as a pullback."}
 
 ## Chentsov's Theorem: The Unique Invariant Metric
 
@@ -231,13 +258,13 @@ This is a strong and somewhat surprising result. It says the geometry of statist
 
 This uniqueness result is local. The Fisher metric is an infinitesimal object: it is a tensor at each point of parameter space, giving an inner product on tangent vectors. It measures how fast nearby distributions diverge statistically, but it says nothing directly about distributions that are far apart.
 
-Recovering a global distance requires integrating along geodesics in the Fisher metric, which is generally difficult and depends on the path. For many parametric families (such as Gaussians, exponential families, etc.), geodesics can be computed explicitly. In general, though, they cannot. This locality is a strength (it gives a clean Riemannian theory that is well-defined and coordinate-free) and a genuine limitation (it is not a ready-made global distance between arbitrary distributions).
+The local tensor nevertheless induces a global Fisher--Rao distance: measure the Fisher length of every curve joining two model distributions and take the infimum. Curve length depends on the chosen path; the geodesic distance selects a shortest one when such a minimizer exists. Finding these geodesics is generally difficult, and closed-form distances are available only for a limited collection of statistical families [@miyamoto2024].
 
-This is the first major contrast with Wasserstein geometry. Fisher gives a local ruler for statistical distinguishability; Wasserstein will give a global ruler for displacement through the sample space.
+Wasserstein geometry also has both global and infinitesimal formulations, so the essential contrast is not simply local versus global. It is what each geometry considers meaningful: Fisher measures statistical distinguishability without requiring a metric on the sample space, whereas Wasserstein measures the displacement of mass using precisely such a ground metric. That is the first major contrast between the two rulers.
 
 ## The Cramér-Rao Bound: Geometry in Action
 
-The Fisher metric does more than organize the geometry of a statistical model. It places hard limits on what any learning or estimation procedure can achieve. A learner navigating parameter space with smaller Fisher metric in some direction cannot acquire information in that direction quickly, no matter how its update rule is designed. The Cramér-Rao bound makes this precise [@fisher1925; @rao1945].
+The Fisher metric does more than organize the geometry of a statistical model. Under the regularity and unbiasedness assumptions of classical estimation theory, it places a hard lower bound on estimation uncertainty. Directions with little Fisher information are intrinsically difficult to estimate from data. The Cramér--Rao bound makes this precise [@fisher1925; @rao1945].
 
 For an unbiased estimator $\hat{\theta}$ of a scalar parameter $\theta$, the bound states:
 
@@ -249,7 +276,7 @@ $$ {#eq-cramer-rao-bound}
 
 Here $\operatorname{Var}_\theta$ denotes variance under $p(\cdot\,;\theta)$.
 
-In vector form, for an unbiased estimator $\hat{\theta}$ of $\theta \in \mathbb{R}^n$:
+In vector form, for an unbiased estimator $\hat{\theta}$ of $\theta \in \mathbb{R}^n$ and a nonsingular FIM:
 
 $$
 \operatorname{Cov}_{\theta}(\hat{\theta})
@@ -259,7 +286,7 @@ $$ {#eq-cramer-rao-bound-vector}
 
 where $\operatorname{Cov}_\theta$ denotes covariance under $p(\cdot\,;\theta)$, and $\succeq$ denotes the Loewner partial order on positive semidefinite matrices: $A\succeq B$ means $A-B$ is positive semidefinite. No unbiased estimator can have covariance smaller than $F(\theta)^{-1}$.
 
-For deep learning, this statement should not be read too literally. We are usually not searching for an unbiased estimator of a true parameter vector; neural networks are overparameterized, non-identifiable, and trained for predictive performance rather than classical parameter recovery. The relevance is geometric: the inverse Fisher describes how sensitive the model distribution is to parameter movement. In optimization language, it acts like a curvature-aware preconditioner, shaping stable step sizes and update directions.
+For deep learning, this statement should not be read too literally. We are usually not searching for an unbiased estimator of a true parameter vector; neural networks are overparameterized, non-identifiable, and trained for predictive performance rather than classical parameter recovery. The relevance is geometric: when the Fisher is nonsingular, its inverse converts an ordinary gradient covector into a geometry-aware parameter direction. In singular models, practical methods instead use damping, approximations, or a generalized inverse [@martens2014].
 
 The geometric reading is direct: $F(\theta)^{-1}$ is the dual metric on the cotangent space, and the bound says that estimation uncertainty is bounded below by the inverse of the local metric scale of the statistical manifold. Where the Fisher metric is large in a direction---where distributions are highly distinguishable and change rapidly along that direction---estimation is easy. Conversely, where the local distinguishability is small, estimation is hard.
 
@@ -396,18 +423,18 @@ The Cramér-Rao bound is one of the oldest results in mathematical statistics bu
 
 ## What the Fisher Metric Cannot See
 
-The Fisher metric is defined entirely within parameter space. It requires a parametric family $p(x;\theta)$ and measures how the model changes as $\theta$ varies. It is sensitive to the statistical shape of the model---how distributions in the family differ from each other---and entirely indifferent to the geometry of the sample space $X$ itself.
+For a parametric model, the Fisher metric measures how the model distribution changes as $\theta$ varies. It is sensitive to the statistical shape of the family---how its distributions differ from each other---but it does not require a distance between points of the sample space $X$.
 
-If you relabel the points of $X$ arbitrarily---i.e., apply any measurable bijection to the data---the Fisher metric does not change. This is exactly Chentsov's invariance property that we touched earlier, and it is both, a strength and a limitation.
+If you relabel the points of $X$ through an invertible measurable transformation, the Fisher metric does not change. This invariance is related to the principle behind Chentsov's theorem, and it is both a strength and a limitation.
 
-It is a strength because it means the geometry is intrinsic to the statistical model, not an artifact of data representation. It is a limitation because it means the Fisher metric has no vocabulary for the spatial layout of the data. To visualize the distinction, imagine a density plot: the horizontal axis is the sample space, while the vertical axis records how much probability mass sits at each location. Fisher sees changes in the heights of that plot, but not the geometry along the horizontal axis. It cannot tell you that the image of a cat shifted two pixels to the right is closer to the original than a completely different image. It lives entirely in the vertical direction, how probability weights change, and is blind to the horizontal direction of where points live in space.
+It is a strength because the geometry is intrinsic to the statistical model rather than an artifact of how observations are labeled. It is a limitation because Fisher supplies no *ground metric* telling us which sample points are spatially close. To visualize the distinction, imagine a density plot: the horizontal axis is the sample space, while the vertical axis records how much probability mass sits at each location. Fisher can detect that the heights have changed, and a particular parametric family may make nearby shifts statistically similar. But Fisher geometry alone does not know that neighboring pixels are close, so it gives no intrinsic guarantee that an image shifted two pixels is closer than a spatially unrelated change. In this visual metaphor, it measures how probability weights change vertically without encoding distance along the horizontal axis.
 
 ::: {.callout-note .learning-box title="Consequence for Learning"}
-Learning algorithms that minimize *Kullback-Leibler (KL) divergence* (maximum likelihood estimation, variational autoencoders, and most of classical statistical inference) are navigating Fisher geometry locally [@amari2000; @wainwright2008]. This is not merely an analogy; a future post will make the connection precise. For now, the key point is that KL-based objectives are sensitive to the parametric structure of the model and indifferent to the spatial layout of the data.
+Learning objectives based on *Kullback--Leibler (KL) divergence* inherit Fisher geometry in their local second-order behavior [@amari2000; @wainwright2008]. Population maximum likelihood can be expressed through KL minimization, and variational objectives use KL terms explicitly. This is not merely an analogy; the next section previews the precise local connection. The key point is that KL-based objectives compare probability assignments without requiring a ground metric on the data space.
 
-A related failure appears for $f$-divergences such as Jensen-Shannon in early GANs: when supports are disjoint or nearly disjoint, the divergence can saturate and provide weak gradients, motivating Wasserstein-based objectives [@arjovsky2017]. The failure traces directly to the geometry: locally, KL induces Fisher geometry, and Fisher geometry has no concept of spatial distance.
+A related failure appears for $f$-divergences such as Jensen--Shannon in early GANs: when supports are disjoint or nearly disjoint, the divergence can saturate and provide weak gradients, motivating Wasserstein-based objectives [@arjovsky2017]. Wasserstein objectives address the missing structure by comparing distributions through the cost of moving mass across the sample space.
 
-Natural gradient descent [@amari1998] corrects the optimization geometry by using $F(\theta)^{-1}$ to rescale the gradient, moving in the steepest direction with respect to the Fisher metric rather than the Euclidean one. This is the geometrically correct update in parameter space---but it is still confined to the vertical, statistical geometry, which we will come back to in a future post.
+When $F(\theta)$ is nonsingular, natural gradient descent [@amari1998] corrects the optimization geometry by using $F(\theta)^{-1}$ to rescale the gradient, moving in the steepest direction with respect to the Fisher metric rather than the Euclidean one. This is the geometry-aware update in parameter space---but it still does not introduce a ground metric on the observations, which we will come back to in a future post.
 :::
 
 ## Preview: Fisher as Local KL Geometry
@@ -491,16 +518,16 @@ Here $\mathcal{O}(\|\delta\|^3)$ means that the omitted terms are of cubic order
 
 This means two things. First, any algorithm that minimizes KL divergence inherits Fisher geometry in its local second-order behavior. Minimizing KL gives Fisher as the local geometry, but the actual update rule may still use Euclidean gradients---this is precisely the gap that natural gradient descent, which will be discussed in future posts, is designed to close. Second, the Fisher metric inherits its symmetry from the Hessian operation: even though KL itself is asymmetric (because $\mathrm{KL}(p\|q) \neq \mathrm{KL}(q\|p)$ in general), its second-order term is a symmetric bilinear form---the metric tensor $F_{ij}$.
 
-The asymmetry of KL beyond second order encodes something important: the two directions of KL correspond to qualitatively different behaviors (mode-covering vs. mode-seeking). I will examine this asymmetry in detail and show how it points directly toward *Schrödinger bridge*.
+The asymmetry of KL beyond second order encodes something important: depending on which argument contains the optimized model, the two directions of KL can encourage qualitatively different mode-covering and mode-seeking behavior. I will examine this asymmetry in detail and show how it points toward *Schrödinger bridges*.
 
 
 ::: {.callout-important .consequence-box title="Consequence for Learning"}
 
 Many learning objectives compare distributions through KL divergence or likelihood. Locally, these objectives inherit the Fisher metric: directions in parameter space are not equally meaningful, because some directions change the model distribution much more than others.
 
-Ordinary gradient descent ignores this geometry. It treats parameter space as Euclidean, so a step of the same coordinate size is treated as equally important in every direction. Natural gradient descent corrects this by using $F(\theta)^{-1}\nabla L$, the steepest descent direction measured in distribution space rather than raw coordinates.
+Ordinary gradient descent ignores this geometry. It treats parameter space as Euclidean, so a step of the same coordinate size is treated as equally important in every direction. When $F$ is invertible, natural gradient descent corrects this by using $F(\theta)^{-1}\nabla L$, the steepest descent direction measured in distribution space rather than raw coordinates. Singular models require a damped inverse or generalized inverse instead [@martens2014].
 
-For modern neural networks, however, the full FIM is impossible to form explicitly: with $N$ parameters, it is an $N\times N$ matrix. Practical methods therefore use approximations such as empirical Fisher estimates, matrix-free Fisher-vector products, diagonal approximations, low-rank approximations, or structured approximations such as K-FAC. These approximations are an active research area: they change the computation, but not the underlying geometric object.
+For modern neural networks, however, the full FIM is impossible to form explicitly: with $N$ parameters, it is an $N\times N$ matrix. Practical methods therefore use approximations such as empirical Fisher estimates, matrix-free Fisher-vector products, diagonal approximations, low-rank approximations, or structured approximations such as K-FAC [@martens2014; @martens2015]. These approximations are an active research area: they change the computation, but not the underlying geometric object.
 
 This is the first practical lesson of Fisher geometry: learning is not just about the slope of the loss, but about the geometry of how parameters change distributions.
 
@@ -569,7 +596,7 @@ F_{ij}
 \partial_i\partial_j A(\theta)
 $$ {#eq-exponential-family-fisher-covariance}
 
-The FIM is the covariance of the sufficient statistics, or equivalently, the Hessian of the log-partition function *with respect to the natural parameters $\theta$*. Since $A$ is convex, $F$ is positive semidefinite, confirming that the FIM is a valid Riemannian metric.
+The FIM is the covariance of the sufficient statistics, or equivalently, the Hessian of the log-partition function *with respect to the natural parameters $\theta$*. Since $A$ is convex, $F$ is positive semidefinite. For a minimal regular exponential family, this covariance is positive definite and therefore defines a genuine Riemannian metric; a redundant representation can leave it singular [@wainwright2008].
 
 ***Example: Gaussians.*** The Gaussian $\mathcal{N}(\mu,\sigma^2)$ belongs to an exponential family with natural parameters
 
@@ -609,7 +636,7 @@ F(\mu,\sigma^2)
 \end{pmatrix}
 $$ {#eq-gaussian-fisher-metric}
 
-This is the correct Fisher metric in $(\mu,\sigma^2)$ coordinates, but it is *not* obtained as the Hessian of $A$ with respect to $(\mu,\sigma^2)$ directly---those are not natural parameters. Geodesic distance in the Fisher metric on the space of Gaussians has closed form expression and is well-studied [@amari2016].
+This is the correct Fisher metric in $(\mu,\sigma^2)$ coordinates, but it is *not* obtained as the Hessian of $A$ with respect to $(\mu,\sigma^2)$ directly---those are not natural parameters. For this two-parameter manifold of univariate Gaussians, the Fisher--Rao distance has a closed-form expression through its hyperbolic geometry [@amari2016; @miyamoto2024]. Closed forms do not extend automatically to arbitrary exponential families.
 
 ***Signpost: dual coordinates.*** The fact that the Fisher metric on an exponential family is the Hessian of a convex function is deeply connected to the duality structure of information geometry [@amari2000]. The convex function $A$ generates the natural-parameter coordinates $\theta$. Its gradient generates the expectation-parameter coordinates
 
@@ -630,9 +657,11 @@ A^{*}(\eta)
 \right\}.
 $$ {#eq-legendre-transform-log-partition}
 
-In the same exponential-family setting, KL divergence between two members of the family is the Bregman divergence generated by $A$:
+In the same exponential-family setting, KL divergence between two members of the family is the Bregman divergence generated by $A$, with a noteworthy reversal of arguments:
 
 $$
+\mathrm{KL}\!\left(p_{\theta}\,\|\,p_{\theta'}\right)
+=
 D_A(\theta',\theta)
 =
 A(\theta')
@@ -643,21 +672,19 @@ $$ {#eq-bregman-divergence-log-partition}
 This is only a signpost for now. The important point for this post is that Fisher geometry is not isolated: it sits inside a larger convex-dual structure that will return when we discuss KL divergence, natural gradients, and learning dynamics.
 :::
 
-## A First Uniqueness Result
+## The First Ruler
 
-I close this post by returning to Chentsov's theorem, because it gives Fisher geometry a special status.
+Chentsov's theorem gives Fisher geometry its special status. Subject to its assumptions, Fisher--Rao is not just a convenient measure of local distinguishability: up to scale, it is the unique Riemannian metric compatible with statistically sufficient transformations.
 
-The Fisher metric is not just a convenient way to measure local distinguishability. Given one natural requirement---that the geometry of a statistical model should not depend on how the data are represented, as long as no statistical information is lost---the Fisher-Rao metric is forced. Up to a constant scale factor, it is the only Riemannian metric with this invariance property.
+That is the lesson of the first ruler. Fisher information does not merely assign numbers to estimators or appear in asymptotic statistics. It describes the local geometry a regular statistical model carries: directions are long or short according to how distinguishable the corresponding changes in distribution are.
 
-That is the main lesson of this first ruler. Fisher information does not merely assign numbers to estimators or appear in asymptotic statistics. It defines the unique local geometry compatible with statistical distinguishability. If we care about how distributions change as models learn, this is the geometry that the model carries.
+But the same invariance also marks its limitation. Fisher geometry does not supply a ground metric on the sample space. It knows how probability assignments change statistically; by itself, it does not know how far mass has moved spatially.
 
-But this uniqueness also explains Fisher's limitation. Because it is invariant under sufficient transformations of the sample space, Fisher geometry is blind to the spatial arrangement of the sample space itself. It knows how probability weights change; it does not know how far mass has moved.
-
-This is exactly where the second ruler enters. The next post turns to Wasserstein geometry, where distance is not measured by distinguishability but by displacement. Brenier's theorem [@brenier1991] will give a second kind of uniqueness: under quadratic transport cost, the optimal way to move mass is not arbitrary, but generated by the gradient of a convex potential.
+This is where the second ruler enters. The next post turns to Wasserstein geometry, where comparison is governed by displacement. Under appropriate regularity assumptions and quadratic transport cost, Brenier's theorem [@brenier1991] identifies the unique optimal transport map as the gradient of a convex potential.
 
 ## What Comes Next
 
-This post introduced the first ruler: Fisher information, the local geometry of statistical distinguishability. The next post introduces the second ruler: Wasserstein distance, the global geometry of displacement.
+This post introduced the first ruler: Fisher information, the geometry of statistical distinguishability. The next post introduces the second ruler: Wasserstein distance, the geometry of displacement.
 
 Together, these two rulers set up the main tension of the series. Fisher asks how distributions differ statistically; Wasserstein asks how probability mass moves spatially. Learning needs both perspectives.
 
@@ -665,7 +692,7 @@ From there, the story becomes more interesting. KL divergence will appear as the
 
 Finally, these ideas will reappear in modern machine learning, where diffusion models, flow matching, natural gradients, Langevin samplers, and Bayesian methods can all be understood as approximations to pieces of this geometry.
 
-The goal of this series is not to argue that these subjects are secretly the same theory. They are not. Rather, the claim is that they discovered compatible pieces of the same geometric picture: information provides the local ruler, transport provides the spatial ruler, KL provides direction, entropy provides stochastic paths, Langevin connects optimization to sampling, and topology explains the obstructions.
+The goal of this series is not to argue that these subjects are secretly the same theory. They are not. Rather, the claim is that they discovered compatible pieces of the same geometric picture: information provides the statistical ruler, transport provides the spatial ruler, KL provides direction, entropy provides stochastic paths, Langevin connects optimization to sampling, and topology explains the obstructions.
 
 ::: {.post-end}
 ༺  The End  ༻
