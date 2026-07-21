@@ -1,0 +1,18 @@
+---
+title: "The Natural Geometry of Learning"
+description: "An essay series connecting information geometry, optimal transport, stochastic dynamics, topology, and learning."
+page-layout: full
+toc: false
+listing:
+  contents:
+    - posts/the-first-ruler-of-distinguishability/index.qmd
+    - posts/the-second-ruler-of-displacement/index.qmd
+  type: default
+  sort: "date asc"
+  categories: false
+  feed: false
+---
+
+*The Natural Geometry of Learning* is an ongoing expository essay series about the geometric ideas that recur across probability and machine learning. It begins with two complementary rulers---Fisher information for statistical distinguishability and Wasserstein distance for spatial displacement---before moving toward KL geometry, Schrödinger bridges, Hodge decomposition, Langevin dynamics, and their connections to learning.
+
+The essays are listed below in reading order.

@@ -4,11 +4,14 @@ subtitle: "Why Fisher information is the local geometry of statistical models"
 description: "This post introduces Fisher information as the first “ruler” for probability distributions: a local metric that measures how distinguishable nearby statistical models are from data. We will see why it arises naturally as a pullback metric, why Chentsov’s theorem makes it unique, and how it foreshadows the deeper connection between KL divergence, natural gradients, and learning."
 date: 2026-06-05
 categories:
+  - Natural Geometry of Learning
   - information geometry
   - fisher information
   - pullback metric
   - riemannian metric
 author: "Gaurav Khanal"
+series: "The Natural Geometry of Learning"
+series-order: 1
 bibliography: ../../references.bib
 toc: true
 number-sections: true

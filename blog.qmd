@@ -12,6 +12,8 @@ listing:
 
 Essays, notes, and technical writing on mathematics, machine learning, information geometry, and related topics.
 
+**Featured series:** [The Natural Geometry of Learning](natural-geometry-of-learning.qmd)
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
   document.querySelectorAll("#listing-listing .quarto-post").forEach((post) => {

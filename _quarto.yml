@@ -29,6 +29,8 @@ website:
         text: Home
       - href: blog.qmd
         text: Blog
+      - href: natural-geometry-of-learning.qmd
+        text: Series
       - href: projects.qmd
         text: Projects
       - href: notes.qmd

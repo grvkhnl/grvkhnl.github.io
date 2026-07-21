@@ -4,12 +4,15 @@ subtitle: "Why Wasserstein distance is the geometry of moving probability mass"
 description: "This post introduces Wasserstein distance as the second “ruler” for probability distributions: a metric that measures the cost of moving probability mass through space. We will see why it arises from the Earth Mover’s problem, why the quadratic case has special geometric structure through Brenier’s theorem, and how the Benamou--Brenier formulation turns optimal transport into a dynamic geometry of probability flows."
 date: 2026-06-13
 categories:
+  - Natural Geometry of Learning
   - Optimal Transport
   - Wasserstein Distance
   - Brenier Theorem
   - Benamou-Brenier
   - Otto's Calculus
 author: "Gaurav Khanal"
+series: "The Natural Geometry of Learning"
+series-order: 2
 bibliography: ../../references.bib
 toc: true
 number-sections: true

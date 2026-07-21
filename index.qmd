@@ -16,6 +16,7 @@ I am interested in all things geometry behind probability, uncertainty, and lear
 
 <div class="hero-links">
   <a href="blog.html">Blog</a>
+  <a href="natural-geometry-of-learning.html">Series</a>
   <a href="projects.html">Projects</a>
   <a href="notes.html">Notes</a>
   <a href="cv.html">CV</a>
@@ -26,7 +27,7 @@ I am interested in all things geometry behind probability, uncertainty, and lear
 
 ## Current writing
 
-I am currently developing a mathematical essay series called **The Natural Geometry of Learning**, starting from Fisher information, optimal transport, KL geometry, and Schrödinger bridges.
+I write technical essays on mathematics, machine learning, geometry, and related ideas. My current long-form series is **The Natural Geometry of Learning**, beginning with Fisher information, optimal transport, KL geometry, and Schrödinger bridges.
 
 <div class="card-grid">
 
@@ -36,7 +37,7 @@ I am currently developing a mathematical essay series called **The Natural Geome
 
 A long-form essay series on information geometry, optimal transport, KL divergence, Schrödinger bridges, and learning.
 
-<a href="blog.html">Read the series →</a>
+<a href="natural-geometry-of-learning.html">Read the series →</a>
 
 </div>
 
@@ -76,4 +77,4 @@ My current interests sit at the intersection of geometry, probability, and learn
 
 If you are here for the writing project, start with the blog series:
 
-<a href="blog.html"><strong>The Natural Geometry of Learning →</strong></a>
+<a href="natural-geometry-of-learning.html"><strong>The Natural Geometry of Learning →</strong></a>
