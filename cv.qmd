@@ -1,66 +1,122 @@
 ---
-title: "CV"
+title: "Gaurav Khanal"
 description: "Curriculum vitae."
 page-layout: article
+toc: false
 ---
 
-## Gaurav Khanal
+::: {.cv-page}
 
-MSc Data Science and Artificial Intelligence student focused on scientific machine learning, physics-informed modeling, inverse problems, and topology- and geometry-aware AI for physical and biomedical systems.
+:::: {.cv-masthead}
+::: {.cv-lede}
+<p class="cv-kicker">MSc Data Science &amp; Artificial Intelligence</p>
 
-<div class="cv-actions">
-<a href="assets/cv/CV_KHANAL_JUN2026.pdf">Download full PDF CV &rarr;</a>
-</div>
+Scientific machine learning, physics-informed modeling, inverse problems, and topology- and geometry-aware AI for physical and biomedical systems.
+:::
+
+::: {.cv-actions}
+<a class="cv-download" href="assets/cv/CV_KHANAL_JUL2026.pdf" download><i class="bi bi-download" aria-hidden="true"></i><span>Download PDF CV</span></a>
+:::
+::::
 
 ## Education
 
-**MSc in Data Science and Artificial Intelligence**<br>
-Université Côte d'Azur, Sophia Antipolis, France<br>
-Sep 2024-Aug 2026<br>
-EFELIA Bourse d'Excellence 2025
+:::: {.cv-entry}
+::: {.cv-entry-heading}
+::: {.cv-entry-title}
+### MSc in Data Science and Artificial Intelligence
 
-**BA in Economics and Accounting**<br>
-Westminster College, Fulton, Missouri, USA<br>
-Aug 2009-May 2013
+<p class="cv-institution">Université Côte d'Azur · Sophia Antipolis, France</p>
 
-## Current Research
+<p class="cv-note">EFELIA Bourse d'Excellence, 2025</p>
+:::
 
-**Research Intern, Predictive Constitutive Modeling of Atrial Appendage Tissue**<br>
-Mines Saint-Étienne | Centre Ingénierie et Santé | SAINBIOSE Lab Inserm U1059<br>
-Apr 2026-Present
+<p class="cv-date">Sep 2024–Aug 2026</p>
+:::
+::::
+
+:::: {.cv-entry}
+::: {.cv-entry-heading}
+::: {.cv-entry-title}
+### BA in Economics and Accounting
+
+<p class="cv-institution">Westminster College · Fulton, Missouri, USA</p>
+:::
+
+<p class="cv-date">Aug 2009–May 2013</p>
+:::
+::::
+
+## Current Professional Experience
+
+:::: {.cv-entry .cv-entry-featured}
+::: {.cv-entry-heading}
+::: {.cv-entry-title}
+### Research Intern, Predictive Constitutive Modeling of Atrial Appendage Tissue
+
+<p class="cv-institution">Mines Saint-Étienne · Centre Ingénierie et Santé · SAINBIOSE Lab, Inserm U1059</p>
+:::
+
+<p class="cv-date">Apr 2026–Present</p>
+:::
 
 Developing mechanics-informed machine learning models to infer specimen-specific force response and constitutive behavior of atrial appendage tissue from projected 2D thickness maps and 3D surface mesh scans. Current work includes 3D morphology and anisotropy descriptors, point-cloud and mesh representation learning, topology-aware shape descriptors, and hybrid constitutive layers for force-response prediction.
+::::
 
 ## Selected Research Projects
 
-[**Physics-Informed Image Registration for Hyperelastic Material Identification**](projects.html#physics-informed-image-registration-for-hyperelastic-material-identification)<br>
+:::: {.cv-project}
+### Beyond Energy MAE: Input-Gradient Geometry in Molecular GNNs *(In progress)* {.cv-project-title-plain}
+
+Designing a controlled energy-only comparison of SchNet and NequIP on 50,500 QM7-X molecular families, using held-out reference forces, numerical $\mathrm{SE}(3)$ symmetry audits, and Wilson B-matrix/Shapley attribution to test whether comparable energy MAE can conceal differences in learned energy-surface geometry.
+::::
+
+:::: {.cv-project}
+### [Physics-Informed Image Registration for Hyperelastic Material Identification](projects.html#physics-informed-image-registration-for-hyperelastic-material-identification)
+
 Developed a unified PINN framework coupling differentiable image registration with Ogden hyperelastic parameter identification, replacing the classical DIC to displacement extraction to constitutive fitting pipeline.
+::::
 
-[**Deep Learning for Full Waveform Inversion**](projects.html#deep-learning-for-full-waveform-inversion-seismic-waveforms-to-velocity-fields)<br>
+:::: {.cv-project}
+### [Deep Learning for Full Waveform Inversion](projects.html#deep-learning-for-full-waveform-inversion-seismic-waveforms-to-velocity-fields)
+
 Built a hybrid Swin V2 Transformer and enhanced U-Net framework for reconstructing subsurface velocity fields from multi-source seismic shot gathers, trained at OpenFWI scale with PyTorch DDP/AMP on H100 GPUs.
+::::
 
-[**PERSIST: Topology-Guided Multiscale Domain Identification**](projects.html#persist-topology-guided-multiscale-domain-identification-in-spatial-transcriptomics)<br>
+:::: {.cv-project}
+### [PERSIST: Topology-Guided Multiscale Domain Identification](projects.html#persist-topology-guided-multiscale-domain-identification-in-spatial-transcriptomics)
+
 Designed an unsupervised topology-guided framework for spatial transcriptomics using persistent homology and discrete exterior calculus based multiscale stability fields.
+::::
 
-[**Graph Signal Processing for Characterization of Multipolar Electrograms in AF**](projects.html#graph-signal-processing-for-characterization-of-multipolar-electrograms-in-af)<br>
+:::: {.cv-project}
+### [Graph Signal Processing for Characterization of Multipolar Electrograms in AF](projects.html#graph-signal-processing-for-characterization-of-multipolar-electrograms-in-af)
+
 Developed a geometry-aware graph signal processing framework for multipolar intracardiac electrograms, using joint time-graph spectral analysis and graph total variation to detect rotor-proximal spatial discordance.
+::::
 
 ## Research Interests
 
+::: {.cv-interest-list}
 - Scientific machine learning and AI for science
 - Physics-informed modeling and inverse problems
 - Geometric and topological deep learning
 - Information geometry, optimal transport, and learning dynamics
 - Medical image registration and biomedical signal analysis
+:::
 
-## Skills
+## Technical Skills
 
-**Programming:** Python, R, MATLAB<br>
-**Machine learning:** PyTorch, JAX, Equinox, Flax, TensorFlow, scikit-learn<br>
-**Scientific computing and geometry:** NumPy, pandas, SciPy, CuPy, Gudhi, Trimesh, PyVista, ParaView<br>
-**HPC and development:** Grid5000, OAR, CUDA, PyTorch DDP, Git, Docker, MLflow, TensorBoard<br>
-**Languages:** English, French, Spanish
+<div class="cv-skill-list">
+<div class="cv-skill-row"><span class="cv-skill-label">Programming</span><span>Python, R, MATLAB</span></div>
+<div class="cv-skill-row"><span class="cv-skill-label">Machine learning</span><span>PyTorch, JAX, Equinox, Flax, TensorFlow, scikit-learn</span></div>
+<div class="cv-skill-row"><span class="cv-skill-label">Scientific computing &amp; geometry</span><span>NumPy, pandas, SciPy, CuPy, Gudhi, Trimesh, PyVista, ParaView</span></div>
+<div class="cv-skill-row"><span class="cv-skill-label">HPC &amp; development</span><span>Grid5000, OAR, CUDA, PyTorch DDP, Git, Docker, MLflow, TensorBoard</span></div>
+<div class="cv-skill-row"><span class="cv-skill-label">Languages</span><span>English, French, Spanish</span></div>
+</div>
 
 ## Earlier Professional Experience
 
 Before returning to graduate study in data science and AI, I worked in consulting across the United States and Australia, including roles at Ernst & Young, Protiviti, and PricewaterhouseCoopers.
+
+:::
