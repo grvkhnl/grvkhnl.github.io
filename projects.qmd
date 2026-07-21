@@ -143,8 +143,6 @@ Selected research projects in scientific machine learning, inverse problems, top
 **Technical scope:** implemented subject-grouped data splits, multi-recording HBN-EEG loading and caching, distributed training, mixed precision, exponential-moving-average checkpoints, subject-bag sampling, and configurable self-supervised and supervised training stages.
 :::
 
-**Scope.** The repository contains the final competition work and an accompanying technical starter guide. No leaderboard placement is reported here because the repository does not document an official rank.
-
 <div class="project-tags">
 <span>EEG</span>
 <span>Foundation models</span>
