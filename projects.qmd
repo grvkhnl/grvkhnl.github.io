@@ -127,6 +127,42 @@ Selected research projects in scientific machine learning, inverse problems, top
 
 ::: {.card .project-card}
 
+<p class="project-meta">2025 · EEG foundation models · Self-supervised learning · Domain generalization</p>
+
+### NeurIPS 2025 EEG Foundation Challenge: Cross-Task and Cross-Subject Modeling
+
+**Context.** EEG foundation models aim to learn representations that transfer across recording paradigms, prediction tasks, and individuals. The NeurIPS 2025 challenge tested this idea on the Healthy Brain Network EEG dataset through two problems: predicting active-task behavior from passive-task recordings and predicting psychopathology factors for previously unseen subjects.
+
+**What I built.** I developed DDP/HPC-ready pipelines for both challenge tracks. The cross-task pipeline uses Barlow Twins self-supervised pretraining on passive EEG tasks with an EEGNeX backbone, followed by supervised transfer to contrast-change-detection response-time prediction. The cross-subject pipeline combines masked-autoencoder pretraining, a one-dimensional ConvNeXt-style encoder, subject-level multiple-instance learning, MixStyle, and domain-adversarial training for externalizing-factor prediction.
+
+::: {.project-so-what}
+**Why it matters:** EEG varies strongly across subjects, developmental stages, recording tasks, and acquisition conditions. The project treats this variability as a representation-learning and domain-generalization problem rather than assuming that window-level features transfer unchanged across people and paradigms.
+:::
+
+::: {.project-result}
+**Technical scope:** implemented subject-grouped data splits, multi-recording HBN-EEG loading and caching, distributed training, mixed precision, exponential-moving-average checkpoints, subject-bag sampling, and configurable self-supervised and supervised training stages.
+:::
+
+**Scope.** The repository contains the final competition work and an accompanying technical starter guide. No leaderboard placement is reported here because the repository does not document an official rank.
+
+<div class="project-tags">
+<span>EEG</span>
+<span>Foundation models</span>
+<span>Barlow Twins</span>
+<span>Masked autoencoders</span>
+<span>Multiple-instance learning</span>
+<span>Domain adaptation</span>
+<span>PyTorch DDP</span>
+</div>
+
+<p class="project-links">
+<a href="https://github.com/grvkhnl/EEG-Foundation-Challenge">Repo &rarr;</a>
+</p>
+
+:::
+
+::: {.card .project-card}
+
 <p class="project-meta">Oct 2025-Mar 2026 · Graph signal processing · Cardiac electrophysiology</p>
 
 ### Graph Signal Processing for Characterization of Multipolar Electrograms in AF

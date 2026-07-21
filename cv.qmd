@@ -95,6 +95,12 @@ Designed an unsupervised topology-guided framework for spatial transcriptomics u
 Developed a geometry-aware graph signal processing framework for multipolar intracardiac electrograms, using joint time-graph spectral analysis and graph total variation to detect rotor-proximal spatial discordance.
 ::::
 
+:::: {.cv-project}
+### [NeurIPS 2025 EEG Foundation Challenge](projects.html#neurips-2025-eeg-foundation-challenge-cross-task-and-cross-subject-modeling)
+
+Built DDP/HPC-ready pipelines for both challenge tracks, combining Barlow Twins self-supervision and an EEGNeX backbone for cross-task transfer with masked-autoencoder pretraining, subject-level multiple-instance learning, MixStyle, and domain-adversarial training for cross-subject externalizing-factor prediction on HBN-EEG.
+::::
+
 ## Research Interests
 
 ::: {.cv-interest-list}
