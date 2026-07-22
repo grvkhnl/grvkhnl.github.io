@@ -436,6 +436,19 @@
       Listing pages
       ============================================================ */
 
+   .series-intro {
+     max-width: 52rem;
+     margin-bottom: 2rem;
+   }
+
+   main.content .series-intro p {
+     margin-bottom: 0;
+     color: var(--faint-ink);
+     font-family: $font-family-serif;
+     font-size: 1.08rem;
+     line-height: 1.65;
+   }
+
    .quarto-listing .listing-title {
      font-family: $font-family-serif;
      font-size: 1.35rem;
@@ -465,6 +478,7 @@
    }
 
    .quarto-listing .listing-description {
+     color: var(--faint-ink);
      line-height: 1.55;
    }
 

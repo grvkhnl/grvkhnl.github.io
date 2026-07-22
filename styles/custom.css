@@ -298,6 +298,19 @@ figcaption {
   letter-spacing: -0.025em;
 }
 
+.series-intro {
+  max-width: 52rem;
+  margin-bottom: 2rem;
+}
+
+main.content .series-intro p {
+  margin-bottom: 0;
+  color: var(--faint-ink);
+  font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
+  font-size: 1.08rem;
+  line-height: 1.65;
+}
+
 .quarto-listing .listing-title {
   font-family: "Iowan Old Style BT", "Iowan Old Style", "Source Serif 4", Georgia, serif;
   font-size: 1.35rem;
@@ -327,6 +340,7 @@ figcaption {
 }
 
 .quarto-listing .listing-description {
+  color: var(--faint-ink);
   line-height: 1.55;
 }
 

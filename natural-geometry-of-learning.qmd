@@ -1,6 +1,5 @@
 ---
 title: "The Natural Geometry of Learning"
-description: "An essay series connecting information geometry, optimal transport, stochastic dynamics, topology, and learning."
 page-layout: full
 toc: false
 listing:
@@ -13,6 +12,36 @@ listing:
   feed: false
 ---
 
+::: {.series-intro}
 *The Natural Geometry of Learning* is an ongoing expository essay series about the geometric ideas that recur across probability and machine learning. It begins with two complementary rulers---Fisher information for statistical distinguishability and Wasserstein distance for spatial displacement---before moving toward KL geometry, Schrödinger bridges, Hodge decomposition, Langevin dynamics, and their connections to learning.
+:::
 
-The essays are listed below in reading order.
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  document.querySelectorAll("#listing-listing .quarto-post").forEach((post) => {
+    const description = post.querySelector(".listing-description");
+    if (!description || description.dataset.expandReady === "true") {
+      return;
+    }
+
+    description.dataset.expandReady = "true";
+
+    const toggle = document.createElement("button");
+    toggle.type = "button";
+    toggle.className = "listing-description-toggle";
+    toggle.setAttribute("aria-expanded", "false");
+    toggle.textContent = "Read more";
+
+    toggle.addEventListener("click", (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      const expanded = post.classList.toggle("description-expanded");
+      toggle.setAttribute("aria-expanded", String(expanded));
+      toggle.textContent = expanded ? "Show less" : "Read more";
+    });
+
+    description.insertAdjacentElement("afterend", toggle);
+  });
+});
+</script>
