@@ -8,6 +8,8 @@ project:
 website:
   title: "Gaurav Khanal"
   site-url: "https://grvkhnl.github.io"
+  open-graph: true
+  twitter-card: true
   description: "Personal website of Gaurav Khanal — mathematics, machine learning, information geometry, and research notes."
   favicon: assets/profile/favicon.svg
 
