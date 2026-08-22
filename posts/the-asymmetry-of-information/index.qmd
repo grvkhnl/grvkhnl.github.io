@@ -2,8 +2,18 @@
 title: "The Asymmetry of Information"
 subtitle: "Why KL divergence remembers direction"
 description: "This post examines KL divergence as a directed contrast rather than a defective distance. We will see how its two directions shape learning, how Fisher geometry reappears as its local second-order shadow, how exponential families reveal its Bregman structure, and why path-space KL leads naturally to the Schrödinger bridge."
-image: figures/social-preview.png
+image: figures/forward-reverse-kl.svg
 image-alt: "Forward and reverse KL approximations of a bimodal probability distribution"
+open-graph:
+  image: figures/social-preview.png
+  image-alt: "Forward and reverse KL approximations of a bimodal probability distribution"
+  image-width: 1200
+  image-height: 630
+twitter-card:
+  image: figures/social-preview.png
+  image-alt: "Forward and reverse KL approximations of a bimodal probability distribution"
+  image-width: 1200
+  image-height: 630
 date: 2026-08-22
 categories:
   - Natural Geometry of Learning
