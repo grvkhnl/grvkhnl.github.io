@@ -47,7 +47,7 @@
   \draw[taupe,thick,domain=0.1:3.5,samples=80]
     plot(\x,{2.2*exp(-1.4*(\x-1.8)*(\x-1.8))});
   \node[taupe,font=\scriptsize,align=center,text width=2.8cm]
-    at (\pw/2,0.48) {mass-covering:\\spans both modes};
+    at (\pw/2,-0.42) {mass-covering:\\spans both modes};
 \end{scope}
 
 % Reverse KL approximation
@@ -64,7 +64,7 @@
   \draw[gold,thick,domain=0.1:3.5,samples=80]
     plot(\x,{2.5*exp(-9.0*(\x-1.0)*(\x-1.0))});
   \node[gold,font=\scriptsize,align=center,text width=2.8cm]
-    at (\pw/2,0.48) {mode-seeking:\\selects one mode};
+    at (\pw/2,-0.42) {mode-seeking:\\selects one mode};
 \end{scope}
 \end{tikzpicture}
 \end{document}

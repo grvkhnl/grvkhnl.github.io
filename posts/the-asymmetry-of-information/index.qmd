@@ -24,7 +24,7 @@ The [first ruler](../the-first-ruler-of-distinguishability/) and the [second rul
 
 Symmetry is natural for distance. But learning is directional.
 
-Consider entropy. A probability distribution concentrated on a single event has very low entropy; it carries a precise prediction. A uniform distribution has maximum entropy; it carries none. The transition from concentrated to diffuse can happen by losing or forgetting information. The reverse transition, from diffuse to concentrated, requires evidence or additional structure. The two directions are not equivalent.
+Consider entropy. A probability distribution concentrated on a single event has very low entropy; it carries a precise prediction. On a fixed finite support, a uniform distribution has maximum entropy; absent further structure, it expresses maximal uncertainty about which event will occur. The transition from concentrated to diffuse can happen by losing or forgetting information. The reverse transition, from diffuse to concentrated, requires evidence or additional structure. The two directions are not equivalent.
 
 This directionality is not a complication to be engineered away. It is part of the structure of inference. Updating beliefs from prior to posterior is not the same operation as moving from posterior back to prior. Fitting a model to data is not the same as generating data from a model. The geometry that captures this structure must remember orientation.
 
@@ -293,6 +293,8 @@ $$ {#eq-e-projection}
 
 Its corresponding clean projection theorem applies when $\mathcal M$ is $m$-flat, meaning affine in mixture or expectation coordinates.
 
+A concrete example helps distinguish the two operations. Projecting a target onto a regular exponential family with forward KL often takes the form of matching the target's sufficient-statistic moments. Reverse KL instead weights the approximation's own samples; when the family is too restricted to represent a multimodal target, the optimum may settle near one mode. The two projections therefore ask different approximation questions even when the destination family is the same.
+
 ::: {.callout-note .remark-box title="Remark"}
 ***A convention worth naming.*** The terms $m$-projection and $e$-projection describe the affine direction of the projection path, not the flatness of the destination. An $m$-projection travels along an $m$-geodesic to an $e$-flat submanifold and minimizes $\mathrm{KL}(p\|q)$. Dually, an $e$-projection travels along an $e$-geodesic to an $m$-flat submanifold and minimizes $\mathrm{KL}(q\|p)$.
 
@@ -343,7 +345,7 @@ The dual identity applies to an $e$-projection onto an $m$-flat family.
 
 ## From Distributions to Paths
 
-Everything so far has compared distributions: static snapshots of probability mass. But KL divergence extends naturally to stochastic processes, which are probability measures on entire trajectories.
+Everything so far has compared distributions: static snapshots of probability mass. A static KL projection chooses the closest admissible distribution; its path-space analogue chooses the closest admissible evolution. KL divergence therefore extends naturally to stochastic processes, which are probability measures on entire trajectories.
 
 A continuous-path process on $[0,1]$ is represented by a probability measure $\mathbb P$ on a path space such as $C([0,1],X)$. Given another path measure $\mathbb Q$ with $\mathbb P\ll\mathbb Q$, their relative entropy is
 
