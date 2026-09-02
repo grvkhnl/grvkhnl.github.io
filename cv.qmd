@@ -15,7 +15,7 @@ Scientific machine learning, physics-informed modeling, inverse problems, and to
 :::
 
 ::: {.cv-actions}
-<a class="cv-download" href="assets/cv/CV_KHANAL_JUL2026.pdf" download><i class="bi bi-download" aria-hidden="true"></i><span>Download PDF CV</span></a>
+<a class="cv-download" href="assets/cv/CV_KHANAL_AUG2026.pdf" download><i class="bi bi-download" aria-hidden="true"></i><span>Download PDF CV</span></a>
 :::
 ::::
 
