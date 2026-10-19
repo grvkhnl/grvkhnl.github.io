@@ -7,6 +7,7 @@ listing:
     - posts/the-first-ruler-of-distinguishability/index.qmd
     - posts/the-second-ruler-of-displacement/index.qmd
     - posts/the-asymmetry-of-information/index.qmd
+    - posts/the-bridge/index.qmd
   type: default
   sort: "date asc"
   categories: false

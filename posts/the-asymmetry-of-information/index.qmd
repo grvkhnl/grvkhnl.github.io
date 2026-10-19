@@ -410,7 +410,7 @@ KL divergence carries that directionality. Its first argument determines where d
 The bridge is not merely a compromise between the two rulers. It is the next object in which information, stochastic evolution, and transport meet.
 
 ::: {.callout-note .preview-box title="What Comes Next"}
-The next post develops the Schrödinger bridge in full: the drift of the bridge process, forward and backward descriptions, its connection to score functions, the entropic dynamic formulation, and the computational role of Sinkhorn iteration.
+The next post, [*The Bridge*](../the-bridge/), develops the Schrödinger bridge in full: the drift of the bridge process, forward and backward descriptions, its connection to score functions, the entropic dynamic formulation, and the computational role of Sinkhorn iteration.
 
 The space-time picture from the second post will reappear, but its deterministic straight lines will be replaced by stochastic paths.
 :::
