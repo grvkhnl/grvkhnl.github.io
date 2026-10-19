@@ -14,7 +14,7 @@ twitter-card:
   image-alt: "Brownian reference paths and controlled Schrödinger bridge paths between two probability distributions"
   image-width: 1200
   image-height: 630
-date: 2026-10-01
+date: 2026-10-19
 categories:
   - Natural Geometry of Learning
   - Schrödinger bridge
