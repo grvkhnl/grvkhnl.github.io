@@ -66,12 +66,6 @@ Developing mechanics-informed machine learning models to infer specimen-specific
 ## Selected Research Projects
 
 :::: {.cv-project}
-### Beyond Energy MAE: Input-Gradient Geometry in Molecular GNNs *(In progress)* {.cv-project-title-plain}
-
-Designing a controlled energy-only comparison of SchNet and NequIP on 50,500 QM7-X molecular families, using held-out reference forces, numerical $\mathrm{SE}(3)$ symmetry audits, and Wilson B-matrix/Shapley attribution to test whether comparable energy MAE can conceal differences in learned energy-surface geometry.
-::::
-
-:::: {.cv-project}
 ### [Physics-Informed Image Registration for Hyperelastic Material Identification](projects.html#physics-informed-image-registration-for-hyperelastic-material-identification)
 
 Developed a unified PINN framework coupling differentiable image registration with Ogden hyperelastic parameter identification, replacing the classical DIC to displacement extraction to constitutive fitting pipeline.
@@ -93,12 +87,6 @@ Designed an unsupervised topology-guided framework for spatial transcriptomics u
 ### [Graph Signal Processing for Characterization of Multipolar Electrograms in AF](projects.html#graph-signal-processing-for-characterization-of-multipolar-electrograms-in-af)
 
 Developed a geometry-aware graph signal processing framework for multipolar intracardiac electrograms, using joint time-graph spectral analysis and graph total variation to detect rotor-proximal spatial discordance.
-::::
-
-:::: {.cv-project}
-### [NeurIPS 2025 EEG Foundation Challenge](projects.html#neurips-2025-eeg-foundation-challenge-cross-task-and-cross-subject-modeling)
-
-Built DDP/HPC-ready pipelines for both challenge tracks, combining Barlow Twins self-supervision and an EEGNeX backbone for cross-task transfer with masked-autoencoder pretraining, subject-level multiple-instance learning, MixStyle, and domain-adversarial training for cross-subject externalizing-factor prediction on HBN-EEG.
 ::::
 
 ## Research Interests
