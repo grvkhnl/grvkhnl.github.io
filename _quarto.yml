@@ -85,7 +85,7 @@ format:
     fig-align: center
     reference-location: margin
     cap-location: bottom
-    html-math-method: mathjax
+    html-math-method: mathml
 
 execute:
   freeze: auto

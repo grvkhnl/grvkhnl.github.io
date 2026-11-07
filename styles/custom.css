@@ -1,6 +1,14 @@
 /* Late-loaded site styling. Quarto compiles SCSS before parts of Bootstrap,
    so final visual polish lives here where the cascade is predictable. */
 
+@font-face {
+  font-family: "XCharter Math";
+  src: url("../assets/fonts/xcharter-math/XCharter-Math.otf") format("opentype");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
 body {
   font-family: "Inter", "Source Sans 3", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   font-feature-settings: "liga" 1, "kern" 1;
@@ -91,12 +99,14 @@ a {
 }
 
 .math.display,
+span[id^="eq-"],
 .quarto-figure {
   margin-top: 1.45rem;
   margin-bottom: 1.45rem;
 }
 
-.math.display {
+.math.display,
+span[id^="eq-"] {
   display: block;
   max-width: 100%;
   overflow-x: auto;
@@ -106,45 +116,45 @@ a {
   scrollbar-color: var(--math-scrollbar-thumb) var(--math-scrollbar-track);
 }
 
-.math.display::-webkit-scrollbar {
+.math.display::-webkit-scrollbar,
+span[id^="eq-"]::-webkit-scrollbar {
   height: 5px;
 }
 
-.math.display::-webkit-scrollbar-track {
+.math.display::-webkit-scrollbar-track,
+span[id^="eq-"]::-webkit-scrollbar-track {
   background: var(--math-scrollbar-track);
   border-radius: 999px;
 }
 
-.math.display::-webkit-scrollbar-thumb {
+.math.display::-webkit-scrollbar-thumb,
+span[id^="eq-"]::-webkit-scrollbar-thumb {
   background: var(--math-scrollbar-thumb);
   border-radius: 999px;
 }
 
-.math.display::-webkit-scrollbar-thumb:hover {
+.math.display::-webkit-scrollbar-thumb:hover,
+span[id^="eq-"]::-webkit-scrollbar-thumb:hover {
   background: var(--math-scrollbar-thumb-hover);
 }
 
-mjx-container {
+math {
+  font-family: "XCharter Math", "STIX Two Math", "Cambria Math", math;
   font-size: 104%;
   color: inherit;
 }
 
-mjx-container[display="true"],
-mjx-container[jax="CHTML"][display="true"] {
+.math.display math[display="block"],
+span[id^="eq-"] math[display="block"] {
   display: block;
-  max-width: 100%;
-  overflow: visible !important;
-  padding-bottom: 0;
+  width: max-content;
+  min-width: max-content;
+  margin-inline: auto;
 }
 
 .callout .math.display,
-.callout mjx-container[display="true"] {
+.callout span[id^="eq-"] {
   max-width: 100%;
-}
-
-.math.display mjx-container[display="true"],
-.math.display mjx-container[jax="CHTML"][display="true"] {
-  min-width: max-content;
 }
 
 blockquote {
