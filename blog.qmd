@@ -10,9 +10,9 @@ listing:
   feed: true
 ---
 
-Essays, notes, and technical writing on mathematics, machine learning, information geometry, and related topics.
+Essays, notes, and technical writing on mathematics, machine learning, information geometry, mathematical image analysis, and related topics. All posts appear here, newest first.
 
-**Featured series:** [The Natural Geometry of Learning](natural-geometry-of-learning.qmd)
+For introductions and guided reading paths, [browse the series directory](series.qmd): [The Natural Geometry of Learning](natural-geometry-of-learning.qmd) and [Mathematical Image Analysis](mathematical-image-analysis.qmd).
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {

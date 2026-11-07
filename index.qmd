@@ -16,7 +16,7 @@ I am interested in all things geometry behind probability, uncertainty, and lear
 
 <div class="hero-links">
   <a href="blog.html">Blog</a>
-  <a href="natural-geometry-of-learning.html">Series</a>
+  <a href="series.html">Series</a>
   <a href="projects.html">Projects</a>
   <a href="notes.html">Notes</a>
   <a href="cv.html">CV</a>
@@ -27,7 +27,7 @@ I am interested in all things geometry behind probability, uncertainty, and lear
 
 ## Current writing
 
-I write technical essays on mathematics, machine learning, geometry, and related ideas. My current long-form series is **The Natural Geometry of Learning**, beginning with Fisher information, optimal transport, KL geometry, and Schrödinger bridges.
+I write technical essays on mathematics, machine learning, geometry, and related ideas. **The Natural Geometry of Learning** explores the geometry of probability and learning. My new series, **Mathematical Image Analysis**, will share ideas, methods, and research notes from my PhD.
 
 <div class="card-grid">
 
@@ -38,6 +38,16 @@ I write technical essays on mathematics, machine learning, geometry, and related
 A long-form essay series on information geometry, optimal transport, KL divergence, Schrödinger bridges, and learning.
 
 <a href="natural-geometry-of-learning.html">Read the series →</a>
+
+</div>
+
+<div class="card">
+
+### Mathematical Image Analysis
+
+Ideas, methods, and research notes from my PhD. First article coming soon.
+
+<a href="mathematical-image-analysis.html">Explore the series →</a>
 
 </div>
 
@@ -75,6 +85,6 @@ My current interests sit at the intersection of geometry, probability, and learn
 
 ## Start here
 
-If you are here for the writing project, start with the blog series:
+Explore the series for a guided reading path, or visit the [Blog](blog.qmd) for the latest posts:
 
-<a href="natural-geometry-of-learning.html"><strong>The Natural Geometry of Learning →</strong></a>
+<a href="series.html"><strong>Browse the series →</strong></a>

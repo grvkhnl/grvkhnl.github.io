@@ -14,6 +14,8 @@ listing:
   feed: false
 ---
 
+[← All series](series.qmd)
+
 ::: {.series-intro}
 *The Natural Geometry of Learning* is an ongoing expository essay series about the geometric ideas that recur across probability and machine learning. It begins with two complementary rulers---Fisher information for statistical distinguishability and Wasserstein distance for spatial displacement---before moving toward KL geometry, Schrödinger bridges, Hodge decomposition, Langevin dynamics, and their connections to learning.
 :::

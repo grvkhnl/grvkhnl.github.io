@@ -1,0 +1,24 @@
+---
+title: "Series"
+description: "Guided reading paths through geometry, learning, and mathematical image analysis."
+page-layout: full
+toc: false
+---
+
+::: {.series-intro}
+Connected essays, worked examples, and research notes, organized by topic. Each series has its own introduction and reading path. For all posts in chronological order, visit the [Blog](blog.qmd).
+:::
+
+## The Natural Geometry of Learning
+
+An ongoing expository series on the geometry of probability and machine learning, beginning with Fisher information, Wasserstein distance, KL divergence, and Schrödinger bridges.
+
+[Read The Natural Geometry of Learning →](natural-geometry-of-learning.qmd)
+
+## Mathematical Image Analysis
+
+Ideas, methods, and research notes from my PhD, exploring the mathematics behind image analysis through explanations and worked examples.
+
+*First article coming soon.*
+
+[Explore Mathematical Image Analysis →](mathematical-image-analysis.qmd)

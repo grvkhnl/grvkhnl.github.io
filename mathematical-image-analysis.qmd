@@ -1,0 +1,21 @@
+---
+title: "Mathematical Image Analysis"
+subtitle: "Ideas, methods, and research notes from my PhD"
+description: "A series exploring mathematical image analysis through explanations, worked examples, and research notes."
+page-layout: full
+toc: false
+---
+
+[← All series](series.qmd)
+
+::: {.series-intro}
+*Mathematical Image Analysis* explores the mathematical ideas and techniques behind analyzing images. Drawing on my PhD topic, this series will bring together explanations of methods, worked examples, and research reflections, connecting mathematical formulations with the image analysis problems they help solve.
+:::
+
+## Reading guide
+
+The series will grow as I write. Articles will be collected here in a suggested reading order, with room for both foundational explanations and focused research notes.
+
+**First article coming soon.**
+
+New articles will also appear in the [Blog](blog.qmd). You can follow updates through the [RSS feed](blog.xml).
