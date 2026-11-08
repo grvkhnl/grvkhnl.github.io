@@ -953,33 +953,3 @@ body.quarto-dark .hero-links a {
 body.quarto-dark .hero-links a:hover {
   color: var(--accent);
 }
-
-/* Geometry diagrams use purpose-built mobile layouts and explicit palettes.
-   Match Quarto's manual theme toggle, rather than the OS color preference. */
-.geometry-diagram picture {
-  display: block;
-  width: 100%;
-}
-.geometry-diagram picture img {
-  display: block;
-  width: 100%;
-  max-width: 100%;
-  height: auto;
-}
-.geometry-diagram .diagram-dark {
-  display: none;
-}
-body.quarto-dark .geometry-diagram .diagram-light {
-  display: none;
-}
-body.quarto-dark .geometry-diagram .diagram-dark {
-  display: block;
-}
-@media print {
-  body.quarto-dark .geometry-diagram .diagram-light {
-    display: block;
-  }
-  body.quarto-dark .geometry-diagram .diagram-dark {
-    display: none;
-  }
-}
