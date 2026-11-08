@@ -143,7 +143,21 @@ In other words, under Brenier's assumptions, the optimal way to move mass for th
 
 :::
 
-![Kantorovich transport plans versus Brenier maps. A general transport plan $\gamma$ may split mass across many destinations, while Brenier's theorem identifies conditions under which the $W_2$-optimal transport is induced by a deterministic gradient map $T=\nabla\varphi$.](figures/transport-plan-vs-brenier-map.svg){#fig-transport-plan-vs-brenier-map width="100%" fig-alt="Diagram comparing a Kantorovich transport plan with many faint mass-splitting connections to a Brenier deterministic map with one arrow from each source bin to a target bin."}
+::: {#fig-transport-plan-vs-brenier-map .geometry-diagram}
+
+```{=html}
+<picture class="diagram-light">
+  <source media="(max-width: 600px)" srcset="figures/transport-plan-vs-brenier-map-mobile.svg" width="229" height="489">
+  <img src="figures/transport-plan-vs-brenier-map.svg" width="469" height="257" alt="A discrete transport plan splits each equal-mass source atom between two targets. Beside it, a continuous uniform density is translated by a deterministic Brenier map, illustrated with representative point trajectories." loading="lazy" decoding="async">
+</picture>
+<picture class="diagram-dark">
+  <source media="(max-width: 600px)" srcset="figures/transport-plan-vs-brenier-map-mobile-dark.svg" width="229" height="489">
+  <img src="figures/transport-plan-vs-brenier-map-dark.svg" width="469" height="257" alt="A discrete transport plan splits each equal-mass source atom between two targets. Beside it, a continuous uniform density is translated by a deterministic Brenier map, illustrated with representative point trajectories." loading="lazy" decoding="async">
+</picture>
+```
+
+Transport plans can split mass, whereas maps assign a single destination to each source point. Left: a discrete coupling with four atoms of mass $1/4$ in each marginal; each source sends $1/8$ along each of two arrows. Right: a continuous uniform density translated by the Brenier map $T(x)=x+1=\nabla(\tfrac12x^2+x)$. Bands show its supports, and dots mark representative points rather than indivisible histogram bins.
+:::
 
 For $p=2$, the optimal transport map takes the especially clean form $T=\nabla\varphi$: it is the gradient field, derived from a scalar potential. This structure is specific to the quadratic cost. For $p\neq 2$, the optimal maps may still be characterized through potential functions related to the $c$-transform of the cost, but the clean form $T=\nabla\varphi$ with $\varphi$ convex is lost. The Riemannian geometric structure developed below depends essentially on this gradient form; for $p \neq 2$ the geometry becomes closer to Finsler than Riemannian, and the elegant theory described here does not carry over [@villani2009; @santambrogio2015].
 
@@ -264,7 +278,21 @@ Here $\|\dot\rho_t\|_{\rho_t}$ denotes the minimum-energy tangent norm defined b
 
 :::
 
-![Displacement interpolation as the cheapest movie between distributions. The top row shows density snapshots over time, while the space-time diagram shows straight-line characteristic paths from $\mu$ to $\nu$ and the intermediate distribution $\rho_{1/2}$.](figures/displacement-interpolation.svg){#fig-displacement-interpolation width="100%" fig-alt="Diagram showing density snapshots at t equals 0, 0.5, and 1 above a space-time plot of straight-line transport paths from mu to nu, with the midpoint density marked as displacement interpolation."}
+::: {#fig-displacement-interpolation .geometry-diagram}
+
+```{=html}
+<picture class="diagram-light">
+  <source media="(max-width: 600px)" srcset="figures/displacement-interpolation-mobile.svg" width="229" height="637">
+  <img src="figures/displacement-interpolation.svg" width="478" height="379" alt="Three normalized Gaussian snapshots with identical widths translate from mean minus one to mean one. Parallel particle trajectories below show the same translation, with the halfway positions marked in gold." loading="lazy" decoding="async">
+</picture>
+<picture class="diagram-dark">
+  <source media="(max-width: 600px)" srcset="figures/displacement-interpolation-mobile-dark.svg" width="229" height="637">
+  <img src="figures/displacement-interpolation-dark.svg" width="478" height="379" alt="Three normalized Gaussian snapshots with identical widths translate from mean minus one to mean one. Parallel particle trajectories below show the same translation, with the halfway positions marked in gold." loading="lazy" decoding="async">
+</picture>
+```
+
+One displacement interpolation shown as density snapshots and particle paths: $\rho_t=\mathcal N(-1+2t,0.6^2)$. The normalized densities translate without changing width, and the parallel characteristics follow $x_t=x_0+2t$. Gold midpoint markers belong to $\rho_{1/2}$. Along this optimal path, $v_t=2$ and the kinetic action equals $W_2^2(\mu,\nu)=4$.
+:::
 
 The Benamou--Brenier formulation is more than a computational device. It recasts optimal transport as a problem about *dynamics*: find the flow that carries mass from $\mu$ to $\nu$ at minimum kinetic energy cost. This dynamic picture is a direct precursor to the Schrödinger bridge, covered in a future post. Rather than simply adding entropy to the kinetic action, the Schrödinger problem minimizes path-space relative entropy with respect to a stochastic reference process, typically a diffusion [@leonard2014]. The result can still be read as the cheapest *stochastic* movie rather than the cheapest deterministic one.
 

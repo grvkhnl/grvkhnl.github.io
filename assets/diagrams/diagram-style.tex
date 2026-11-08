@@ -1,0 +1,38 @@
+% Shared by all geometry figures. Compile from a post's figures/source directory.
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{Iowan Old Style}
+\setmathfont{XCharter-Math.otf}[Path=../../../../assets/fonts/xcharter-math/]
+\usetikzlibrary{arrows.meta,calc,positioning,backgrounds}
+\newif\ifdiagrammobile
+\ifdefined\mobile\diagrammobiletrue\fi
+\definecolor{paper}{HTML}{FFF1DC}
+\definecolor{ink}{HTML}{292523}
+\definecolor{muted}{HTML}{65584F}
+\definecolor{maroon}{HTML}{7A2435}
+\definecolor{taupe}{HTML}{70534D}
+\definecolor{gold}{HTML}{865811}
+\definecolor{rule}{HTML}{C9B495}
+\definecolor{wash}{HTML}{F4E4CB}
+\ifdefined\darkmode
+  \definecolor{paper}{HTML}{0D1117}
+  \definecolor{ink}{HTML}{EEE7DC}
+  \definecolor{muted}{HTML}{BEB3A7}
+  \definecolor{maroon}{HTML}{E5A1AF}
+  \definecolor{taupe}{HTML}{D1B4A7}
+  \definecolor{gold}{HTML}{E6BC70}
+  \definecolor{rule}{HTML}{4E4850}
+  \definecolor{wash}{HTML}{1B2029}
+\fi
+\pagecolor{paper}
+\color{ink}
+\tikzset{
+  >=Stealth,
+  every picture/.style={font=\fontsize{10}{13}\selectfont, line cap=round,line join=round},
+  title/.style={font=\fontsize{12}{15}\selectfont\bfseries,text=maroon,align=center},
+  labeltext/.style={font=\fontsize{10}{13}\selectfont,align=center,text=ink},
+  smalltext/.style={font=\fontsize{9}{12}\selectfont,align=center,text=muted},
+  panel/.style={draw=rule,fill=paper,rounded corners=5pt,line width=0.7pt},
+  vector/.style={->,line width=1.2pt},
+  axis/.style={->,draw=muted,line width=0.6pt},
+}

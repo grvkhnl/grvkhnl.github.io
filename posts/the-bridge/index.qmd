@@ -135,7 +135,21 @@ More precisely, the bridge measures concentrate on the ensemble of these paths. 
 Entropy regularization makes the finite-noise problem smoother and, under standard positivity conditions, strictly convex with a unique coupling. The deterministic Wasserstein geometry reappears when that regularization is removed.
 :::
 
-![A Brownian reference supplies many unconstrained paths. The Schrödinger bridge reweights and steers those paths so their endpoint marginals match $\mu$ and $\nu$ while remaining as close as possible to the reference law. The gold characteristic indicates the deterministic displacement path approached as the noise vanishes.](figures/bridge-paths.svg){#fig-bridge-paths width="92%" fig-alt="Space-time diagram with source and target distributions, faint Brownian paths, controlled bridge paths, and a deterministic optimal-transport characteristic."}
+::: {#fig-bridge-paths .geometry-diagram}
+
+```{=html}
+<picture class="diagram-light">
+  <source media="(max-width: 600px)" srcset="figures/bridge-paths-mobile.svg" width="229" height="597">
+  <img src="figures/bridge-paths.svg" width="469" height="305" alt="Two separate space-time panels compare unconstrained Brownian diffusion near the initial mean with a Schrödinger bridge reaching the shifted target distribution. Endpoint density curves show the laws; gold dashed straight paths show limiting transport characteristics." loading="lazy" decoding="async">
+</picture>
+<picture class="diagram-dark">
+  <source media="(max-width: 600px)" srcset="figures/bridge-paths-mobile-dark.svg" width="229" height="597">
+  <img src="figures/bridge-paths-dark.svg" width="469" height="305" alt="Two separate space-time panels compare unconstrained Brownian diffusion near the initial mean with a Schrödinger bridge reaching the shifted target distribution. Endpoint density curves show the laws; gold dashed straight paths show limiting transport characteristics." loading="lazy" decoding="async">
+</picture>
+```
+
+Brownian reference and Schrödinger bridge for $\mu=\mathcal N(0,0.45^2)$ and $\nu=\mathcal N(2.5,0.45^2)$, both with noise $\varepsilon=0.35$. The reference has no terminal constraint and ends with law $r_1=\mathcal N(0,0.45^2+0.35)$; the bridge has the prescribed endpoint laws. Each panel shows nine sampled paths, while the curves depict the underlying marginal densities. The gold straight paths illustrate three members of the OT ensemble $x_t=x_0+2.5t$ recovered in the zero-noise limit.
+:::
 
 ## Steering the Flow: The $(f,g)$-Transform
 
@@ -314,7 +328,21 @@ $$ {#eq-sinkhorn-updates}
 
 where $\oslash$ denotes elementwise division. The vectors $u$ and $v$ are the discrete counterparts of the Schrödinger potentials.
 
-![Sinkhorn alternates KL projections onto the two intersecting marginal-constraint sets. Each iterate satisfies one marginal, and the sequence converges to the entropic coupling $\gamma^\varepsilon$ in their intersection.](figures/sinkhorn-projections.svg){#fig-sinkhorn-projections width="86%" fig-alt="Two overlapping constraint sets for source and target marginals with a zigzag sequence of alternating KL projections converging to a point in their intersection."}
+::: {#fig-sinkhorn-projections .geometry-diagram}
+
+```{=html}
+<picture class="diagram-light">
+  <source media="(max-width: 600px)" srcset="figures/sinkhorn-projections-mobile.svg" width="229" height="365">
+  <img src="figures/sinkhorn-projections.svg" width="469" height="280" alt="Actual Sinkhorn iterates zigzag between the zero-row-error and zero-column-error axes. Intermediate iterates satisfy one marginal constraint; their limit at the origin satisfies both." loading="lazy" decoding="async">
+</picture>
+<picture class="diagram-dark">
+  <source media="(max-width: 600px)" srcset="figures/sinkhorn-projections-mobile-dark.svg" width="229" height="365">
+  <img src="figures/sinkhorn-projections-dark.svg" width="469" height="280" alt="Actual Sinkhorn iterates zigzag between the zero-row-error and zero-column-error axes. Intermediate iterates satisfy one marginal constraint; their limit at the origin satisfies both." loading="lazy" decoding="async">
+</picture>
+```
+
+Sinkhorn updates for a positive $2\times2$ matrix with total mass one, starting from $\gamma^{(0)}=\left(\begin{smallmatrix}0.32&0.08\\0.12&0.48\end{smallmatrix}\right)$, with target marginals $\mu=(0.55,0.45)$ and $\nu=(0.35,0.65)$. The coordinates are marginal errors $r=\gamma_{11}+\gamma_{12}-0.55$ and $c=\gamma_{11}+\gamma_{21}-0.35$. Odd iterates lie on $r=0$ and even iterates on $c=0$; their limit has both errors zero. The dashed continuation shows later updates. This is a residual plot, not a Euclidean picture of KL projection.
+:::
 
 ::: {.callout-tip .math-depth title="Mathematical Depth"}
 ***The projection behind each scaling step.*** For a positive coupling $\gamma$, the row correction is

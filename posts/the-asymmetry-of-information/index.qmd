@@ -130,7 +130,21 @@ The expectation is under the model. The objective penalizes the model strongly f
 
 Reverse KL is the standard divergence appearing in the evidence lower bound used in much of variational inference [@wainwright2008]. It is not the only possible variational objective, but it is computationally attractive because expectations under the tractable approximation can often be estimated directly.
 
-![Forward and reverse KL fitted to a bimodal target. Forward KL commonly favors a broad approximation covering both modes, while reverse KL commonly selects one mode when the approximating family is unimodal.](figures/forward-reverse-kl.svg){#fig-forward-reverse-kl width="100%" fig-alt="Three-panel diagram showing a bimodal target, a broad forward-KL Gaussian covering both modes, and a narrow reverse-KL Gaussian concentrated on one mode."}
+::: {#fig-forward-reverse-kl .geometry-diagram}
+
+```{=html}
+<picture class="diagram-light">
+  <source media="(max-width: 600px)" srcset="figures/forward-reverse-kl-mobile.svg" width="229" height="589">
+  <img src="figures/forward-reverse-kl.svg" width="478" height="220" alt="A normalized bimodal target, its broad moment-matched forward-KL Gaussian, and a numerically fitted reverse-KL Gaussian near the left mode. All three panels use the same density and spatial scales." loading="lazy" decoding="async">
+</picture>
+<picture class="diagram-dark">
+  <source media="(max-width: 600px)" srcset="figures/forward-reverse-kl-mobile-dark.svg" width="229" height="589">
+  <img src="figures/forward-reverse-kl-dark.svg" width="478" height="220" alt="A normalized bimodal target, its broad moment-matched forward-KL Gaussian, and a numerically fitted reverse-KL Gaussian near the left mode. All three panels use the same density and spatial scales." loading="lazy" decoding="async">
+</picture>
+```
+
+Gaussian approximations to the normalized target $p=\tfrac12\mathcal N(-2,0.55^2)+\tfrac12\mathcal N(2,0.55^2)$, on common axes. Forward KL gives the moment-matched Gaussian $\mathcal N(0,2.074^2)$. Numerical reverse-KL minimization gives approximately $\mathcal N(-1.999,0.552^2)$; symmetry gives an equally good fit near the right mode. All densities integrate to one; displayed parameters are rounded.
+:::
 
 ::: {.callout-note .learning-box title="Consequence for Learning"}
 The contrast between forward and reverse KL directly shapes the behavior of widely used learning procedures.
@@ -313,7 +327,21 @@ A concrete example helps distinguish the two operations. Projecting a target ont
 Machine-learning discussions often avoid these names and simply say *forward-* and *reverse-KL projection*. The information-geometric terminology becomes useful once the affine structure of $\mathcal M$ is specified.
 :::
 
-![Two directed KL projections of the same target onto a model submanifold. The forward-KL or m-projection and reverse-KL or e-projection generally land at different model distributions.](figures/dual-kl-projections.svg){#fig-dual-kl-projections width="82%" fig-alt="Diagram of a target distribution above a curved model submanifold, with two curved arrows landing at different forward-KL and reverse-KL projection points."}
+::: {#fig-dual-kl-projections .geometry-diagram}
+
+```{=html}
+<picture class="diagram-light">
+  <source media="(max-width: 600px)" srcset="figures/dual-kl-projections-mobile.svg" width="229" height="591">
+  <img src="figures/dual-kl-projections.svg" width="469" height="314" alt="The same bimodal target appears in two panels. Forward-KL minimization reaches a broad Gaussian and reverse-KL minimization reaches a narrow Gaussian, both in the same Gaussian model family." loading="lazy" decoding="async">
+</picture>
+<picture class="diagram-dark">
+  <source media="(max-width: 600px)" srcset="figures/dual-kl-projections-mobile-dark.svg" width="229" height="591">
+  <img src="figures/dual-kl-projections-dark.svg" width="469" height="314" alt="The same bimodal target appears in two panels. Forward-KL minimization reaches a broad Gaussian and reverse-KL minimization reaches a narrow Gaussian, both in the same Gaussian model family." loading="lazy" decoding="async">
+</picture>
+```
+
+Two directed minimizations for the same target and the same Gaussian family $\mathcal M=\{\mathcal N(m,s^2):s>0\}$. The forward-KL ($m$-) projection and reverse-KL ($e$-) projection use the fits in @fig-forward-reverse-kl. Points represent whole distributions; separate density sketches show their shapes. The arrows indicate minimization, not Euclidean perpendiculars or a claim that both projection theorems apply to this family.
+:::
 
 ::: {.callout-tip .math-depth title="Mathematical Depth"}
 ***Geodesics and dual connections.*** An $m$-geodesic connects distributions by linear interpolation of their densities:

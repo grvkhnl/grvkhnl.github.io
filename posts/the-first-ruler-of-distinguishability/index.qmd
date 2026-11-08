@@ -194,7 +194,21 @@ $$ {#eq-reparameterized-fim}
 This is exactly the transformation law for a Riemannian metric. The FIM captures intrinsic geometry, not a coordinate artifact. Changing how we label the parameters changes the matrix entries, but not the statistical distance measured by the metric.
 :::
 
-![The pullback origin of the Fisher Information Matrix. The parameter manifold $\mathcal M$ maps into the space of distributions $\mathcal P$ through the model map $f$. Parameter directions push forward to density perturbations, whose logarithmic representations are score functions, and the Fisher--Rao inner product pulls back to the Fisher metric.](figures/fim-pullback-origin.svg){#fig-fim-pullback width="100%" fig-alt="Diagram showing parameter space mapping into distribution space, with tangent vectors represented logarithmically as score functions and the Fisher metric obtained as a pullback."}
+::: {#fig-fim-pullback .geometry-diagram}
+
+```{=html}
+<picture class="diagram-light">
+  <source media="(max-width: 600px)" srcset="figures/fim-pullback-origin-mobile.svg" width="220" height="464">
+  <img src="figures/fim-pullback-origin.svg" width="478" height="209" alt="Parameter and distribution tangent planes connected by the model map and its differential. Dividing a density perturbation by the density gives a score; the Fisher–Rao inner product pulls back to the Fisher information matrix." loading="lazy" decoding="async">
+</picture>
+<picture class="diagram-dark">
+  <source media="(max-width: 600px)" srcset="figures/fim-pullback-origin-mobile-dark.svg" width="220" height="464">
+  <img src="figures/fim-pullback-origin-dark.svg" width="478" height="209" alt="Parameter and distribution tangent planes connected by the model map and its differential. Dividing a density perturbation by the density gives a score; the Fisher–Rao inner product pulls back to the Fisher information matrix." loading="lazy" decoding="async">
+</picture>
+```
+
+The pullback origin of the Fisher information matrix. A point $p_\theta$ represents an entire density, and $df_\theta$ sends parameter directions to density perturbations. Dividing by $p$ gives the score components. Measuring these perturbations with the Fisher–Rao inner product induces $F=f^*g$ on parameter space. The shaded planes depict tangent spaces, not density graphs.
+:::
 
 ## Chentsov's Theorem: The Unique Invariant Metric
 
@@ -293,7 +307,21 @@ For deep learning, this statement should not be read too literally. We are usual
 
 The geometric reading is direct: $F(\theta)^{-1}$ is the dual metric on the cotangent space, and the bound says that estimation uncertainty is bounded below by the inverse of the local metric scale of the statistical manifold. Where the Fisher metric is large in a direction---where distributions are highly distinguishable and change rapidly along that direction---estimation is easy. Conversely, where the local distinguishability is small, estimation is hard.
 
-![Fisher ellipses and the Cramér-Rao bound. The local Fisher metric changes the shape of unit balls on the parameter manifold: narrow directions correspond to high local distinguishability, while wide directions correspond to directions where estimation is harder.](figures/fisher-ellipses-cramer-rao.svg){#fig-fisher-ellipses-cramer-rao width="100%" fig-alt="Diagram of a statistical manifold with Fisher ellipses at two parameter points and an inset showing the Cramér-Rao covariance bound."}
+::: {#fig-fisher-ellipses-cramer-rao .geometry-diagram}
+
+```{=html}
+<picture class="diagram-light">
+  <source media="(max-width: 600px)" srcset="figures/fisher-ellipses-cramer-rao-mobile.svg" width="229" height="529">
+  <img src="figures/fisher-ellipses-cramer-rao.svg" width="469" height="328" alt="Two tangent-space ellipses with long maroon axes for lower sensitivity and short gold axes for higher sensitivity. A separate Cramér–Rao panel states the covariance bound and its assumptions." loading="lazy" decoding="async">
+</picture>
+<picture class="diagram-dark">
+  <source media="(max-width: 600px)" srcset="figures/fisher-ellipses-cramer-rao-mobile-dark.svg" width="229" height="529">
+  <img src="figures/fisher-ellipses-cramer-rao-dark.svg" width="469" height="328" alt="Two tangent-space ellipses with long maroon axes for lower sensitivity and short gold axes for higher sensitivity. A separate Cramér–Rao panel states the covariance bound and its assumptions." loading="lazy" decoding="async">
+</picture>
+```
+
+Fisher unit-length boundaries in two tangent spaces. A long axis means lower Fisher sensitivity and permits more coordinate movement at fixed Fisher length; a short axis means higher sensitivity. These are directional statements, not a ranking of the two parameter points. For regular unbiased estimation with nonsingular Fisher information, the covariance is bounded below by $F^{-1}$, where $F$ includes the full observed sample.
+:::
 
 ::: {.callout-tip .math-depth title="Mathematical Depth"}
 ***Proof sketch.*** Fix an unbiased estimator $\hat{\theta}$ of a scalar parameter $\theta \in \mathbb{R}$. Unbiasedness means
