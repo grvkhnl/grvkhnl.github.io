@@ -1,6 +1,15 @@
 \documentclass[tikz,border=8pt]{standalone}
-\usepackage[utf8]{inputenc}
-\usepackage{amsmath,amssymb}
+\usepackage{fontspec}
+\usepackage{unicode-math}
+\setmainfont{XCharter-Roman.otf}[
+  Path=../../../../assets/fonts/xcharter-text/,
+  BoldFont=XCharter-Bold.otf,
+  ItalicFont=XCharter-Italic.otf,
+  BoldItalicFont=XCharter-BoldItalic.otf
+]
+\setmathfont{XCharter-Math.otf}[
+  Path=../../../../assets/fonts/xcharter-math/
+]
 \usepackage{microtype}
 \usetikzlibrary{arrows.meta,calc,decorations.pathmorphing,positioning}
 
