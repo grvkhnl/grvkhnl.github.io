@@ -1,28 +1,48 @@
 \documentclass[tikz,border=8pt]{standalone}
 \input{../../../../assets/diagrams/diagram-style.tex}
+% Schematic embedded patches: the quadratic terms vanish to first order at
+% the marked point, so both arrows lie in the actual local tangent plane.
+\newcommand{\curvedpatch}[2]{
+  \draw[draw=rule,fill=wash,line width=0.65pt]
+    plot[domain=-1:1,samples=25] ({1.6*\x-0.75},{0.3*\x+0.65+#1*\x*\x+#2})
+    -- plot[domain=-1:1,samples=25] ({1.6+0.75*\x},{0.3-0.65*\x+#1+#2*\x*\x})
+    -- plot[domain=1:-1,samples=25] ({1.6*\x+0.75},{0.3*\x-0.65+#1*\x*\x+#2})
+    -- plot[domain=1:-1,samples=25] ({-1.6+0.75*\x},{-0.3-0.65*\x+#1+#2*\x*\x}) -- cycle;
+  \foreach \v in {-0.5,0,0.5}{
+    \draw[rule,line width=0.4pt]
+      plot[domain=-1:1,samples=25] ({1.6*\x+0.75*\v},{0.3*\x-0.65*\v+#1*\x*\x+#2*\v*\v});
+    \draw[rule,line width=0.4pt]
+      plot[domain=-1:1,samples=25] ({1.6*\v+0.75*\x},{0.3*\v-0.65*\x+#1*\v*\v+#2*\x*\x});
+  }
+  % A small flat patch distinguishes the tangent space from the manifold.
+  \draw[draw=muted,dashed,line width=0.6pt,fill=wash,fill opacity=0.88]
+    (-1.415,0.13)--(0.665,0.52)--(1.415,-0.13)--(-0.665,-0.52)--cycle;
+}
 \newcommand{\parameterpanel}{
   \draw[panel] (0,0) rectangle (6.3,5.2);
   \node[title] at (3.15,4.72) {Parameter manifold $\mathcal M$};
-  \draw[draw=rule,fill=wash] (0.7,2.25)--(2.0,3.85)--(5.45,3.25)--(4.15,1.65)--cycle;
-  \node[smalltext] at (1.35,3.95) {$T_\theta\mathcal M$};
-  \coordinate (th) at (2.5,2.75);
-  \draw[vector,maroon] (th)--(4.05,3.35) node[above right] {$\partial_i$};
-  \draw[vector,taupe] (th)--(3.7,2.1) node[below right] {$\partial_j$};
+  \begin{scope}[shift={(3.0,2.85)}]\curvedpatch{0.48}{-0.32}\end{scope}
+  \node[smalltext] at (1.3,4.12) {$T_\theta\mathcal M$};
+  \draw[muted,line width=0.45pt] (1.65,3.95)--(2.25,3.18);
+  \coordinate (th) at (3.0,2.85);
+  \draw[vector,maroon] (th)--(4.0,3.0375) node[above right] {$\partial_i$};
+  \draw[vector,taupe] (th)--(3.45,2.46) node[below right] {$\partial_j$};
   \fill[maroon] (th) circle (2.3pt);
-  \node[below left=4pt,text=maroon] at (th) {$\theta$};
+  \node[left=5pt,text=maroon] at (th) {$\theta$};
   \node[smalltext] at (3.15,1.2) {Infinitesimal parameter directions};
   \node[labeltext,text=gold] at (3.15,0.55) {Inherited metric: $F=f^*g$};
 }
 \newcommand{\densitypanel}{
   \draw[panel] (0,0) rectangle (6.3,5.2);
   \node[title] at (3.15,4.72) {Distribution manifold $\mathcal P$};
-  \draw[draw=rule,fill=wash] (0.7,2.7)--(2.0,4.05)--(5.45,3.45)--(4.15,2.1)--cycle;
-  \node[smalltext] at (1.3,4.12) {$T_{p_\theta}\mathcal P$};
-  \coordinate (p) at (2.5,3.15);
-  \draw[vector,maroon] (p)--(4.05,3.7) node[above right] {$\partial_i p$};
-  \draw[vector,taupe] (p)--(3.7,2.55) node[below right] {$\partial_j p$};
+  \begin{scope}[shift={(3.0,3.15)}]\curvedpatch{-0.34}{0.4}\end{scope}
+  \node[smalltext] at (1.25,4.15) {$T_{p_\theta}\mathcal P$};
+  \draw[muted,line width=0.45pt] (1.65,3.98)--(2.25,3.48);
+  \coordinate (p) at (3.0,3.15);
+  \draw[vector,maroon] (p)--(4.0,3.3375) node[above right] {$\partial_i p$};
+  \draw[vector,taupe] (p)--(3.45,2.76) node[below right] {$\partial_j p$};
   \fill[maroon] (p) circle (2.3pt);
-  \node[below left=4pt,text=maroon] at (p) {$p_\theta$};
+  \node[left=5pt,text=maroon] at (p) {$p_\theta$};
   \node[smalltext] at (3.15,1.7) {One point represents a whole density.};
   \node[labeltext] at (3.15,1.1) {Logarithmic representation (score)};
   \node[labeltext,text=maroon] at (3.15,0.5) {$s_i=\dfrac{\partial_i p}{p}=\partial_i\log p$};

@@ -199,15 +199,15 @@ This is exactly the transformation law for a Riemannian metric. The FIM captures
 ```{=html}
 <picture class="diagram-light">
   <source media="(max-width: 600px)" srcset="figures/fim-pullback-origin-mobile.svg" width="220" height="464">
-  <img src="figures/fim-pullback-origin.svg" width="478" height="209" alt="Parameter and distribution tangent planes connected by the model map and its differential. Dividing a density perturbation by the density gives a score; the Fisher–Rao inner product pulls back to the Fisher information matrix." loading="lazy" decoding="async">
+  <img src="figures/fim-pullback-origin.svg" width="478" height="209" alt="Curved parameter and distribution manifolds with small dashed tangent patches, connected by the model map and its differential. Dividing a density perturbation by the density gives a score; the Fisher–Rao inner product pulls back to the Fisher information matrix." loading="lazy" decoding="async">
 </picture>
 <picture class="diagram-dark">
   <source media="(max-width: 600px)" srcset="figures/fim-pullback-origin-mobile-dark.svg" width="220" height="464">
-  <img src="figures/fim-pullback-origin-dark.svg" width="478" height="209" alt="Parameter and distribution tangent planes connected by the model map and its differential. Dividing a density perturbation by the density gives a score; the Fisher–Rao inner product pulls back to the Fisher information matrix." loading="lazy" decoding="async">
+  <img src="figures/fim-pullback-origin-dark.svg" width="478" height="209" alt="Curved parameter and distribution manifolds with small dashed tangent patches, connected by the model map and its differential. Dividing a density perturbation by the density gives a score; the Fisher–Rao inner product pulls back to the Fisher information matrix." loading="lazy" decoding="async">
 </picture>
 ```
 
-The pullback origin of the Fisher information matrix. A point $p_\theta$ represents an entire density, and $df_\theta$ sends parameter directions to density perturbations. Dividing by $p$ gives the score components. Measuring these perturbations with the Fisher–Rao inner product induces $F=f^*g$ on parameter space. The shaded planes depict tangent spaces, not density graphs.
+The pullback origin of the Fisher information matrix. A point $p_\theta$ represents an entire density, and $df_\theta$ sends parameter directions to density perturbations. Dividing by $p$ gives the score components. Measuring these perturbations with the Fisher–Rao inner product induces $F=f^*g$ on parameter space. The curved surfaces schematically depict the manifolds; the small dashed patches are their tangent spaces at the marked points. The surfaces are not density graphs, and their drawn curvature is illustrative.
 :::
 
 ## Chentsov's Theorem: The Unique Invariant Metric
