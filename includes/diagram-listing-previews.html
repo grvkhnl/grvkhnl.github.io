@@ -1,0 +1,30 @@
+<script>
+// Follow Quarto's manual theme choice, including in browsers where embedded
+// SVG media queries follow the system preference instead of the page theme.
+document.addEventListener("DOMContentLoaded", () => {
+  const listings = document.querySelectorAll(".quarto-listing");
+  if (!listings.length) return;
+
+  const diagram = /\/(fim-pullback-origin|transport-plan-vs-brenier-map|forward-reverse-kl|bridge-paths)(?:-preview-dark)?\.svg$/;
+  const updatePreviews = () => {
+    const dark = document.body.classList.contains("quarto-dark");
+    listings.forEach(listing => {
+      listing.querySelectorAll("img.thumbnail-image").forEach(img => {
+        const source = img.getAttribute("src");
+        if (!source || !diagram.test(source)) return;
+        const next = source.replace(diagram, `/$1${dark ? "-preview-dark" : ""}.svg`);
+        if (source !== next) img.setAttribute("src", next);
+      });
+    });
+  };
+
+  updatePreviews();
+  new MutationObserver(updatePreviews).observe(document.body, {
+    attributes: true, attributeFilter: ["class"]
+  });
+  // Listing search, category filters and pagination may reinsert thumbnails.
+  listings.forEach(listing => new MutationObserver(updatePreviews).observe(listing, {
+    childList: true, subtree: true
+  }));
+});
+</script>

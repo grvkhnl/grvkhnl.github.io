@@ -36,3 +36,8 @@
   vector/.style={->,line width=1.2pt},
   axis/.style={->,draw=muted,line width=0.6pt},
 }
+% Listing thumbnails blend into the surrounding page in dark mode.
+\ifdefined\transparentpreview
+  \nopagecolor
+  \tikzset{panel/.append style={fill=none}}
+\fi

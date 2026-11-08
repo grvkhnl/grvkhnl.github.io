@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Compile the canonical TikZ sources into light/dark, desktop/mobile SVGs.
+"""Compile TikZ sources into light/dark SVGs and transparent listing previews.
 
 Requires XeLaTeX and pdftocairo. Numerical data are tracked; regenerate them
 separately with generate-diagram-data.py (NumPy/SciPy) when changing examples.
@@ -10,6 +10,8 @@ import subprocess
 import xml.etree.ElementTree as ET
 
 ROOT = Path(__file__).resolve().parents[1]
+LISTING_FIGURES = {'fim-pullback-origin', 'transport-plan-vs-brenier-map',
+                   'forward-reverse-kl', 'bridge-paths'}
 parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument('--figure', action='append', help='Stem of a figure to rebuild (repeatable)')
 args = parser.parse_args()
@@ -21,9 +23,12 @@ if not sources:
 for source in sources:
     build = source.parent.parent / 'build'
     build.mkdir(exist_ok=True)
-    for suffix, defines in [('', ''), ('-dark', r'\def\darkmode{1}'),
-                            ('-mobile', r'\def\mobile{1}'),
-                            ('-mobile-dark', r'\def\mobile{1}\def\darkmode{1}')]:
+    variants = [('', ''), ('-dark', r'\def\darkmode{1}'),
+                ('-mobile', r'\def\mobile{1}'),
+                ('-mobile-dark', r'\def\mobile{1}\def\darkmode{1}')]
+    if source.stem in LISTING_FIGURES:
+        variants.append(('-preview-dark', r'\def\darkmode{1}\def\transparentpreview{1}'))
+    for suffix, defines in variants:
         stem = source.stem + suffix
         command = ['xelatex', '-interaction=nonstopmode', '-halt-on-error',
                    '-output-directory=../build', '-jobname=' + stem,
@@ -33,16 +38,17 @@ for source in sources:
             raise RuntimeError(result.stdout[-6000:] + result.stderr)
         svg = source.parent.parent / (stem + '.svg')
         subprocess.run(['pdftocairo', '-svg', str(build / (stem + '.pdf')), str(svg)], check=True)
-        # pdftocairo omits the PDF page color. Give every standalone SVG an
-        # explicit background, including when opened or shared outside the blog.
+        # Give standalone diagrams an explicit background; listing previews
+        # deliberately keep both the page and panel interiors transparent.
         ET.register_namespace('', 'http://www.w3.org/2000/svg')
         ET.register_namespace('xlink', 'http://www.w3.org/1999/xlink')
         tree = ET.parse(svg)
         root = tree.getroot()
-        width, height = root.attrib['viewBox'].split()[2:]
-        background = ET.Element('{http://www.w3.org/2000/svg}rect', {
-            'width': width, 'height': height,
-            'fill': '#0d1117' if 'dark' in suffix else '#fff1dc'})
-        root.insert(0, background)
+        if suffix != '-preview-dark':
+            width, height = root.attrib['viewBox'].split()[2:]
+            background = ET.Element('{http://www.w3.org/2000/svg}rect', {
+                'width': width, 'height': height,
+                'fill': '#0d1117' if 'dark' in suffix else '#fff1dc'})
+            root.insert(0, background)
         tree.write(svg, encoding='utf-8', xml_declaration=True)
         print(svg.relative_to(ROOT), flush=True)

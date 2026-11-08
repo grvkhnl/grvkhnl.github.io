@@ -10,6 +10,11 @@ Iowan Old Style; equations use the bundled XCharter Math font. Iowan must be
 installed on the machine rebuilding the figures (it is available on this Mac).
 Readers do not need either font installed because the SVGs contain outlines.
 
+The four lead figures also produce `-preview-dark.svg` listing thumbnails,
+with transparent pages and panel interiors. The listing include switches each
+thumbnail's source when Quarto's theme changes; light mode uses the original
+light SVG. Article figures and social-preview PNGs keep their backgrounds.
+
 ## Rebuild
 
 From the repository root, with XeLaTeX and Poppler's `pdftocairo` installed:

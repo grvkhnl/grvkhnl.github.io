@@ -61,7 +61,9 @@ website:
 
 format:
   html:
-    include-after-body: includes/cloudflare-web-analytics.html
+    include-after-body:
+      - includes/cloudflare-web-analytics.html
+      - includes/diagram-listing-previews.html
     theme:
       light: [flatly, styles/light.scss, styles/theme.scss]
       dark: [darkly, styles/dark.scss, styles/theme.scss]
